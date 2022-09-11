@@ -1,0 +1,24 @@
+project:
+  type: website
+
+website:
+  title: "W. Zane Billings"
+  navbar:
+    right:
+      - text: "Home"
+        href: index.qmd
+      - text: "Posts"
+        href: blog.qmd
+      - icon: github
+        href: https://github.com/wzbillings
+      - icon: twitter
+        href: https://twitter.com/wzbillings
+format:
+  html:
+    theme:
+      light: pulse
+      dark: vapor
+    css: styles.css
+
+
+

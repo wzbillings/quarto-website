@@ -1,0 +1,33 @@
+---
+title: "W. Zane Billings"
+image: profile.jpg
+about:
+  template: trestles
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/wzbillings
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/wzbillings
+    - icon: github
+      text: GitHub
+      href: https://github.com/wzbillings
+    - icon: envelope-fill
+      text: Email
+      url: mailto:wesley.billings@uga.edu
+---
+
+## About this blog
+
+Zane's Blog (or Zlog for short) is where I plan to post about different things that I'm interested in. [Andrew Heiss](https://andrewheiss.com) gave me the excellent advice that all my work should be done in public because you never know what will be useful to someone else, and some of my adviser [Andreas Handel](https://andreashandel.com)'s post have been very helpful to me. So maybe one day my blog will be as useful as their blogs.
+
+## About Zane
+
+Zane Billings is a PhD student in the data analysis and modeling program,
+department of epidemiology and biostatistics, University of Georgia, Athens,
+GA. His main skills are `R` programming, scientific computing, and statistical
+data analysis. Most of his research focuses on influenza and the immune
+response to seasonal influenza vaccines, but he has also done work on norovirus.
+In general, he is interested in using statistics, data analytics, and modeling
+methods to improve understand of common viral pathogens.
