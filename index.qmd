@@ -18,16 +18,6 @@ about:
       url: mailto:wesley.billings@uga.edu
 ---
 
-## About this blog
+I am currently a PhD student working with [Andreas Handel](http://handelgroup.publichealth.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. Previously, I obtained my undergraduate degree in mathematics and biology at Western Carolina University, where my research primarily focused on modulation of the autophagy pathway by keratin proteins. Now I have transitioned to more theoretical work, focusing on data analytics related to the seasonal influenza vaccine. In the past, I participated in two REU programs, [Math-Biology at UNCG](http://www.uncg.edu/mat/bio-math/REU/people.html) and [Population Biology of Infectious Diseases at UGA](http://reu.ecology.uga.edu/). At UGA (in Summer 2019), I worked with Andreas for the first time, and he apparently liked my work enough to let me work with him for my PhD. 
 
-Zane's Blog (or Zlog for short) is where I plan to post about different things that I'm interested in. [Andrew Heiss](https://andrewheiss.com) gave me the excellent advice that all my work should be done in public because you never know what will be useful to someone else, and some of my adviser [Andreas Handel](https://andreashandel.com)'s post have been very helpful to me. So maybe one day my blog will be as useful as their blogs.
-
-## About Zane
-
-Zane Billings is a PhD student in the data analysis and modeling program,
-department of epidemiology and biostatistics, University of Georgia, Athens,
-GA. His main skills are `R` programming, scientific computing, and statistical
-data analysis. Most of his research focuses on influenza and the immune
-response to seasonal influenza vaccines, but he has also done work on norovirus.
-In general, he is interested in using statistics, data analytics, and modeling
-methods to improve understand of common viral pathogens.
+Now I am primarily interested in influenza epidemiology and the seasonal influenza vaccine. Current research projects include investigating the drivers of immune response to the influenza vaccine at the individual level and examining patient and clinician agreement on reporting of influenza symptoms. I am also passionate about statistical methodology--linear models are my favorite. You can see my publications, previous projects, and presentations on this website, and if you want you can check out my GitHub or CV for more information about me.
