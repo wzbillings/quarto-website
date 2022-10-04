@@ -1,0 +1,26 @@
+# Other stuff
+
+## Links
+
+* ASCII (.txt) version of my CV: [here](static/CV.txt).
+* My OEIS (On-line Encyclopedia of Integer Sequences) contributions: [here](https://oeis.org/search?q=W.+Zane+Billings&language=english&go=Search). (I made a few contributions during undergrad and haven't though about integer sequences since then.)
+
+## Teaching experience
+
+* Course teaching
+  + Teaching Assistant, Fall 2022, EPID 7500: Introduction to Coding in R, Data Science and Simulation for Public Health and the Life Sciences; University of Georgia.
+  + Lab assistant, Spring 2017 - Spring 2019, MATH 340: Scientific Computing; Western Carolina University.
+* Programming workshops
+  + Reproducible research with R / R Markdown, June 2022. Led a workshop for 12 undergraduate participants in the Population Biology of Infectious Diseases REU Program (PopBio).
+  + R/SAS primer, August 2021. Organized and led a workshop introducing basic R and SAS skills for College of Public Health students (MS, MPH, and PhD).
+  + Data visualization using `ggplot2`, June 2021. Hosted a workshop for 10 undergrads in the PopBio program.
+* Undergraduate mentoring
+  + Primary mentor for one undergraduate student for the PopBio 2022 program, leading to an in-progress manuscript.
+  + Co-mentor for one undergraduate student for the PopBio 2021 program, leading to an in-progress manuscript.
+* Peer mentoring
+  + Supplementary Instruction (SI) leader, Spring 2020, Calculus II; Western Carolina University.
+  + Course tutor, Spring 2017 - Spring 2019; Western Carolina University. Individual and group tutoring for intro biology, organic chemsitry, genetics, evolutionary biology, microscopy, and immunology.
+
+## Service
+* Curriculum committee student representative, Department of Epidemiology & Biostatistics, UGA. Fall 2021 to present.
+* President, Graduate Scholars of Epidemiology and Biostatistics, UGA. Fall 2021 - Spring 2022.

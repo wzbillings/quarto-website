@@ -1,18 +1,59 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "*.Rmd"
+    - "*.md"
+    - "!README.md"
+    - "!LICENSE.md"
+    - "!myresources/"
+    - "!certificate*"
+  resources:
+    - "static/"
+
+execute: 
+  freeze: true
+
+description: "Personal homepage for Zane Billings"
+description-meta: "Personal homepage for Zane Billings"
 
 website:
   title: "W. Zane Billings"
   navbar:
     right:
-      - text: "Home"
+      - text: "home"
         href: index.qmd
-      - text: "Posts"
+      - text: "blog"
         href: blog.qmd
-      - icon: github
-        href: https://github.com/wzbillings
-      - icon: twitter
-        href: https://twitter.com/wzbillings
+      - text: "projects"
+        href: projects.qmd
+      - text: "presentations"
+        href: presentations.qmd
+      - text: "uses"
+        href: uses.qmd
+      - text: "now"
+        href: now.qmd
+      - text: "misc"
+        href: misc.qmd
+  
+  twitter-card: 
+    creator: "@andreashandel"
+  cookie-consent: true    
+  search: true
+  site-url: "https://wzbillings.com"
+  repo-url: "https://github.com/wzbillings/wzbillings"
+  
+  page-footer:
+    left: |
+      {{< fa regular copyright >}} Andreas Handel, 2022<br>
+      All content licensed under {{< fa brands creative-commons >}}
+      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-sa >}} {{< fa brands creative-commons-nc >}} [(CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+    
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      Inspiration and code snippets taken from [these folks.](/posts/quarto-website-migration.html)<br>
+      [Source at {{< fa brands github >}} GitHub](https://github.com/andreashandel/andreashandelwebsite)
+
 format:
   html:
     theme:
