@@ -25,8 +25,8 @@ website:
         href: index.qmd
       - text: "blog"
         href: blog.qmd
-      - text: "projects"
-        href: projects.qmd
+      # - text: "projects"
+      #   href: projects.qmd
       - text: "presentations"
         href: presentations.qmd
       - text: "uses"
@@ -41,7 +41,7 @@ website:
   cookie-consent: true    
   search: true
   site-url: "https://wzbillings.com"
-  repo-url: "https://github.com/wzbillings/wzbillings"
+  repo-url: "https://github.com/wzbillings/quarto-website"
   
   page-footer:
     left: |
