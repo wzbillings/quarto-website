@@ -16,9 +16,6 @@ about:
     - icon: envelope-fill
       text: Email
       url: mailto:wesley.billings@uga.edu
-    - icon: file-pdf
-      text: CV
-      url: /static/Billings-CV.pdf/
     - text: "Google scholar"
       href: "https://scholar.google.com/citations?user=JgDUMIcAAAAJ"
     - text: "ORCid"

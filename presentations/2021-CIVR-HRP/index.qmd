@@ -1,0 +1,30 @@
+---
+title: How does pre-existing immunity interact with other factors to impact influenza vaccine responses?
+abstract: |
+  Previous mechanistic models predict that fold change in influenza antibody
+  level should have a negative linear relationship with pre-vaccination titer on
+  a log-log scale. Models also predict that higher vaccine doses should have a
+  higher intercept, but parallel slopes. Using vaccine cohort data, we found
+  that the first conclusion was true, but the latter was not always true.
+  Now we are working to understand in which cases the model deviates from
+  expected predictions.
+event: "CIVR-HRP Annual Meeting, 2021"
+location: virtual
+image: featured.png
+date: "2016-09-09"
+categories:
+  - talk
+  - flu
+  - vaccines
+  - research
+
+---
+
+![](featured.jpg)
+
+I gave a two-minute lightning talk at the CIVR-HRP (Center for Influenza) annual meeting in Fall 2021. CIVR-HRP is an NIH-funded CIVIC (Collaborative Influenza Vaccine Innovation Centers) site at the University of Georgia, Athens, GA, USA, but the meeting was held virtually due to COVID-19. There were no virtual poster presentations, so I gave a lightning talk instead.
+
+The slides can be found [here](static/posters/Billings-CIVR-Presentation.pdf). They are also embedded below. In short, we used vaccine cohort data, and found that the data were consistent with some predictions of prior mechanistic models, but not all.
+
+<iframe src="static/posters/Billings-CIVR-Presentation.pdf" width="100%" height="800">
+</iframe>
