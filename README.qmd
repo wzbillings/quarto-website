@@ -24,4 +24,5 @@ This repository contains the source code for https://wzbillings.com/.
 - [ ] update projects
 - [x] add CV
 - [x] Add CIVICs 2022 presentation (trajectories)
+- [ ] convert iframes to object tags for presentations
 - [x] Fix presentation dates

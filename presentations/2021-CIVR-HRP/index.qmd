@@ -1,5 +1,6 @@
 ---
-title: How does pre-existing immunity interact with other factors to impact influenza vaccine responses?
+title: "How does pre-existing immunity interact with other factors to impact influenza vaccine responses?"
+author: W. Zane Billings
 abstract: |
   Previous mechanistic models predict that fold change in influenza antibody
   level should have a negative linear relationship with pre-vaccination titer on
@@ -10,7 +11,7 @@ abstract: |
   expected predictions.
 event: "CIVR-HRP Annual Meeting, 2021"
 location: virtual
-image: featured.png
+image: featured.jpg
 date: "2021-04-06"
 categories:
   - talk
@@ -24,7 +25,7 @@ categories:
 
 I gave a two-minute lightning talk at the CIVR-HRP (Center for Influenza) annual meeting in Fall 2021. CIVR-HRP is an NIH-funded CIVIC (Collaborative Influenza Vaccine Innovation Centers) site at the University of Georgia, Athens, GA, USA, but the meeting was held virtually due to COVID-19. There were no virtual poster presentations, so I gave a lightning talk instead.
 
-The slides can be found [here](static/posters/Billings-CIVR-Presentation.pdf). They are also embedded below. In short, we used vaccine cohort data, and found that the data were consistent with some predictions of prior mechanistic models, but not all.
+The slides can be found [here](pres.pdf). They are also embedded below. In short, we used vaccine cohort data, and found that the data were consistent with some predictions of prior mechanistic models, but not all.
 
-<iframe src="static/posters/Billings-CIVR-Presentation.pdf" width="100%" height="800">
-</iframe>
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>

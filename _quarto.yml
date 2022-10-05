@@ -10,11 +10,11 @@ project:
     - "!certificate*"
   resources:
     - "static/"
+    - "static/presentations/"
 
 execute: 
   freeze: true
 
-description: "Personal homepage for Zane Billings"
 description-meta: "Personal homepage for Zane Billings"
 
 website:

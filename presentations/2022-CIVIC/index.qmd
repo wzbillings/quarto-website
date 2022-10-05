@@ -10,7 +10,7 @@ abstract: |
 event: "CIVR-HRP Annual Meeting, 2022"
 location: Athens, GA
 image: featured.jpeg
-date: "2021-04-06"
+date: "2022-03-20"
 categories:
   - talk
   - flu

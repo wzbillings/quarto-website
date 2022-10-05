@@ -15,9 +15,9 @@ categories:
 
 ![](featured.png)
 
-I gave a two-minute "lighting presentation" at the NIAID CIVICs virtual meeting in 2021. You can find my slides [here](static/presentations/CIVIC-Annual-2021-slides.pdf) as well as embedded at the bottom of the page.
+I gave a two-minute "lighting presentation" at the NIAID CIVICs virtual meeting in 2021. You can find my slides [here](pres.pdf) as well as embedded at the bottom of the page.
 
 In brief, some prior mechanistic modeling studies show that dose should modulate the effect of an influenza vaccine, but do not make strong predictions about the roles of covariates. Using data from an ongoing cohort study, we examine these predictions and also examine whether other covariates should be included in future models. For this presentation, we focused on the effects of vaccine dose, whether the participant was vaccinated in the previous year, and the age of the participant. 
 
-<iframe src="static/posters/CIVIC-Annual-2021-slides.pdf" width="100%" height="800">
+<iframe src="pres.pdf" width="100%" height="800">
 </iframe>

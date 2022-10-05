@@ -8,9 +8,10 @@
   {
     "listing": "/presentations.html",
     "items": [
+      "/presentations/2022-CIVIC/index.html",
+      "/presentations/2021-CIVIC/index.html",
       "/presentations/2021-EEID/index.html",
-      "/presentations/2021-CIVR-HRP/index.html",
-      "/presentations/2021-CIVIC/index.html"
+      "/presentations/2021-CIVR-HRP/index.html"
     ]
   },
   {

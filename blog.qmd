@@ -8,9 +8,8 @@ listing:
   sort-ui: false
   filter-ui: false
 page-layout: full
-title-block-banner: true
 ---
 
-## About this blog
+This is where I plan to post about different things that I'm interested in. [Andrew Heiss](https://andrewheiss.com) gave me the excellent advice that all my work should be done in public because you never know what will be useful to someone else, and some of my adviser [Andreas Handel](https://andreashandel.com)'s posts have been very helpful to me. So maybe one day my blog will be as useful as their blogs.
 
-Zane's Blog (or Zlog for short) is where I plan to post about different things that I'm interested in. [Andrew Heiss](https://andrewheiss.com) gave me the excellent advice that all my work should be done in public because you never know what will be useful to someone else, and some of my adviser [Andreas Handel](https://andreashandel.com)'s posts have been very helpful to me. So maybe one day my blog will be as useful as their blogs.
+<br>
