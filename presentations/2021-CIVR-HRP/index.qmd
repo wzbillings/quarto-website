@@ -11,7 +11,7 @@ abstract: |
 event: "CIVR-HRP Annual Meeting, 2021"
 location: virtual
 image: featured.png
-date: "2016-09-09"
+date: "2021-04-06"
 categories:
   - talk
   - flu

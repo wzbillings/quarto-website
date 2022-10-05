@@ -1,0 +1,34 @@
+---
+title: Longitudinal trajectories of influenza immune response after repeat vaccination
+abstract: |
+  Repeat vaccination is sort of a hot topic in flu immunity right now, but most
+  analyses are still done in a cross-sectional format. Using data from an
+  ongoing influenza vaccination cohort study, we break trajectories up into
+  component segments to analyze patterns of boosting and waning. This allows us
+  to quantify trends across strata and allow for measurement error in responses
+  of a specific magnitude.
+event: "CIVR-HRP Annual Meeting, 2022"
+location: Athens, GA
+image: featured.jpeg
+date: "2021-04-06"
+categories:
+  - talk
+  - flu
+  - vaccines
+  - research
+  - trajectories
+
+---
+
+![](featured.jpeg) 
+
+I gave a two-minute lightning talk at the CIVR-HRP (Center for Influenza) annual meeting in Spring 2022. CIVR-HRP is an NIH-funded CIVIC (Collaborative Influenza Vaccine Innovation Centers) site at the University of Georgia, Athens, GA, USA. There were no poster presentations, so I got to give an actual talk.
+
+Instead of focusing on math and formal statistical analyses, my goal was to describe a conceptual framework (that I believe is novel) for analyzing longitudinal data. Often analyzing an individual's entire trajectory over several years can be difficult to interpret, but by breaking trajectories down into 3 data points (day 0, day 21/28, and day 365 relative to the yearly vaccination), we can easily examine patterns of boosting and waning.
+
+In the future, we intend to use this framework to quantify differences across strata, such as age groups. We also plan to include formal statistical analyses which can account for within-individual correlations.
+
+The slides can be found [here](static/posters/CIVIC-Meeting-2022.pdf). They are also embedded below.
+
+<iframe src="static/posters/CIVIC-Meeting-2022.pdf" width="100%" height="800">
+</iframe>

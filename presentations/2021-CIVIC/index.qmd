@@ -5,7 +5,7 @@ event: "CIVICs annual meeting, 2021"
 location: virtual
 
 image: featured.png
-date: "2016-06-24"
+date: "2021-08-08"
 categories:
   - talk
   - flu

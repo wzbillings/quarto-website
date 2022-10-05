@@ -15,16 +15,17 @@ about:
       href: https://github.com/wzbillings
     - icon: envelope-fill
       text: Email
-      url: mailto:wesley.billings@uga.edu
+      href: mailto:wesley.billings@uga.edu
+    - icon: file-pdf-fill
+      text: "CV"
+      href: "/static/CV.pdf"
     - text: "Google scholar"
       href: "https://scholar.google.com/citations?user=JgDUMIcAAAAJ"
     - text: "ORCid"
       href: "https://orcid.org/0000-0002-0184-6134"
 ---
 
-I am currently a PhD student working with [Andreas Handel](http://handelgroup.publichealth.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. Previously, I obtained my undergraduate degree in mathematics and biology at Western Carolina University, where my research primarily focused on modulation of the autophagy pathway by keratin proteins. Now I have transitioned to more theoretical work, focusing on data analytics related to the seasonal influenza vaccine. In the past, I participated in two REU programs, [Math-Biology at UNCG](http://www.uncg.edu/mat/bio-math/REU/people.html) and [Population Biology of Infectious Diseases at UGA](http://reu.ecology.uga.edu/). At UGA (in Summer 2019), I worked with Andreas for the first time, and he apparently liked my work enough to let me work with him for my PhD. 
-
-Now I am primarily interested in influenza epidemiology and the seasonal influenza vaccine. Current research projects include investigating the drivers of immune response to the influenza vaccine at the individual level and examining patient and clinician agreement on reporting of influenza symptoms. I am also passionate about statistical methodology--linear models are my favorite. You can see my publications, previous projects, and presentations on this website, and if you want you can check out my GitHub or CV for more information about me.
+I am currently a PhD student working with [Andreas Handel](http://handelgroup.publichealth.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. Previously, I obtained my undergraduate degree in mathematics and biology at Western Carolina University. Current research projects include investigating the drivers of immune response to the influenza vaccine at the individual level and examining patient and clinician agreement on reporting of influenza symptoms. You can see my publications, previous projects, and presentations on this website, and if you want you can check out my GitHub or CV for more information about me.
 
 # Education
 
