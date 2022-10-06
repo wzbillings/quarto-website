@@ -407,9 +407,9 @@ I already did the manual calculations, and you can look on Andrew Heiss' blog po
 out <-
 tidybayes::epred_draws(
 	brms_fit,
-	newdata = tibble::tibble(sepal_width = seq(2, 4.4, 0.1)),
+	newdata = tibble::tibble(sepal_width = seq(2, 4.4, 0.01)),
 	re_formula = NA,
-	ndraws = 2500,
+	ndraws = 10000,
 	seed = 370
 ) |>
 	ggdist::point_interval(
@@ -417,52 +417,25 @@ tidybayes::epred_draws(
 		.point = mean
 	)
 
-ggplot() +
-	geom_ribbon(
-		alpha = 0.5,
-		fill = "pink",
-		data = out,
-		mapping = aes(
-			x = sepal_width,
-			y = .epred,
-			ymin = .lower,
-			ymax = .upper
-		)
-	) +
-	geom_line(
-		size = 1,
-		color = "red",
-		data = out,
-		mapping = aes(
-			x = sepal_width,
-			y = .epred
-		)
-	) +
-	geom_ribbon(
-		alpha = 0.5,
-		fill = "slateblue",
-		data = type_1_summary,
-		mapping = aes(
-			x = sepal_width,
-			y = mean,
-			ymin = lower,
-			ymax = upper
-		)
-	) +
-	geom_line(
-		size = 1,
-		color = "blue",
-		data = type_1_summary,
-		mapping = aes(
-			x = sepal_width,
-			y = mean
-		)
-	) +
+fits <-
+	dplyr::bind_rows(
+		"rethinking" = type_1_summary,
+		"brms" = select(out, sepal_width, mean = .epred,
+						lower = .lower, upper = .upper),
+		.id = "fit"
+	)
+
+fits |>
+	ggplot() +
+	aes(x = sepal_width, y = mean, ymin = lower, ymax = upper,
+		fill = fit) +
+	geom_ribbon(alpha = 0.25) +
+	geom_line(size = 1, aes(color = fit, linetype = fit)) +
 	# This part plots the raw data points
-	scale_fill_brewer(palette = "Reds") +
-	labs(x = "Sepal width", y = "Predicted petal length",
-		 fill = "Credible interval") +
+	labs(x = "Sepal width", y = "Predicted petal length") +
 	zlib::theme_ms()
+
+# Note to self: plot distributions of linear predictors, not just summaries
 ```
 
 
