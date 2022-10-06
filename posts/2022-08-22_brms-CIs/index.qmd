@@ -14,6 +14,19 @@ draft: true
 #| include: false
 set.seed(370)
 
+# Declaring dependencies
+box::use(
+	StanHeaders,
+	rstan,
+	cmdstanr,
+	brms,
+	rethinking
+)
+
+# Loading libraries that need to be in the global namespace for one reason
+# or another
+library(rethinking)
+library(brms)
 library(ggplot2)
 ```
 
@@ -87,38 +100,33 @@ Y_i &\sim \text{Normal}(\mu_i, \sigma) \\
 \sigma &\sim \text{Exponential}(1)
 \end{align*}
 
-This isn't a blog post about choosing principled or correct priors, so all I can really say about these is that I made them up after looking at Chapter 13 of Statistical Rethinking. They probably aren't very good and I should really do better, but that's not my main focus here, so I won't. I sort of just picked gamma likelihood and exponential/gamma priors because they are constrained to be positive, and since both our independent and dependent variables must be positive, I think it's probably fine to force all of these things to be positive. (In reality, only mu has to be positive and the $\beta$ parameter has to be negative, but since we can plot the relationship and see that there's a positive correlation, I think this assumption is fine.)
-
-Anyways. Other people know lots more about priors than I do (like the Stan dev team and Michael Betancourt) so you should read their stuff about priors if that's what you're curious about. We should also probably do a prior predictive check, but again, I just want to talk about CIs, so let's move on.
+This isn't a blog post about choosing principled or correct priors, so all I can really say about these is that I made them up after looking at Chapter 13 of Statistical Rethinking. They probably aren't very good and I should really do better, but that's not my main focus here, so I won't. I picked these priors because they're pretty much the easiest ones, even if it doesn't really make sense for any of them to be negative. This post isn't really about making this model good, it's about doing some manual calculations. I just want to talk about CIs, so let's move on.
 
 ### Model fitting in R
 
 I'll fit the model using `rethinking`, since I think it's actually quite a nice interface to `rstan`, and I like that we basically enter the model just like it looks above. We'll do some minor data processing so I can be sure that I know which species is which in the output.
 
 ```{r, message = FALSE}
-library(rethinking)
-
 d <-
 	iris |>
 	dplyr::transmute(
 		petal_length = Petal.Length,
 		sepal_width = Sepal.Width,
 		species = as.numeric(Species)
-	) |>
-	as.list()
+	)
 
 fit <-
 	rethinking::ulam(
 		flist = alist(
-			petal_length ~ gamma(mu, sigma),
+			petal_length ~ normal(mu, sigma),
 			mu <- alpha[species] + beta * sepal_width,
-			alpha[species] ~ gamma(bar_alpha, gamma),
-			bar_alpha ~ exponential(1),
-			beta ~ exponential(1),
+			alpha[species] ~ normal(bar_alpha, gamma),
+			bar_alpha ~ normal(0, 2),
+			beta ~ normal(0, 2),
 			gamma ~ exponential(1),
 			sigma ~ exponential(1)
 		),
-		data = d,
+		data = as.list(d),
 		chains = 4,
 		cores = 4,
 		iter = 5000,
@@ -182,16 +190,18 @@ where $x$ is the predictor, sepal width. So what we need to do is use our poster
 
 So we want to get predictions for a bunch of interpolated values of sepal width. We'll need to do a bit of vector/matrix manipulation to do this in R, so I'll try to explain that.
 
-First of all, we have our vectors of samples, $\hat{\beta}$ and $\hat{\bar{\alpha}}$ (remember for this type of CI, we assume that $\alpha_i = \bar{\alpha}$). These are both $2500 \times 1$ column vectors. Now, our vector of interpolated $x$ values, say $\tilde{x}$, will be a $j \times 1$ column vector, where $j$ depends on interpolation. Clearly this is incompatible with our other vectors.
+First of all, we have our vectors of samples, $\hat{\beta}$ and $\hat{\bar{\alpha}}$ (remember for this type of CI, we assume that $\hat{\alpha}_i = \hat{\bar{\alpha}}$). These are both $2500 \times 1$ column vectors. Now, our vector of interpolated $x$ values, say $\tilde{x}$, will be a $j \times 1$ column vector, where $j$ depends on interpolation. Clearly this is incompatible with our other vectors.
 
-However, we can use the [outer matrix product](https://en.wikipedia.org/wiki/Outer_product) to get this in the correct shape. Then, the formula for computing the linear predictor is
-$$\hat{\mu} =  \hat{\bar{\alpha}} \otimes \mathbf{1} + \hat{\beta} \otimes \tilde{x},$$
-where $\mathbf{1}$ is a column vector of $1$'s with dimensions $j \times 1$. You can write this without the outer product by using matrix products and transposes, but I personally prefer this notation. If you're more comfortable without the outer product, this can also be written as
+However, we can use some linear algebra to get this in the correct shape. Then, the formula for computing the linear predictor (which is also the mean since we're using the identity link) is
 
 $$\hat{\mu} = \hat{\bar{\alpha}} \mathbf{1}^\prime + \tilde{x}\hat{\beta}^\prime, $$
-where multiplication is the standard matrix product.
+where $\mathbf{1}$ is a column vector of $1$'s with dimensions $j \times 1$ and multiplication is the standard matrix product.
 
-Now, both $\hat{\bar{\alpha}} \otimes \mathbf{1}$ and $\hat{\beta} \otimes \tilde{x}$ will be $2500 \times j$ matrices (and so are conformable for addition) and will look like this:
+As a sidenote, I actually originally wrote this in terms of the [outer matrix product](https://en.wikipedia.org/wiki/Outer_product), e.g.,
+$$\hat{\mu} =  \hat{\bar{\alpha}} \otimes \mathbf{1} + \hat{\beta} \otimes \tilde{x}.$$
+For some reason, I like that notation a lot. I'm not sure why, my linear algebra professors never used it but for some reason it makes more sense to me. Probably cause there's no transposes. Anyways, moving on.
+
+Now, both $\hat{\bar{\alpha}} \mathbf{1}^\prime$ and $\tilde{x}\hat{\beta}^\prime$ will be $2500 \times j$ matrices (and so are conformable for addition) and will look like this:
 
 $$\begin{bmatrix} \hat{\bar{\alpha}}_1 & \hat{\bar{\alpha}}_1 & \cdots & \hat{\bar{\alpha}}_1 \\
 \hat{\bar{\alpha}}_2 & \hat{\bar{\alpha}}_2 & \cdots & \hat{\bar{\alpha}}_2 \\
@@ -209,7 +219,7 @@ $$\begin{bmatrix} \hat{\bar{\alpha}}_1 & \hat{\bar{\alpha}}_1 & \cdots & \hat{\b
 \hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_1 & \hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_2 & \cdots & \hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_j \\
 \end{bmatrix}.$$
 
-So, you can see we get a linear predictor (since the link is the identity function) for each element of the matrix. We've constructed 2500 samples of the linear predictor evaluated at $j$ values of the predictor $x$. (Under the assumption that we don't care about group-level deviations from the mean. Remember, the whole reason this makes the type 1 CI is that we used $\bar{\alpha}$.)
+So, you can see we get a linear predictor evaluation (since the link is the identity function) for each element of the matrix. We've constructed 2500 samples of the linear predictor evaluated at $j$ values of the predictor $x$. (Under the assumption that we don't care about group-level deviations from the mean. Remember, the whole reason this makes the type 1 CI is that we used $\bar{\alpha}$.)
 
 Now let's do this in `R` code. The first thing we have to do is construct the vector of sepal width values to use. In the code below, you can see that I made a vector that goes from the minimum observed value to the maximum observe value in steps of 0.01. Then, we can construct the $\hat{\mu}$ (not sure if this is the technically correct notation `r emoji::emoji("grin")`) matrix using either of the matrix formulas I listed above. In R, `%*%` is the standard matrix product and `%o%` is the outer product.
 
@@ -230,8 +240,8 @@ mean_pi <- function(x, p = 0.89) {
 	est <- rethinking::PI(x, prob = p)
 	out <- tibble::tibble(
 		mean = mean(x),
-		lower = est[1],
-		upper = est[2]
+		lower = as.numeric(est[1]),
+		upper = as.numeric(est[2])
 	)
 	return(out)
 }
@@ -289,7 +299,7 @@ Here we can see one of the problems that made me think `iris` may not be such a 
 
 The CIs of type two (I hope that the order in Andrew Heiss' blog post becomes the canonical name for these four types of CIs, since I haven't seen any official names anywhere else) are group-specific, rather than calculating one overall estimate that combines groups. The formula for calculating these CIs is probably the easiest one to write down:
 
-$$\hat{\mu}_s =  \hat{\alpha}_s \otimes \mathbf{1} + \hat{\beta} \otimes \tilde{x},$$
+$$\hat{\mu}_s =  \hat{\alpha}_s \mathbf{1}^\prime + \tilde{x}\hat{\beta}^\prime ,$$
 where $s \in S = \{\text{setosa, versicolor, viginica}\}$ indexes the species group. Since we're using all of the same matrix math as before, I won't rattle on as much this time. Instead we just need one extra ingredient for these CIs -- the incredibly versatile `purrr::map()`! I **KNOW** there's a better way to do this and the way I'm doing it here is weird and inefficient, I just didn't want to work on it longer and this runs pretty fast.
 
 ```{r}
@@ -359,6 +369,102 @@ However, you can see that we get individual credible intervals for each group, a
 ### "Type Four" -- Similar new individual means
 
 ## Using `brms` for double checking or whatever
+
+Now, just to emphasize that you can trust me, I thought it would be a good idea to fit the model with `brms` and compare my bespoke hand-crafted CI's with whatever `brms` does automatically. So let's do that.
+
+```{r}
+brms_priors <- c(
+	prior(normal(0, 2), class = b),
+	# Prior for alpha_bar
+	prior(normal(0, 2), class = Intercept),
+	prior(exponential(1), class = sd),
+	prior(exponential(1), class = sigma)
+)
+
+brms_fit <-
+	brms::brm(
+		formula = petal_length ~ (1 | species) + sepal_width,
+		prior = brms_priors,
+		family = gaussian(link = "identity"),
+		data = d,
+		seed = 370,
+		iter = 5000,
+		# I like cmdstanr more but this is what we used for the rethinking fit
+		# so keep it the same just in case
+		backend = "rstan",
+		cores = 4
+	)
+
+posterior_summary(brms_fit)
+precis(fit, depth = 2)
+```
+
+The summary looks pretty good, we got about the same Rhat and ESS values as the rethinking model, so I'll assume this model converged and mixed and whatever (and just ignore the small amount of divergent transitions).
+
+I already did the manual calculations, and you can look on Andrew Heiss' blog post for the brms explanations, so here I'll just go quick without explanations to make a plot.
+
+```{r}
+out <-
+tidybayes::epred_draws(
+	brms_fit,
+	newdata = tibble::tibble(sepal_width = seq(2, 4.4, 0.1)),
+	re_formula = NA,
+	ndraws = 2500,
+	seed = 370
+) |>
+	ggdist::point_interval(
+		.width = 0.89,
+		.point = mean
+	)
+
+ggplot() +
+	geom_ribbon(
+		alpha = 0.5,
+		fill = "pink",
+		data = out,
+		mapping = aes(
+			x = sepal_width,
+			y = .epred,
+			ymin = .lower,
+			ymax = .upper
+		)
+	) +
+	geom_line(
+		size = 1,
+		color = "red",
+		data = out,
+		mapping = aes(
+			x = sepal_width,
+			y = .epred
+		)
+	) +
+	geom_ribbon(
+		alpha = 0.5,
+		fill = "slateblue",
+		data = type_1_summary,
+		mapping = aes(
+			x = sepal_width,
+			y = mean,
+			ymin = lower,
+			ymax = upper
+		)
+	) +
+	geom_line(
+		size = 1,
+		color = "blue",
+		data = type_1_summary,
+		mapping = aes(
+			x = sepal_width,
+			y = mean
+		)
+	) +
+	# This part plots the raw data points
+	scale_fill_brewer(palette = "Reds") +
+	labs(x = "Sepal width", y = "Predicted petal length",
+		 fill = "Credible interval") +
+	zlib::theme_ms()
+```
+
 
 ## The Wrap-Up
 
