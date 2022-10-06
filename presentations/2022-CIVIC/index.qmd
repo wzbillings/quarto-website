@@ -28,7 +28,7 @@ Instead of focusing on math and formal statistical analyses, my goal was to desc
 
 In the future, we intend to use this framework to quantify differences across strata, such as age groups. We also plan to include formal statistical analyses which can account for within-individual correlations.
 
-The slides can be found [here](static/posters/CIVIC-Meeting-2022.pdf). They are also embedded below.
+The slides can be found [here](pres.pdf). They are also embedded below.
 
-<iframe src="static/posters/CIVIC-Meeting-2022.pdf" width="100%" height="800">
-</iframe>
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>
