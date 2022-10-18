@@ -1,6 +1,6 @@
 ---
-title: How do pre-existing immunity and host factors interact to impact influenza vaccine response?
-abstract: Some prior mechanistic modeling studies show that dose should modulate the effect of an influenza vaccine, but do not make strong predictions about the roles of covariates. Using data from an ongoing cohort study, we examine these predictions and also examine whether other covariates should be included in future models.
+title: Challenge Study Ethics
+abstract: Challenge studies need to be highly regulated to ensure they are beneficial rather than harmful. I led a discussion with one of my colleagues about some of these ethical issues.
 event: "Infectious Disease Interest Group"
 location: Athens, GA
 
