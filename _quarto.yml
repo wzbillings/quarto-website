@@ -56,8 +56,8 @@ website:
 format:
   html:
     theme:
-      light: pulse
       dark: vapor
+      light: pulse
     css: styles.css
 
 
