@@ -1,0 +1,36 @@
+---
+title: "IDIG 2022-10-24"
+author: "Zane (https://wzbillings.com)"
+format:
+  revealjs:
+    toc: false
+---
+
+
+> Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals. 2009;37(4):216-221. doi:10.1016/j.biologicals.2009.02.002.
+
+## Intro
+
+blah
+
+## Definitions
+
+text
+
+::: {.smaller}
+## The model {.scrollable}
+
+\begin{align*}
+t &= \log_2 \left( \mathrm{HAI \ titer} / 5 \right) \\
+t &\sim \mathrm{Normal}(\mu, \sigma) \\
+\pi_{\mathrm{seroprotected}} &= \int_{t_p}^\infty \ f(t) \ \mathrm{d}t \\
+\pi_{\mathrm{seroconverted}} &= \int_{-\infty}^\infty \ f(t) \frac{\lambda}{\left(1 + \exp\left(\alpha + \beta t\right)\right) \ \mathrm{d}t} \\
+\end{align*}
+
+* $0 < \lambda \leq 1, \ \alpha > 0, \beta < 0$
+* $\lambda$ is the probability of clinical protection for subjects with "a very high HI titer".
+* $\alpha$ accounts for protection unrelated to antibody level.
+* $\beta$ is the slope of the clinical protection curve.
+* $\displaystyle\frac{\lambda}{\left(1 + \exp\left(\alpha + \beta \ \mathbf{t_p} \right)\right)} = 0.5$.
+* Can alternatively specify the value of $t_p$ instead of $\beta$ (if all other parameters are also specified).
+:::

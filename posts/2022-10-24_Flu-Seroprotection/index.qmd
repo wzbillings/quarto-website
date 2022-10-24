@@ -1,0 +1,19 @@
+---
+title: "Influenza, seroconversion, and the number 40"
+author: "Zane Billings"
+date: "2022-10-24"
+description: |
+  What the hell is seroconversion and why is it important anyways?
+---
+
+I definitely wouldn't call myself *well-read* on flu at this point, but I'm better read about flu than the average person you're likely to meet on the sidewalk. But in the flu literature (especially immunological and clinical stuff) there's this idea that an HAI^[Hemagglutination inhibition assay, an assay which is generally agreed to be a correlate of protection from influenza. I wish I had more information, but I actually don't know the evidence for this either.] titer of 1:40 is a magic target to hit and then you become immune to flu. That's an oversimplification and it isn't exactly true, but from the way people use "seroconversion"^[Reaching a desired threshold for a serological measurement. If your influenza titer is less than 1:40, then you get a vaccine, and then afterwards your titer is greater than 1:40, you are said to have seroconverted. Additionally, there is seroprotection, which is having a titer greater than 1:40 regardless of when it was acquired.] as an outcome, that's certainly how it feels to read the literature. For the seminar that I coordinate, I decided to present on this paper
+
+> Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals. 2009;37(4):216-221. doi:10.1016/j.biologicals.2009.02.002.
+
+which was suggested as a potential discussion topic on our list of potential topics by my adviser so I thought, well I guess this is important. It's also super relevant to my active research so I guess it's useful.
+
+Then I saw that the first reference was a paper than my colleague [Yang Ge](https://yangepi.github.io/) presented on over the summer at my seminar, and I realized I had stepped right into the muck of "where does the magic number 40" come from, which is something [Handelgroup](https://handelgroup.uga.edu/) has collectively had on the brain for a while. I've tried my best not to get involved with it, but because there is something wrong with me, I figured. Well, I've got mud on my clothes anyways so I might as well dive in, right?
+
+# Definitions
+
+
