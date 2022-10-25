@@ -1,0 +1,25 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/2022-10-24_Flu-Seroprotection/pres.html",
+      "/posts/2022-10-24_Flu-Seroprotection/index.html",
+      "/posts/2022-06-24_Bayes-Diagnostics/index.html"
+    ]
+  },
+  {
+    "listing": "/presentations.html",
+    "items": [
+      "/presentations/IDIG-2022-10-25/index.html",
+      "/presentations/IDIG-Challenge-Studies/index.html",
+      "/presentations/2022-CIVIC/index.html",
+      "/presentations/2021-CIVIC/index.html",
+      "/presentations/2021-EEID/index.html",
+      "/presentations/2021-CIVR-HRP/index.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": []
+  }
+]

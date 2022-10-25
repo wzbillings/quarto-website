@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zane Billings">
+<meta name="dcterms.date" content="2022-08-22">
+<meta name="description" content="Personal homepage for Zane Billings">
+
+<title>W. Zane Billings - Doing what brms does</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="W. Zane Billings - Doing what brms does">
+<meta name="twitter:description" content="If you’re anything like me, when you got predictions from a brms model with a CI before, you probably thought. How can I do this manually, making it much more error prone and tedious? Well, here’s the answer! Maybe.">
+<meta name="twitter:image" content="https://wzbillings.com/posts\2022-08-22_brms-CIs\thumbnail.jpg">
+<meta name="twitter:creator" content="@andreashandel">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">W. Zane Billings</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../presentations.html">presentations</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uses.html">uses</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../now.html">now</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../misc.html">misc</a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Doing what brms does</h1>
+                  <div>
+        <div class="description">
+          <p>If you’re anything like me, when you got predictions from a brms model with a CI before, you probably thought. How can I do this manually, making it much more error prone and tedious? Well, here’s the answer! Maybe.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Zane Billings </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 22, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#the-backstory-for-this-blog-post" id="toc-the-backstory-for-this-blog-post" class="nav-link active" data-scroll-target="#the-backstory-for-this-blog-post">The backstory for this blog post</a></li>
+  <li><a href="#brms-and-credible-intervals-backstory-part-2" id="toc-brms-and-credible-intervals-backstory-part-2" class="nav-link" data-scroll-target="#brms-and-credible-intervals-backstory-part-2"><code>brms</code> and credible intervals (backstory part 2)</a></li>
+  <li><a href="#who-this-guide-is-for" id="toc-who-this-guide-is-for" class="nav-link" data-scroll-target="#who-this-guide-is-for">Who this guide is for</a></li>
+  <li><a href="#the-actual-tutorial-that-everyone-came-here-for-i-assume" id="toc-the-actual-tutorial-that-everyone-came-here-for-i-assume" class="nav-link" data-scroll-target="#the-actual-tutorial-that-everyone-came-here-for-i-assume">The actual tutorial that everyone came here for, I assume</a>
+  <ul class="collapse">
+  <li><a href="#fitting-a-model-with-rethinking" id="toc-fitting-a-model-with-rethinking" class="nav-link" data-scroll-target="#fitting-a-model-with-rethinking">Fitting a model with <code>rethinking</code></a></li>
+  <li><a href="#estimating-the-posterior-mean-and-its-ci" id="toc-estimating-the-posterior-mean-and-its-ci" class="nav-link" data-scroll-target="#estimating-the-posterior-mean-and-its-ci">Estimating the posterior mean and its CI</a></li>
+  <li><a href="#using-brms-for-double-checking-or-whatever" id="toc-using-brms-for-double-checking-or-whatever" class="nav-link" data-scroll-target="#using-brms-for-double-checking-or-whatever">Using <code>brms</code> for double checking or whatever</a></li>
+  <li><a href="#the-wrap-up" id="toc-the-wrap-up" class="nav-link" data-scroll-target="#the-wrap-up">The Wrap-Up</a></li>
+  <li><a href="#details" id="toc-details" class="nav-link" data-scroll-target="#details">Details</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="thumbnail.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Two negative Abbot BinaxNOW Covid-19 antigen test cards on a dark wooden table, next to a kitchen timer shaped like a chicken.</figcaption><p></p>
+</figure>
+</div>
+<section id="the-backstory-for-this-blog-post" class="level1">
+<h1>The backstory for this blog post</h1>
+<p>Like most of my personality traits, my propensity to get into the weeds with every project I engage with is both a strength and a weakness. It really depends on the circumstances, I guess. Recently I’ve been working with my colleague <a href="https://twitter.com/yangepi">(Dr.) Yang Ge</a> on one of his virus modeling projects. The analyses for this project all used Bayesian linear mixed-effects models, and while I know a decent amount about linear models, I don’t know very much about Bayesian…anything.</p>
+<p>Of course knowing that I <del>work best</del> get slightly more work done under pressure, my mentor <a href="https://twitter.com/andreashandel">Andreas</a> thought it would be a good idea for me to reproduce Yang’s work using the <code>rethinking</code> package, which forces the user to write parametric bayesian models out in much more detail than <code>brms</code> does. After months of work and a few more months of quiet contemplation, I have decided to forgive Andreas for this.</p>
+<p>The low-down, I guess, is that <code>brms</code> is much more convenient for people who know what they are doing, but it is much easier to make mistakes or make accidental unplanned assumptions. As I am not one such person who knows what they are doing, I looked at Yang’s <code>brms</code> code and said “uhhhh…okay.” So we (mostly Yang and Andreas, but sometimes me since I took like four math stats classes or whatever) spent some time writing out the probability models, and then I started implementing those in <code>rethinking</code>. Fortunately, the <code>rethinking</code> syntax is almost exactly like the normal syntax for writing out probabilistic models.</p>
+<p>Long story short, after a bit of struggling (as one does), I got the models to fit and I had gigabytes and gigabytes of posterior samples saved to my hard drive. And then I had to figure out how to get the posterior mean and credible interval estimates.</p>
+</section>
+<section id="brms-and-credible-intervals-backstory-part-2" class="level1">
+<h1><code>brms</code> and credible intervals (backstory part 2)</h1>
+<p>That should be easy, right? Or so I thought, in my hubris. For a fixed-effects only model, we would just take the sample mean and use the empirical quantiles to construct a CI—as an avid bootstrap user, I’ve done this plenty of times. However, the random effects make this a bit more complicated. If you build your model with <code>brms</code>, the package writers have written the excellent <code>predict.brmsfit()</code> and <code>posterior_pred()</code> and similar functions that calculate the credible intervals and handle random effects for you. Of course, I was not using <code>brms</code>, so for me this was not an option. I had a matrix full of numbers to my name and nothing else.</p>
+<p>While I love the <code>rethinking</code> package for its quick interface with Stan, I note that the <code>rethinking::PI()</code> function for getting intervals using the quantiles of the samples does not abstract random effects away for the user. Personally, I think this is a good thing—I am never trustworthy of software that I do not understand.</p>
+<p>One of the biggest annoyances I had during this project was that <strong>there are no other references explaining how you calculate these CIs by hand!</strong> I checked Statistical Rethinking, Data Analysis Using Regression and Multilevel/Hierarchical Models, AND BDA3. Either I don’t know what I’m looking for, or the explanation for calculating these CI’s just isn’t in any of those. If anyone can recommend a book that covers this material better, <strong><em>PLEASE</em></strong> get in touch with me!</p>
+<p>So, I started with <a href="https://www.andrewheiss.com/blog/2021/11/10/ame-bayes-re-guide/">one of the world’s best-ever blog posts</a> by <a href="https://twitter.com/andrewheiss">Andrew Heiss</a>. I have had the pleasure of meeting Andrew once, but that was before I read this blog post, so I didn’t get to tell him in person how this blog post saved my career, cleared my skin, fertilized my crops, etc. (Maybe not, but it sure was helpful.)</p>
+<p>So, now that I’ve spent a lot of time rambling (another one of my personality traits that is sometimes a strength but often not), I’ll get to the actual tutorial.</p>
+</section>
+<section id="who-this-guide-is-for" class="level1">
+<h1>Who this guide is for</h1>
+<p>I thought I should start by borrowing from Andrew, who was borrowing from <a href="https://solomonkurz.netlify.app/post/2021-09-22-sexy-up-your-logistic-regression-model-with-logit-dotplots/">Solomon Kurtz</a>. I’ll make these assumptions.</p>
+<ul>
+<li><p>You’re familiar with <a href="">R</a> and the <a href="">tidyverse</a>. I plan to do most of this in base R, but if it’s more convenient I’ll switch to tidy-style.</p></li>
+<li><p>You’re at least passingly familiar with Bayesian parametric probability models. If you’ve had a probability theory course (or know the equivalent material), I hope this will be understandable.</p></li>
+<li><p>You have passing familiarity with random effects. Nothing too deep here, but I’ll be building a model with a random intercept and adaptive priors, as described by McElreath in Chapter 12 of Statistical Rethinking.</p></li>
+</ul>
+</section>
+<section id="the-actual-tutorial-that-everyone-came-here-for-i-assume" class="level1">
+<h1>The actual tutorial that everyone came here for, I assume</h1>
+<p>So, here’s a brief outline of what I’ll cover in this tutorial.</p>
+<ol type="1">
+<li>Fitting an easy model using the <code>rethinking</code> package. This model will have a random intercept. If you’re looking for models with more than one random effect, I’m not sure I can help you, as I haven’t painstakingly worked through that yet! So if that’s you, use this guide at your own risk.</li>
+<li>I’ll show how to get the posterior samples from the model. Then I’ll walk through manual calculations of the four types of credible intervals discussed in Andrew Heiss’ blog post above.</li>
+<li>Hopefully I’ll refit the model with <code>brms</code>, this might come a bit later after this is posted. Depends on how fast I can absorb Yang’s <code>brms</code> knowledge from his code. That way we can check and see that my answers are more-or-less correct.</li>
+</ol>
+<p>Enough messing about, let’s get started!</p>
+<section id="fitting-a-model-with-rethinking" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-model-with-rethinking">Fitting a model with <code>rethinking</code></h2>
+<section id="example-data-and-model" class="level3">
+<h3 class="anchored" data-anchor-id="example-data-and-model">Example data and model</h3>
+<p>For this type of simple one random-intercept model, I’ll use the <code>iris</code> dataset that everyone is familiar with. If this doesn’t work out how I want, I’ll probably come back here and either find a different dataset to use, or generate some fake data that matches the hierarchical model I want to fit (of course with some noise 😁).</p>
+<p>But what I’m interested in here is one continuous outcome with one continuous predictor, with a categorical grouping factor. And <code>iris</code> works for that!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+</div>
+<p>For convenience, I’ll call <code>Petal.Length</code> <span class="math inline">\(y\)</span> (our outcome of interest) and <code>Sepal.Width</code> <span class="math inline">\(x\)</span> (our predictor, I choose this because I thought the scatterplot looked interesting). We’ll use <code>Species</code> as an indexing variable, <span class="math inline">\(i\)</span> here. That means we’ll have different estimates for each species in the dataset.</p>
+<p>We’ll fit the following model.</p>
+<p><span class="math display">\[\begin{align*}
+Y_i &amp;\sim \text{Normal}(\mu_i, \sigma) \\
+\mu_i &amp;= \alpha_{\text{Species}[i]} + \beta x \\
+\alpha_i &amp;\sim \text{Normal}(\bar{\alpha}, \gamma), \quad \text{ for } j = 1, \ldots, 3 \\
+\bar{\alpha} &amp;\sim \text{Normal}(0, 2) \\
+\beta &amp;\sim \text{Normal}(0, 2) \\
+\gamma &amp;\sim \text{Exponential}(1) \\
+\sigma &amp;\sim \text{Exponential}(1)
+\end{align*}\]</span></p>
+<p>This isn’t a blog post about choosing principled or correct priors, so all I can really say about these is that I made them up after looking at Chapter 13 of Statistical Rethinking. They probably aren’t very good and I should really do better, but that’s not my main focus here, so I won’t. I sort of just picked gamma likelihood and exponential/gamma priors because they are constrained to be positive, and since both our independent and dependent variables must be positive, I think it’s probably fine to force all of these things to be positive. (In reality, only mu has to be positive and the <span class="math inline">\(\beta\)</span> parameter has to be negative, but since we can plot the relationship and see that there’s a positive correlation, I think this assumption is fine.)</p>
+<p>Anyways. Other people know lots more about priors than I do (like the Stan dev team and Michael Betancourt) so you should read their stuff about priors if that’s what you’re curious about. We should also probably do a prior predictive check, but again, I just want to talk about CIs, so let’s move on.</p>
+</section>
+<section id="model-fitting-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="model-fitting-in-r">Model fitting in R</h3>
+<p>I’ll fit the model using <code>rethinking</code>, since I think it’s actually quite a nice interface to <code>rstan</code>, and I like that we basically enter the model just like it looks above. We’ll do some minor data processing so I can be sure that I know which species is which in the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    iris <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">transmute</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">petal_length =</span> Petal.Length,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sepal_width =</span> Sepal.Width,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">species =</span> <span class="fu">as.numeric</span>(Species)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.list</span>()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    rethinking<span class="sc">::</span><span class="fu">ulam</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">flist =</span> <span class="fu">alist</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            petal_length <span class="sc">~</span> <span class="fu">gamma</span>(mu, sigma),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            mu <span class="ot">&lt;-</span> alpha[species] <span class="sc">+</span> beta <span class="sc">*</span> sepal_width,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            alpha[species] <span class="sc">~</span> <span class="fu">gamma</span>(bar_alpha, gamma),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            bar_alpha <span class="sc">~</span> <span class="fu">exponential</span>(<span class="dv">1</span>),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            beta <span class="sc">~</span> <span class="fu">exponential</span>(<span class="dv">1</span>),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            gamma <span class="sc">~</span> <span class="fu">exponential</span>(<span class="dv">1</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            sigma <span class="sc">~</span> <span class="fu">exponential</span>(<span class="dv">1</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> d,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">iter =</span> <span class="dv">5000</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">warmup =</span> <span class="dv">2500</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">cmdstan =</span> <span class="cn">TRUE</span>, <span class="co"># Not sure this is actually working</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.95</span>, <span class="at">seed =</span> <span class="dv">370</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 4 parallel chains, with 1 thread(s) per chain...
+
+Chain 1 Iteration:    1 / 5000 [  0%]  (Warmup) 
+Chain 2 Iteration:    1 / 5000 [  0%]  (Warmup) 
+Chain 3 Iteration:    1 / 5000 [  0%]  (Warmup) 
+Chain 4 Iteration:    1 / 5000 [  0%]  (Warmup) 
+Chain 1 Iteration:  100 / 5000 [  2%]  (Warmup) 
+Chain 2 Iteration:  100 / 5000 [  2%]  (Warmup) 
+Chain 3 Iteration:  100 / 5000 [  2%]  (Warmup) 
+Chain 4 Iteration:  100 / 5000 [  2%]  (Warmup) 
+Chain 1 Iteration:  200 / 5000 [  4%]  (Warmup) 
+Chain 2 Iteration:  200 / 5000 [  4%]  (Warmup) 
+Chain 2 Iteration:  300 / 5000 [  6%]  (Warmup) 
+Chain 3 Iteration:  200 / 5000 [  4%]  (Warmup) 
+Chain 4 Iteration:  200 / 5000 [  4%]  (Warmup) 
+Chain 1 Iteration:  300 / 5000 [  6%]  (Warmup) 
+Chain 3 Iteration:  300 / 5000 [  6%]  (Warmup) 
+Chain 4 Iteration:  300 / 5000 [  6%]  (Warmup) 
+Chain 1 Iteration:  400 / 5000 [  8%]  (Warmup) 
+Chain 2 Iteration:  400 / 5000 [  8%]  (Warmup) 
+Chain 3 Iteration:  400 / 5000 [  8%]  (Warmup) 
+Chain 4 Iteration:  400 / 5000 [  8%]  (Warmup) 
+Chain 3 Iteration:  500 / 5000 [ 10%]  (Warmup) 
+Chain 1 Iteration:  500 / 5000 [ 10%]  (Warmup) 
+Chain 2 Iteration:  500 / 5000 [ 10%]  (Warmup) 
+Chain 4 Iteration:  500 / 5000 [ 10%]  (Warmup) 
+Chain 3 Iteration:  600 / 5000 [ 12%]  (Warmup) 
+Chain 2 Iteration:  600 / 5000 [ 12%]  (Warmup) 
+Chain 4 Iteration:  600 / 5000 [ 12%]  (Warmup) 
+Chain 1 Iteration:  600 / 5000 [ 12%]  (Warmup) 
+Chain 3 Iteration:  700 / 5000 [ 14%]  (Warmup) 
+Chain 2 Iteration:  700 / 5000 [ 14%]  (Warmup) 
+Chain 3 Iteration:  800 / 5000 [ 16%]  (Warmup) 
+Chain 4 Iteration:  700 / 5000 [ 14%]  (Warmup) 
+Chain 1 Iteration:  700 / 5000 [ 14%]  (Warmup) 
+Chain 2 Iteration:  800 / 5000 [ 16%]  (Warmup) 
+Chain 3 Iteration:  900 / 5000 [ 18%]  (Warmup) 
+Chain 4 Iteration:  800 / 5000 [ 16%]  (Warmup) 
+Chain 1 Iteration:  800 / 5000 [ 16%]  (Warmup) 
+Chain 2 Iteration:  900 / 5000 [ 18%]  (Warmup) 
+Chain 3 Iteration: 1000 / 5000 [ 20%]  (Warmup) 
+Chain 2 Iteration: 1000 / 5000 [ 20%]  (Warmup) 
+Chain 3 Iteration: 1100 / 5000 [ 22%]  (Warmup) 
+Chain 1 Iteration:  900 / 5000 [ 18%]  (Warmup) 
+Chain 4 Iteration:  900 / 5000 [ 18%]  (Warmup) 
+Chain 2 Iteration: 1100 / 5000 [ 22%]  (Warmup) 
+Chain 3 Iteration: 1200 / 5000 [ 24%]  (Warmup) 
+Chain 3 Iteration: 1300 / 5000 [ 26%]  (Warmup) 
+Chain 4 Iteration: 1000 / 5000 [ 20%]  (Warmup) 
+Chain 1 Iteration: 1000 / 5000 [ 20%]  (Warmup) 
+Chain 2 Iteration: 1200 / 5000 [ 24%]  (Warmup) 
+Chain 1 Iteration: 1100 / 5000 [ 22%]  (Warmup) 
+Chain 3 Iteration: 1400 / 5000 [ 28%]  (Warmup) 
+Chain 2 Iteration: 1300 / 5000 [ 26%]  (Warmup) 
+Chain 3 Iteration: 1500 / 5000 [ 30%]  (Warmup) 
+Chain 4 Iteration: 1100 / 5000 [ 22%]  (Warmup) 
+Chain 1 Iteration: 1200 / 5000 [ 24%]  (Warmup) 
+Chain 2 Iteration: 1400 / 5000 [ 28%]  (Warmup) 
+Chain 3 Iteration: 1600 / 5000 [ 32%]  (Warmup) 
+Chain 4 Iteration: 1200 / 5000 [ 24%]  (Warmup) 
+Chain 1 Iteration: 1300 / 5000 [ 26%]  (Warmup) 
+Chain 2 Iteration: 1500 / 5000 [ 30%]  (Warmup) 
+Chain 3 Iteration: 1700 / 5000 [ 34%]  (Warmup) 
+Chain 4 Iteration: 1300 / 5000 [ 26%]  (Warmup) 
+Chain 1 Iteration: 1400 / 5000 [ 28%]  (Warmup) 
+Chain 2 Iteration: 1600 / 5000 [ 32%]  (Warmup) 
+Chain 3 Iteration: 1800 / 5000 [ 36%]  (Warmup) 
+Chain 4 Iteration: 1400 / 5000 [ 28%]  (Warmup) 
+Chain 1 Iteration: 1500 / 5000 [ 30%]  (Warmup) 
+Chain 2 Iteration: 1700 / 5000 [ 34%]  (Warmup) 
+Chain 3 Iteration: 1900 / 5000 [ 38%]  (Warmup) 
+Chain 1 Iteration: 1600 / 5000 [ 32%]  (Warmup) 
+Chain 2 Iteration: 1800 / 5000 [ 36%]  (Warmup) 
+Chain 4 Iteration: 1500 / 5000 [ 30%]  (Warmup) 
+Chain 3 Iteration: 2000 / 5000 [ 40%]  (Warmup) 
+Chain 1 Iteration: 1700 / 5000 [ 34%]  (Warmup) 
+Chain 2 Iteration: 1900 / 5000 [ 38%]  (Warmup) 
+Chain 3 Iteration: 2100 / 5000 [ 42%]  (Warmup) 
+Chain 4 Iteration: 1600 / 5000 [ 32%]  (Warmup) 
+Chain 1 Iteration: 1800 / 5000 [ 36%]  (Warmup) 
+Chain 2 Iteration: 2000 / 5000 [ 40%]  (Warmup) 
+Chain 3 Iteration: 2200 / 5000 [ 44%]  (Warmup) 
+Chain 2 Iteration: 2100 / 5000 [ 42%]  (Warmup) 
+Chain 4 Iteration: 1700 / 5000 [ 34%]  (Warmup) 
+Chain 1 Iteration: 1900 / 5000 [ 38%]  (Warmup) 
+Chain 3 Iteration: 2300 / 5000 [ 46%]  (Warmup) 
+Chain 2 Iteration: 2200 / 5000 [ 44%]  (Warmup) 
+Chain 3 Iteration: 2400 / 5000 [ 48%]  (Warmup) 
+Chain 4 Iteration: 1800 / 5000 [ 36%]  (Warmup) 
+Chain 1 Iteration: 2000 / 5000 [ 40%]  (Warmup) 
+Chain 1 Iteration: 2100 / 5000 [ 42%]  (Warmup) 
+Chain 2 Iteration: 2300 / 5000 [ 46%]  (Warmup) 
+Chain 3 Iteration: 2500 / 5000 [ 50%]  (Warmup) 
+Chain 4 Iteration: 1900 / 5000 [ 38%]  (Warmup) 
+Chain 2 Iteration: 2400 / 5000 [ 48%]  (Warmup) 
+Chain 3 Iteration: 2501 / 5000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 2200 / 5000 [ 44%]  (Warmup) 
+Chain 4 Iteration: 2000 / 5000 [ 40%]  (Warmup) 
+Chain 1 Iteration: 2300 / 5000 [ 46%]  (Warmup) 
+Chain 2 Iteration: 2500 / 5000 [ 50%]  (Warmup) 
+Chain 2 Iteration: 2501 / 5000 [ 50%]  (Sampling) 
+Chain 3 Iteration: 2600 / 5000 [ 52%]  (Sampling) 
+Chain 4 Iteration: 2100 / 5000 [ 42%]  (Warmup) 
+Chain 1 Iteration: 2400 / 5000 [ 48%]  (Warmup) 
+Chain 2 Iteration: 2600 / 5000 [ 52%]  (Sampling) 
+Chain 2 Iteration: 2700 / 5000 [ 54%]  (Sampling) 
+Chain 3 Iteration: 2700 / 5000 [ 54%]  (Sampling) 
+Chain 4 Iteration: 2200 / 5000 [ 44%]  (Warmup) 
+Chain 1 Iteration: 2500 / 5000 [ 50%]  (Warmup) 
+Chain 2 Iteration: 2800 / 5000 [ 56%]  (Sampling) 
+Chain 1 Iteration: 2501 / 5000 [ 50%]  (Sampling) 
+Chain 4 Iteration: 2300 / 5000 [ 46%]  (Warmup) 
+Chain 2 Iteration: 2900 / 5000 [ 58%]  (Sampling) 
+Chain 3 Iteration: 2800 / 5000 [ 56%]  (Sampling) 
+Chain 1 Iteration: 2600 / 5000 [ 52%]  (Sampling) 
+Chain 4 Iteration: 2400 / 5000 [ 48%]  (Warmup) 
+Chain 2 Iteration: 3000 / 5000 [ 60%]  (Sampling) 
+Chain 3 Iteration: 2900 / 5000 [ 58%]  (Sampling) 
+Chain 1 Iteration: 2700 / 5000 [ 54%]  (Sampling) 
+Chain 2 Iteration: 3100 / 5000 [ 62%]  (Sampling) 
+Chain 4 Iteration: 2500 / 5000 [ 50%]  (Warmup) 
+Chain 4 Iteration: 2501 / 5000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 2800 / 5000 [ 56%]  (Sampling) 
+Chain 2 Iteration: 3200 / 5000 [ 64%]  (Sampling) 
+Chain 3 Iteration: 3000 / 5000 [ 60%]  (Sampling) 
+Chain 4 Iteration: 2600 / 5000 [ 52%]  (Sampling) 
+Chain 2 Iteration: 3300 / 5000 [ 66%]  (Sampling) 
+Chain 1 Iteration: 2900 / 5000 [ 58%]  (Sampling) 
+Chain 2 Iteration: 3400 / 5000 [ 68%]  (Sampling) 
+Chain 3 Iteration: 3100 / 5000 [ 62%]  (Sampling) 
+Chain 4 Iteration: 2700 / 5000 [ 54%]  (Sampling) 
+Chain 2 Iteration: 3500 / 5000 [ 70%]  (Sampling) 
+Chain 1 Iteration: 3000 / 5000 [ 60%]  (Sampling) 
+Chain 2 Iteration: 3600 / 5000 [ 72%]  (Sampling) 
+Chain 3 Iteration: 3200 / 5000 [ 64%]  (Sampling) 
+Chain 4 Iteration: 2800 / 5000 [ 56%]  (Sampling) 
+Chain 1 Iteration: 3100 / 5000 [ 62%]  (Sampling) 
+Chain 2 Iteration: 3700 / 5000 [ 74%]  (Sampling) 
+Chain 4 Iteration: 2900 / 5000 [ 58%]  (Sampling) 
+Chain 2 Iteration: 3800 / 5000 [ 76%]  (Sampling) 
+Chain 3 Iteration: 3300 / 5000 [ 66%]  (Sampling) 
+Chain 1 Iteration: 3200 / 5000 [ 64%]  (Sampling) 
+Chain 2 Iteration: 3900 / 5000 [ 78%]  (Sampling) 
+Chain 4 Iteration: 3000 / 5000 [ 60%]  (Sampling) 
+Chain 1 Iteration: 3300 / 5000 [ 66%]  (Sampling) 
+Chain 2 Iteration: 4000 / 5000 [ 80%]  (Sampling) 
+Chain 3 Iteration: 3400 / 5000 [ 68%]  (Sampling) 
+Chain 2 Iteration: 4100 / 5000 [ 82%]  (Sampling) 
+Chain 4 Iteration: 3100 / 5000 [ 62%]  (Sampling) 
+Chain 1 Iteration: 3400 / 5000 [ 68%]  (Sampling) 
+Chain 3 Iteration: 3500 / 5000 [ 70%]  (Sampling) 
+Chain 2 Iteration: 4200 / 5000 [ 84%]  (Sampling) 
+Chain 1 Iteration: 3500 / 5000 [ 70%]  (Sampling) 
+Chain 4 Iteration: 3200 / 5000 [ 64%]  (Sampling) 
+Chain 2 Iteration: 4300 / 5000 [ 86%]  (Sampling) 
+Chain 3 Iteration: 3600 / 5000 [ 72%]  (Sampling) 
+Chain 1 Iteration: 3600 / 5000 [ 72%]  (Sampling) 
+Chain 2 Iteration: 4400 / 5000 [ 88%]  (Sampling) 
+Chain 2 Iteration: 4500 / 5000 [ 90%]  (Sampling) 
+Chain 4 Iteration: 3300 / 5000 [ 66%]  (Sampling) 
+Chain 3 Iteration: 3700 / 5000 [ 74%]  (Sampling) 
+Chain 1 Iteration: 3700 / 5000 [ 74%]  (Sampling) 
+Chain 2 Iteration: 4600 / 5000 [ 92%]  (Sampling) 
+Chain 4 Iteration: 3400 / 5000 [ 68%]  (Sampling) 
+Chain 1 Iteration: 3800 / 5000 [ 76%]  (Sampling) 
+Chain 2 Iteration: 4700 / 5000 [ 94%]  (Sampling) 
+Chain 3 Iteration: 3800 / 5000 [ 76%]  (Sampling) 
+Chain 2 Iteration: 4800 / 5000 [ 96%]  (Sampling) 
+Chain 4 Iteration: 3500 / 5000 [ 70%]  (Sampling) 
+Chain 1 Iteration: 3900 / 5000 [ 78%]  (Sampling) 
+Chain 2 Iteration: 4900 / 5000 [ 98%]  (Sampling) 
+Chain 3 Iteration: 3900 / 5000 [ 78%]  (Sampling) 
+Chain 4 Iteration: 3600 / 5000 [ 72%]  (Sampling) 
+Chain 1 Iteration: 4000 / 5000 [ 80%]  (Sampling) 
+Chain 2 Iteration: 5000 / 5000 [100%]  (Sampling) 
+Chain 2 finished in 10.8 seconds.
+Chain 3 Iteration: 4000 / 5000 [ 80%]  (Sampling) 
+Chain 4 Iteration: 3700 / 5000 [ 74%]  (Sampling) 
+Chain 1 Iteration: 4100 / 5000 [ 82%]  (Sampling) 
+Chain 1 Iteration: 4200 / 5000 [ 84%]  (Sampling) 
+Chain 3 Iteration: 4100 / 5000 [ 82%]  (Sampling) 
+Chain 4 Iteration: 3800 / 5000 [ 76%]  (Sampling) 
+Chain 1 Iteration: 4300 / 5000 [ 86%]  (Sampling) 
+Chain 3 Iteration: 4200 / 5000 [ 84%]  (Sampling) 
+Chain 4 Iteration: 3900 / 5000 [ 78%]  (Sampling) 
+Chain 1 Iteration: 4400 / 5000 [ 88%]  (Sampling) 
+Chain 3 Iteration: 4300 / 5000 [ 86%]  (Sampling) 
+Chain 4 Iteration: 4000 / 5000 [ 80%]  (Sampling) 
+Chain 1 Iteration: 4500 / 5000 [ 90%]  (Sampling) 
+Chain 4 Iteration: 4100 / 5000 [ 82%]  (Sampling) 
+Chain 3 Iteration: 4400 / 5000 [ 88%]  (Sampling) 
+Chain 1 Iteration: 4600 / 5000 [ 92%]  (Sampling) 
+Chain 4 Iteration: 4200 / 5000 [ 84%]  (Sampling) 
+Chain 3 Iteration: 4500 / 5000 [ 90%]  (Sampling) 
+Chain 1 Iteration: 4700 / 5000 [ 94%]  (Sampling) 
+Chain 4 Iteration: 4300 / 5000 [ 86%]  (Sampling) 
+Chain 3 Iteration: 4600 / 5000 [ 92%]  (Sampling) 
+Chain 1 Iteration: 4800 / 5000 [ 96%]  (Sampling) 
+Chain 4 Iteration: 4400 / 5000 [ 88%]  (Sampling) 
+Chain 1 Iteration: 4900 / 5000 [ 98%]  (Sampling) 
+Chain 3 Iteration: 4700 / 5000 [ 94%]  (Sampling) 
+Chain 4 Iteration: 4500 / 5000 [ 90%]  (Sampling) 
+Chain 1 Iteration: 5000 / 5000 [100%]  (Sampling) 
+Chain 3 Iteration: 4800 / 5000 [ 96%]  (Sampling) 
+Chain 1 finished in 13.9 seconds.
+Chain 4 Iteration: 4600 / 5000 [ 92%]  (Sampling) 
+Chain 3 Iteration: 4900 / 5000 [ 98%]  (Sampling) 
+Chain 4 Iteration: 4700 / 5000 [ 94%]  (Sampling) 
+Chain 3 Iteration: 5000 / 5000 [100%]  (Sampling) 
+Chain 4 Iteration: 4800 / 5000 [ 96%]  (Sampling) 
+Chain 3 finished in 14.7 seconds.
+Chain 4 Iteration: 4900 / 5000 [ 98%]  (Sampling) 
+Chain 4 Iteration: 5000 / 5000 [100%]  (Sampling) 
+Chain 4 finished in 15.3 seconds.
+
+All 4 chains finished successfully.
+Mean chain execution time: 13.7 seconds.
+Total execution time: 15.5 seconds.</code></pre>
+</div>
+</div>
+<p>Not sure if all the messages from the stan fit will show up here or not, hopefully not. But the model ran for me, I just got some warnings from how <code>rethinking</code> writes Stan syntax. Hopefully those warnings don’t matter much <code>emoji::emoji("smile")</code>.</p>
+<p>The focus of this post isn’t diagnostics either, but let’s do a quick check.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rethinking<span class="sc">::</span><span class="fu">precis</span>(fit, <span class="at">depth =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">X5.5.</th>
+<th style="text-align: right;">X94.5.</th>
+<th style="text-align: right;">n_eff</th>
+<th style="text-align: right;">Rhat4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">alpha[1]</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">2169.24</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">alpha[2]</td>
+<td style="text-align: right;">3.44</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">3.10</td>
+<td style="text-align: right;">3.78</td>
+<td style="text-align: right;">2259.86</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">alpha[3]</td>
+<td style="text-align: right;">4.67</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">4.31</td>
+<td style="text-align: right;">5.03</td>
+<td style="text-align: right;">2260.87</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bar_alpha</td>
+<td style="text-align: right;">2.08</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">3.54</td>
+<td style="text-align: right;">4611.90</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">beta</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">2161.87</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gamma</td>
+<td style="text-align: right;">1.75</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">0.68</td>
+<td style="text-align: right;">3.50</td>
+<td style="text-align: right;">5381.65</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sigma</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">6232.82</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The effective sample sizes are pretty good, everything is higher than the actual sample size (2500) except for beta. But the ESS for beta is still pretty good. The <span class="math inline">\(\hat{R}\)</span> values also look good. Every book on using Stan cautions on just looking at these metrics, but if you want something better…look in those books (BDA3, SR, etc.) since they explain it better than I can. So I’ll assume we’re good and finally get to what I actually wanted to talk about.</p>
+</section>
+</section>
+<section id="estimating-the-posterior-mean-and-its-ci" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-the-posterior-mean-and-its-ci">Estimating the posterior mean and its CI</h2>
+<p>Now, we need to sample from the posterior.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> rethinking<span class="sc">::</span><span class="fu">extract.samples</span>(fit, <span class="at">n =</span> <span class="dv">2500</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(post)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 5
+ $ alpha    : num [1:2500, 1:3] 0.438 0.904 0.213 0.626 0.342 ...
+ $ bar_alpha: num [1:2500(1d)] 1.91 3.03 2.68 2.41 1.03 ...
+ $ beta     : num [1:2500(1d)] 0.304 0.16 0.372 0.237 0.331 ...
+ $ gamma    : num [1:2500(1d)] 2.3 1.12 2.81 1.34 1.29 ...
+ $ sigma    : num [1:2500(1d)] 0.0427 0.0433 0.0445 0.0371 0.0324 ...
+ - attr(*, "source")= chr "ulam posterior: 2500 samples from object"</code></pre>
+</div>
+</div>
+<p>Ok, so we have all of our samples, yay. You can see that we have three alpha vectors in a matrix (one for each species, in the order they showed up in the original dataset). Everything else is a vector of length 2500 (the number of samples we did). Here’s some quick histograms showing the posterior distribution of each parameter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(post, {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(bar_alpha, <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"bar_alpha"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(alpha[, <span class="dv">1</span>], <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"alpha (group 1)"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(alpha[, <span class="dv">2</span>], <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"alpha (group 2)"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(alpha[, <span class="dv">3</span>], <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"alpha (group 3)"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(post, {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(beta,  <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"beta"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(sigma, <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"sigma"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(gamma, <span class="at">breaks =</span> <span class="st">"FD"</span>, <span class="at">main =</span> <span class="st">"gamma"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="type-one-grand-means" class="level3">
+<h3 class="anchored" data-anchor-id="type-one-grand-means">“Type One” – Grand means</h3>
+<p>Ok, in <code>brms</code> world, this would use the setting <code>re_formula = NA</code>. In short, <strong>this is the variance about the mean, ignoring any variations in the random effects.</strong> While discussing this with Andreas, I think a very subtle and important point is that <em>the estimate of the mean still includes information from the random effects</em> in this model formulation, but the credible interval will not take variation away from the mean of the random effects into account. I don’t know that much about this formally, but my understanding is that this estimate is still conditional on the random effects. Because we used a “partial pooling” model, our estimate of <code>bar_alpha</code> includes random effects information. (If you read this and you think I’m wrong, please let me know!)</p>
+<p>Basically, the way this mean and CI is calculated is by <strong>using only the mean of the random effects, ignoring RE-level deviations.</strong> So for this example, that means we’ll base our inference on <code>bar_alpha</code> rather than on the three <code>alpha</code> vectors. Now, we can of course do inference on just the <code>bar_alpha</code> parameter, but as Andrew Heiss pointed out in the blog posted I linked earlier, we can’t just interpret it like we can in a frequentist OLS model.</p>
+<p>What we’re trying to estimate here is how the expected value of the outcome (petal length) changes along with sepal width. In our model we defined <span class="math display">\[\hat{\mu} = \hat{\alpha}_i + \hat{\beta} x,\]</span> where <span class="math inline">\(x\)</span> is the predictor, sepal width. So what we need to do is use our posterior samples to calculate this mean. In lots of models, we would need to “unlink” in this step also (apply the inverse link function), but here I used an identity link, even though that’s not too common with a gamma likelihood model, to make my life easier.</p>
+<p>So we want to get predictions for a bunch of interpolated values of sepal width. We’ll need to do a bit of vector/matrix manipulation to do this in R, so I’ll try to explain that.</p>
+<p>First of all, we have our vectors of samples, <span class="math inline">\(\hat{\beta}\)</span> and <span class="math inline">\(\hat{\bar{\alpha}}\)</span> (remember for this type of CI, we assume that <span class="math inline">\(\alpha_i = \bar{\alpha}\)</span>). These are both <span class="math inline">\(2500 \times 1\)</span> column vectors. Now, our vector of interpolated <span class="math inline">\(x\)</span> values, say <span class="math inline">\(\tilde{x}\)</span>, will be a <span class="math inline">\(j \times 1\)</span> column vector, where <span class="math inline">\(j\)</span> depends on interpolation. Clearly this is incompatible with our other vectors.</p>
+<p>However, we can use the <a href="https://en.wikipedia.org/wiki/Outer_product">outer matrix product</a> to get this in the correct shape. Then, the formula for computing the linear predictor is <span class="math display">\[\hat{\mu} =  \hat{\bar{\alpha}} \otimes \mathbf{1} + \hat{\beta} \otimes \tilde{x},\]</span> where <span class="math inline">\(\mathbf{1}\)</span> is a column vector of <span class="math inline">\(1\)</span>’s with dimensions <span class="math inline">\(j \times 1\)</span>. You can write this without the outer product by using matrix products and transposes, but I personally prefer this notation. If you’re more comfortable without the outer product, this can also be written as</p>
+<p><span class="math display">\[\hat{\mu} = \hat{\bar{\alpha}} \mathbf{1}^\prime + \tilde{x}\hat{\beta}^\prime, \]</span> where multiplication is the standard matrix product.</p>
+<p>Now, both <span class="math inline">\(\hat{\bar{\alpha}} \otimes \mathbf{1}\)</span> and <span class="math inline">\(\hat{\beta} \otimes \tilde{x}\)</span> will be <span class="math inline">\(2500 \times j\)</span> matrices (and so are conformable for addition) and will look like this:</p>
+<p><span class="math display">\[\begin{bmatrix} \hat{\bar{\alpha}}_1 &amp; \hat{\bar{\alpha}}_1 &amp; \cdots &amp; \hat{\bar{\alpha}}_1 \\
+\hat{\bar{\alpha}}_2 &amp; \hat{\bar{\alpha}}_2 &amp; \cdots &amp; \hat{\bar{\alpha}}_2 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\hat{\bar{\alpha}}_{2500} &amp; \hat{\bar{\alpha}}_{2500} &amp; \cdots &amp; \hat{\bar{\alpha}}_{2500}
+\end{bmatrix} + \begin{bmatrix}
+\hat{\beta}_1 \tilde{x}_1 &amp; \hat{\beta}_1 \tilde{x}_2 &amp; \cdots &amp; \hat{\beta}_1 \tilde{x}_j \\
+\hat{\beta}_2 \tilde{x}_1 &amp; \hat{\beta}_2 \tilde{x}_2 &amp; \cdots &amp; \hat{\beta}_2 \tilde{x}_j \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\hat{\beta}_{2500} \tilde{x}_1 &amp; \hat{\beta}_{2500} \tilde{x}_2 &amp; \cdots &amp; \hat{\beta}_{2500} \tilde{x}_j
+\end{bmatrix} = \begin{bmatrix}
+\hat{\bar{\alpha}}_1 + \hat{\beta}_1 \tilde{x}_1 &amp; \hat{\bar{\alpha}}_1 + \hat{\beta}_1 \tilde{x}_2 &amp; \cdots &amp; \hat{\bar{\alpha}}_1 + \hat{\beta}_1 \tilde{x}_j \\
+\hat{\bar{\alpha}}_2 + \hat{\beta}_2 \tilde{x}_1 &amp; \hat{\bar{\alpha}}_2 + \hat{\beta}_2 \tilde{x}_2 &amp; \cdots &amp; \hat{\bar{\alpha}}_2 + \hat{\beta}_2 \tilde{x}_j \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_1 &amp; \hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_2 &amp; \cdots &amp; \hat{\bar{\alpha}}_{2500} + \hat{\beta}_{2500} \tilde{x}_j \\
+\end{bmatrix}.\]</span></p>
+<p>So, you can see we get a linear predictor (since the link is the identity function) for each element of the matrix. We’ve constructed 2500 samples of the linear predictor evaluated at <span class="math inline">\(j\)</span> values of the predictor <span class="math inline">\(x\)</span>. (Under the assumption that we don’t care about group-level deviations from the mean. Remember, the whole reason this makes the type 1 CI is that we used <span class="math inline">\(\bar{\alpha}\)</span>.)</p>
+<p>Now let’s do this in <code>R</code> code. The first thing we have to do is construct the vector of sepal width values to use. In the code below, you can see that I made a vector that goes from the minimum observed value to the maximum observe value in steps of 0.01. Then, we can construct the <span class="math inline">\(\hat{\mu}\)</span> (not sure if this is the technically correct notation 😁) matrix using either of the matrix formulas I listed above. In R, <code>%*%</code> is the standard matrix product and <code>%o%</code> is the outer product.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x_tilde <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(d<span class="sc">$</span>sepal_width), <span class="fu">max</span>(d<span class="sc">$</span>sepal_width), <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ones <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">times =</span> <span class="fu">length</span>(x_tilde))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(post, pred_vals <span class="ot">&lt;&lt;-</span> bar_alpha <span class="sc">%o%</span> ones <span class="sc">+</span> beta <span class="sc">%o%</span> x_tilde)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively, pred_vals &lt;- post$bar_alpha %o% ones + post$beta %o% x_tilde</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pred_vals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:2500, 1:241] 2.51 3.34 3.43 2.89 1.69 ...</code></pre>
+</div>
+</div>
+<p>Now that we have these samples, we can summarize them in the typical way. For each column of the <code>pred_vals</code> matrix, you can estimate the sample mean (or other statistics) along with a credible interval. I’ll use an equal-tailed (aka percentile) 89% credible interval, but you could also use the HDPI or whatever else. I also prefer to tidy up the data first before I do anything else.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to return the mean and percentile interval as a tibble</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mean_pi <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="fl">0.89</span>) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    est <span class="ot">&lt;-</span> rethinking<span class="sc">::</span><span class="fu">PI</span>(x, <span class="at">prob =</span> p)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">lower =</span> est[<span class="dv">1</span>],</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">upper =</span> est[<span class="dv">2</span>]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>type_1_summary <span class="ot">&lt;-</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    pred_vals <span class="sc">|&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert from matrix to tibble</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Summarize each column</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">.cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>(),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">.f =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="fu">mean_pi</span>(.x))</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set names so we can pivot longer easily</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">set_names</span>(<span class="at">nm =</span> x_tilde) <span class="sc">|&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Pivot to get in the right form for ggplot</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">cols =</span> tidyselect<span class="sc">::</span><span class="fu">everything</span>(),</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"sepal_width"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"stats"</span>,</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">sepal_width =</span> as.numeric)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Unnest to get separate columns for mean and CI bounds</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(<span class="at">cols =</span> stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+Using compatibility `.name_repair`.</code></pre>
+</div>
+</div>
+<p>Alright, now that we’ve got the data cleaned up and the Type 1 CI computed, we can make a plot to show what this CI looks like.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>type_1_summary <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sepal_width, <span class="at">y =</span> mean, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This part plots the mean line and CI</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This part plots the raw data points</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> iris,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Width, <span class="at">y =</span> Petal.Length, <span class="at">color =</span> Species,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">shape =</span> Species),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">stroke =</span> <span class="dv">1</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This plot customizes how the plot looks</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)) <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">sepal width"</span>, <span class="at">y =</span> <span class="st">"petal length</span><span class="sc">\n</span><span class="st">"</span>) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    zlib<span class="sc">::</span><span class="fu">theme_ms</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here we can see one of the problems that made me think <code>iris</code> may not be such a good data set for demonstrating these calculations – the average fits the overall global mean well, but it doesn’t describe any of the three groups particularly well. However, after seeing this, I think it might actually demonstrate the shortcomings of the global mean in cases like this. Anyways, we got the CI calculated manually, and now we can move on to the next CI type.</p>
+</section>
+<section id="type-two-group-means" class="level3">
+<h3 class="anchored" data-anchor-id="type-two-group-means">“Type Two” – Group means</h3>
+<p>The CIs of type two (I hope that the order in Andrew Heiss’ blog post becomes the canonical name for these four types of CIs, since I haven’t seen any official names anywhere else) are group-specific, rather than calculating one overall estimate that combines groups. The formula for calculating these CIs is probably the easiest one to write down:</p>
+<p><span class="math display">\[\hat{\mu}_s =  \hat{\alpha}_s \otimes \mathbf{1} + \hat{\beta} \otimes \tilde{x},\]</span> where <span class="math inline">\(s \in S = \{\text{setosa, versicolor, viginica}\}\)</span> indexes the species group. Since we’re using all of the same matrix math as before, I won’t rattle on as much this time. Instead we just need one extra ingredient for these CIs – the incredibly versatile <code>purrr::map()</code>! I <strong>KNOW</strong> there’s a better way to do this and the way I’m doing it here is weird and inefficient, I just didn’t want to work on it longer and this runs pretty fast.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>type_2_summary <span class="ot">&lt;-</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the estimates for each group</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">map</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="sc">~</span><span class="fu">as.data.frame</span>(post<span class="sc">$</span>alpha[, .x] <span class="sc">%o%</span> ones <span class="sc">+</span> post<span class="sc">$</span>beta <span class="sc">%o%</span> x_tilde)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set names so that the species value will be calculated correctly</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">set_names</span>(<span class="at">nm =</span> <span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>, <span class="st">"virginica"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine the list of data frames into one data frame</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(<span class="at">.id =</span> <span class="st">"species"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Do the summarization for each species</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now calculate the mean and CI the same as before.</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">across</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">.cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>(),</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">.f =</span> <span class="sc">~</span><span class="fu">list</span>(<span class="fu">mean_pi</span>(.x))</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    rlang<span class="sc">::</span><span class="fu">set_names</span>(<span class="at">nm =</span> <span class="fu">c</span>(<span class="st">"species"</span>, x_tilde)) <span class="sc">|&gt;</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">cols =</span> <span class="sc">-</span>species,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_to =</span> <span class="st">"sepal_width"</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">values_to =</span> <span class="st">"stats"</span>,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">sepal_width =</span> as.numeric)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Unnest to get separate columns for mean and CI bounds</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(<span class="at">cols =</span> stats)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(type_2_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [723 × 5] (S3: tbl_df/tbl/data.frame)
+ $ species    : chr [1:723] "setosa" "setosa" "setosa" "setosa" ...
+ $ sepal_width: num [1:723] 2 2.01 2.02 2.03 2.04 2.05 2.06 2.07 2.08 2.09 ...
+ $ mean       : num [1:723] 1.06 1.06 1.06 1.06 1.07 ...
+ $ lower      : Named num [1:723] 0.885 0.889 0.893 0.897 0.901 ...
+  ..- attr(*, "names")= chr [1:723] "5%" "5%" "5%" "5%" ...
+ $ upper      : Named num [1:723] 1.22 1.22 1.23 1.23 1.23 ...
+  ..- attr(*, "names")= chr [1:723] "94%" "94%" "94%" "94%" ...</code></pre>
+</div>
+</div>
+<p>Now let’s plot these CIs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>type_2_summary <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sepal_width, <span class="at">y =</span> mean, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> species, <span class="at">fill =</span> species, <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This part plots the mean line and CI</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This part plots the raw data points</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> iris,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Width, <span class="at">y =</span> Petal.Length, <span class="at">color =</span> Species,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">shape =</span> Species),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">stroke =</span> <span class="dv">1</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This plot customizes how the plot looks</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)) <span class="sc">+</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">sepal width"</span>, <span class="at">y =</span> <span class="st">"petal length</span><span class="sc">\n</span><span class="st">"</span>) <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    zlib<span class="sc">::</span><span class="fu">theme_ms</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that this model is a so-called “parallel slopes” model. We estimated one common slope, with a different intercept for each group. If we also wanted the slope to vary, we would have needed to make the slope a random effect as well. (And probably specified the correlation between the slope and intercept.)</p>
+<p>However, you can see that we get individual credible intervals for each group, as we desired.</p>
+</section>
+<section id="type-three-typical-new-individual-means" class="level3">
+<h3 class="anchored" data-anchor-id="type-three-typical-new-individual-means">“Type Three” – Typical new individual means</h3>
+</section>
+<section id="type-four-similar-new-individual-means" class="level3">
+<h3 class="anchored" data-anchor-id="type-four-similar-new-individual-means">“Type Four” – Similar new individual means</h3>
+</section>
+</section>
+<section id="using-brms-for-double-checking-or-whatever" class="level2">
+<h2 class="anchored" data-anchor-id="using-brms-for-double-checking-or-whatever">Using <code>brms</code> for double checking or whatever</h2>
+</section>
+<section id="the-wrap-up" class="level2">
+<h2 class="anchored" data-anchor-id="the-wrap-up">The Wrap-Up</h2>
+</section>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section id="details" class="level2 appendix"><h2 class="quarto-appendix-heading">Details</h2><div class="quarto-appendix-contents">
+
+<p>Last updated: 2022-10-04 15:25:02</p>
+<p><a href="https://github.com/wzbillings/zlog/tree/master/_posts/posts/2022-08-22_brms-CIs/index.qmd">source code</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+attached base packages:
+[1] parallel  stats     graphics  grDevices datasets  utils     methods  
+[8] base     
+
+other attached packages:
+[1] digest_0.6.29        rethinking_2.21      cmdstanr_0.5.3      
+[4] rstan_2.21.7         StanHeaders_2.21.0-7 ggplot2_3.3.6       
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.9           mvtnorm_1.1-3        lattice_0.20-45     
+ [4] tidyr_1.2.1          prettyunits_1.1.1    ps_1.7.1            
+ [7] assertthat_0.2.1     utf8_1.2.2           R6_2.5.1            
+[10] backports_1.4.1      stats4_4.2.1         evaluate_0.16       
+[13] coda_0.19-4          highr_0.9            pillar_1.8.1        
+[16] rlang_1.0.5          data.table_1.14.2    rstudioapi_0.14     
+[19] callr_3.7.2          checkmate_2.1.0      emoji_0.2.0         
+[22] rmarkdown_2.16       labeling_0.4.2       stringr_1.4.1       
+[25] htmlwidgets_1.5.4    loo_2.5.1            munsell_0.5.0       
+[28] compiler_4.2.1       xfun_0.32            pkgconfig_2.0.3     
+[31] pkgbuild_1.3.1       shape_1.4.6          zlib_0.0.1          
+[34] htmltools_0.5.3      tidyselect_1.1.2     tibble_3.1.8        
+[37] tensorA_0.36.2       gridExtra_2.3        codetools_0.2-18    
+[40] matrixStats_0.62.0   fansi_1.0.3          crayon_1.5.2        
+[43] dplyr_1.0.10         withr_2.5.0          MASS_7.3-57         
+[46] grid_4.2.1           distributional_0.3.1 jsonlite_1.8.0      
+[49] gtable_0.3.1         lifecycle_1.0.2      DBI_1.1.3           
+[52] magrittr_2.0.3       posterior_1.3.1      scales_1.2.1        
+[55] RcppParallel_5.1.5   cli_3.4.1            stringi_1.7.8       
+[58] farver_2.1.1         renv_0.15.5          ellipsis_0.3.2      
+[61] generics_0.1.3       vctrs_0.4.2          tools_4.2.1         
+[64] glue_1.6.2           purrr_0.3.4          processx_3.7.0      
+[67] abind_1.4-5          fastmap_1.1.0        yaml_2.3.5          
+[70] inline_0.3.19        colorspace_2.0-3     knitr_1.40          </code></pre>
+</div>
+</div>
+
+
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div quarto-reuse="quarto-reuse" class="quarto-appendix-contents"><div>CC BY SA</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{billings2022,
+  author = {Zane Billings},
+  editor = {},
+  title = {Doing What Brms Does},
+  date = {2022-08-22},
+  url = {https://wzbillings.com/posts/2022-08-22_brms-CIs},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-billings2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Zane Billings. 2022. <span>“Doing What Brms Does.”</span> August 22,
+2022. <a href="https://wzbillings.com/posts/2022-08-22_brms-CIs">https://wzbillings.com/posts/2022-08-22_brms-CIs</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="wzbillings/website" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-regular fa-copyright" aria-hidden="true"></i> Zane Billings, 2022<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-sa" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></div>   
+      <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/wzbillings/quarto-website">Source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
