@@ -42,7 +42,9 @@ x <- seq(0, 10, 0.01)
 alpha <- 3
 beta <- -1
 lambda <- 1
-t <- dnorm(x, 5, 1.5)
+mu <- 5
+sigma <- 1.5
+t <- dnorm(x, mu, sigma)
 y <- lambda / (1 + exp(alpha + beta * x))
 tp <- x[which.min(abs(y - 0.5))]
 
@@ -84,5 +86,35 @@ plot(
 	type = "l"
 )
 lines(x, t)
+```
+
+```{r}
+sim_x <- rnorm(10000, mu, sigma)
+sim_y <- lambda / (1 + exp(alpha + beta * sim_x))
+
+# These all work out to be about the same
+sample_mean <- mean(sim_y)
+theoretical_mean <- pracma::trapz(x, y * t)
+o <- order(sim_x)
+sample_auc <-
+	pracma::trapz(
+		sim_x[o],
+		sim_y[o] * dnorm(sim_x[o], mu, sigma)
+	)
+sample_auc_uk <-
+	pracma::trapz(
+		sim_x[o],
+		sim_y[o] * dnorm(sim_x[o], mean(sim_x), sd(sim_x))
+	)
+tibble::tribble(
+	~method, ~estimate,
+	"sample mean", sample_mean,
+	"theoretical mean", theoretical_mean,
+	"sample auc with known parameters", sample_auc,
+	"sample auc with unknown parameters", sample_auc_uk
+) |>
+	knitr::kable()
+
+# So we can get a confidence interval for the protection by back-transforming
 ```
 
