@@ -13,7 +13,7 @@ categories:
 
 ![](featured.PNG)
 
-My colleague [Savannah](https://smhammerton.com) led a discussion on challenge study ethics at the seminar I coordinate (IDIG, the Infectious Disease Interest Group). The main topic was how to handle including unethical studies in systematic reviews, but we also discussed several other issues related to challenge studies. We only got through half of the powerpoint because we both love to talk, but the slides are embedded below or you can get them [here](pres.pdf) if you're interested.
+My colleague [Savannah](https://smhammerton.com) and I led a discussion on challenge study ethics at the seminar I coordinate (IDIG, the Infectious Disease Interest Group). The main topic was how to handle including unethical studies in systematic reviews, but we also discussed several other issues related to challenge studies. We only got through half of the powerpoint because we both love to talk, but the slides are embedded below or you can get them [here](pres.pdf) if you're interested.
 
 <object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
 </object>

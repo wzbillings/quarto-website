@@ -1,0 +1,23 @@
+---
+title: Journal club (Nauta et al.)
+abstract: Slides from a paper discussion that I led at my seminar.
+event: "Infectious Disease Interest Group"
+location: Athens, GA
+
+image: featured.png
+date: "2022-10-25"
+categories:
+  - talk
+  - other
+---
+
+![](featured.PNG)
+
+I led a discussion of this paper
+
+> Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals. 2009;37(4):216-221. doi:10.1016/j.biologicals.2009.02.002.
+
+at the seminar I coordinate. It was a pretty interesting paper -- I read a lot about HAI titers and flu vaccines, and I think it's interesting that I haven't really seen a lot of people explicitly address the concerns from this paper. I also think their results extend to a lot of diseases beyond flu, and point to the general issue of "point-estimate-is-the-estimate-ism" that seems so prevalent in science. The slides are embedded below or you can get them [here](pres.pdf) if you're interested.
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>
