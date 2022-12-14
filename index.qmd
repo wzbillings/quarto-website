@@ -7,9 +7,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/wzbillings
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/wzbillings
+    - icon: mastodon
+      text: Mastodon
+      href: https://fediscience.org/@wzbillings
     - icon: github
       text: GitHub
       href: https://github.com/wzbillings

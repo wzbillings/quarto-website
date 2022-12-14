@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Zlog (Zane’s Blog)",
     "section": "",
-    "text": "IDIG 2022-10-24\n\n\n\n\n\n\n\n\n\n\n\n\nZane (https://wzbillings.com)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInfluenza, seroconversion, and the number 40\n\n\n\n\n\nWhat the hell is seroconversion and why is it important anyways?\n\n\n\n\n\n\nOct 24, 2022\n\n\nZane Billings\n\n\n\n\n\n\n  \n\n\n\n\nMultiple diagnostic testing and Bayes’ rule\n\n\n\n\n\nWhen you do multiple diagnostic tests in sequence, how do you estimate your probability of the condition?\n\n\n\n\n\n\nJun 24, 2022\n\n\nZane Billings\n\n\n\n\n\n\nNo matching items"
+    "text": "Multiple diagnostic testing and Bayes’ rule\n\n\n\n\n\nWhen you do multiple diagnostic tests in sequence, how do you estimate your probability of the condition?\n\n\n\n\n\n\nJun 24, 2022\n\n\nZane Billings\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -61,41 +61,6 @@
     "title": "Multiple diagnostic testing and Bayes’ rule",
     "section": "Details",
     "text": "Details\n\nsource code\n\nsessionInfo()\n\nR version 4.2.1 (2022-06-23 ucrt)\nPlatform: x86_64-w64-mingw32/x64 (64-bit)\nRunning under: Windows 10 x64 (build 19043)\n\nMatrix products: default\n\nlocale:\n[1] LC_COLLATE=English_United States.utf8 \n[2] LC_CTYPE=English_United States.utf8   \n[3] LC_MONETARY=English_United States.utf8\n[4] LC_NUMERIC=C                          \n[5] LC_TIME=English_United States.utf8    \n\nattached base packages:\n[1] stats     graphics  grDevices datasets  utils     methods   base     \n\nother attached packages:\n[1] ggplot2_3.3.6 dplyr_1.0.10 \n\nloaded via a namespace (and not attached):\n [1] pillar_1.8.1     compiler_4.2.1   tools_4.2.1      digest_0.6.29   \n [5] jsonlite_1.8.0   evaluate_0.16    lifecycle_1.0.2  tibble_3.1.8    \n [9] gtable_0.3.1     pkgconfig_2.0.3  rlang_1.0.5      cli_3.4.1       \n[13] DBI_1.1.3        rstudioapi_0.14  yaml_2.3.5       xfun_0.32       \n[17] fastmap_1.1.0    withr_2.5.0      stringr_1.4.1    knitr_1.40      \n[21] generics_0.1.3   vctrs_0.4.2      grid_4.2.1       tidyselect_1.1.2\n[25] glue_1.6.2       R6_2.5.1         fansi_1.0.3      rmarkdown_2.16  \n[29] farver_2.1.1     purrr_0.3.4      magrittr_2.0.3   scales_1.2.1    \n[33] htmltools_0.5.3  assertthat_0.2.1 colorspace_2.0-3 renv_0.15.5     \n[37] labeling_0.4.2   utf8_1.2.2       stringi_1.7.8    munsell_0.5.0"
-  },
-  {
-    "objectID": "posts/2022-10-24_Flu-Seroprotection/index.html",
-    "href": "posts/2022-10-24_Flu-Seroprotection/index.html",
-    "title": "Influenza, seroconversion, and the number 40",
-    "section": "",
-    "text": "Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals. 2009;37(4):216-221. doi:10.1016/j.biologicals.2009.02.002.\n\nwhich was suggested as a potential discussion topic on our list of potential topics by my adviser so I thought, well I guess this is important. It’s also super relevant to my active research so I guess it’s useful.\nThen I saw that the first reference was a paper than my colleague Yang Ge presented on over the summer at my seminar, and I realized I had stepped right into the muck of “where does the magic number 40” come from, which is something Handelgroup has collectively had on the brain for a while. I’ve tried my best not to get involved with it, but because there is something wrong with me, I figured. Well, I’ve got mud on my clothes anyways so I might as well dive in, right?\n\nDefinitions\n\n\n\n\n\nFootnotes\n\n\nHemagglutination inhibition assay, an assay which is generally agreed to be a correlate of protection from influenza. I wish I had more information, but I actually don’t know the evidence for this either.↩︎\nReaching a desired threshold for a serological measurement. If your influenza titer is less than 1:40, then you get a vaccine, and then afterwards your titer is greater than 1:40, you are said to have seroconverted. Additionally, there is seroprotection, which is having a titer greater than 1:40 regardless of when it was acquired.↩︎\n\nCitationBibTeX citation:@online{billings2022,\n  author = {Zane Billings},\n  editor = {},\n  title = {Influenza, Seroconversion, and the Number 40},\n  date = {2022-10-24},\n  url = {https://wzbillings.com/posts/2022-10-24_Flu-Seroprotection},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nZane Billings. 2022. “Influenza, Seroconversion, and the Number\n40.” October 24, 2022. https://wzbillings.com/posts/2022-10-24_Flu-Seroprotection."
-  },
-  {
-    "objectID": "posts/2022-10-24_Flu-Seroprotection/pres.html#intro",
-    "href": "posts/2022-10-24_Flu-Seroprotection/pres.html#intro",
-    "title": "IDIG 2022-10-24",
-    "section": "Intro",
-    "text": "Intro\nblah"
-  },
-  {
-    "objectID": "posts/2022-10-24_Flu-Seroprotection/pres.html#definitions",
-    "href": "posts/2022-10-24_Flu-Seroprotection/pres.html#definitions",
-    "title": "IDIG 2022-10-24",
-    "section": "Definitions",
-    "text": "Definitions\ntext"
-  },
-  {
-    "objectID": "posts/2022-10-24_Flu-Seroprotection/pres.html#the-model",
-    "href": "posts/2022-10-24_Flu-Seroprotection/pres.html#the-model",
-    "title": "IDIG 2022-10-24",
-    "section": "The model",
-    "text": "The model\n\\[\\begin{align*}\nt &= \\log_2 \\left( \\mathrm{HAI \\ titer} / 5 \\right) \\\\\nt &\\sim \\mathrm{Normal}(\\mu, \\sigma) \\\\\n\\pi_{\\mathrm{seroprotected}} &= \\int_{t_p}^\\infty \\ f(t) \\ \\mathrm{d}t \\\\\n\\pi_{\\mathrm{seroconverted}} &= \\int_{-\\infty}^\\infty \\ f(t) \\frac{\\lambda}{\\left(1 + \\exp\\left(\\alpha + \\beta t\\right)\\right) \\ \\mathrm{d}t} \\\\\n\\end{align*}\\]\n\n\\(0 < \\lambda \\leq 1, \\ \\alpha > 0, \\beta < 0\\)\n\\(\\lambda\\) is the probability of clinical protection for subjects with “a very high HI titer”.\n\\(\\alpha\\) accounts for protection unrelated to antibody level.\n\\(\\beta\\) is the slope of the clinical protection curve.\n\\(\\displaystyle\\frac{\\lambda}{\\left(1 + \\exp\\left(\\alpha + \\beta \\ \\mathbf{t_p} \\right)\\right)} = 0.5\\).\nCan alternatively specify the value of \\(t_p\\) instead of \\(\\beta\\) (if all other parameters are also specified)."
-  },
-  {
-    "objectID": "posts/2022-10-24_Flu-Seroprotection/pres.html#what-does-that-mean",
-    "href": "posts/2022-10-24_Flu-Seroprotection/pres.html#what-does-that-mean",
-    "title": "IDIG 2022-10-24",
-    "section": "What does that mean?",
-    "text": "What does that mean?\n\nx <- seq(0, 10, 0.01)\nalpha <- 3\nbeta <- -1\nlambda <- 1\nt <- dnorm(x, 5, 1.5)\ny <- lambda / (1 + exp(alpha + beta * x))\ntp <- x[which.min(abs(y - 0.5))]\n\nplot(NULL, xlim = c(0, 9), ylim = c(0, 1), xlab = \"t\",\n     ylab = \"probability density\",\n     xaxs = \"i\", yaxs = \"i\", cex.axis = 1.3, cex.lab = 1.3)\n\npolygon(c(tp, x[x >= tp]), c(0, t[x >= tp]), col = \"gray\")\nlines(x = x, y = t)\nlines(x = x, y = y)\n\n# Lines pointing out 0.5 threshold\nsegments(tp, 0, tp, 0.5, lty = 2)\nsegments(-1000, 0.5, tp, 0.5, lty = 2)\n\n# Horizontal line\nsegments(3.5, 0.28, 6.5, 0.28)\n\n# Wagaman reference lines\nsegments(3.5, 0.27, 3.5, 0.29)\nsegments(5.0, 0.27, 5.0, 0.29)\nsegments(6.5, 0.27, 6.5, 0.29)\n\n# Text labels\npar(cex = 1.5)\ntext(x = 8, y = 0.96, labels = expression(\"f\"[2]*\"(t)\"))\ntext(x = 8.16, y = 0.07, labels = expression(\"f\"[1]*\"(t)\"))\ntext(x = 5, y = 0.32, labels = expression(mu))\ntext(x = 4.25, y = 0.32, labels = expression(\"-\"*sigma))\ntext(x = 5.75, y = 0.32, labels = expression(\"+\"*sigma))\n\n\n\n\n\nplot(\n    x,\n    t * y,\n    xlab = \"t\",\n    ylab = expression(\"f\"[1]*\" f\"[2]),\n    type = \"l\"\n)\nlines(x, t)"
   },
   {
     "objectID": "presentations.html",
