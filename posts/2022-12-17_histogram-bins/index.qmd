@@ -6,6 +6,8 @@ description: |
   The shortest possible description of histogram binwidths in R
 ---
 
+![An example of a histogram.](image.png)
+
 # Backstory
 
 While discussing histograms in a class that I TA'd, we ending up talking about
@@ -26,6 +28,7 @@ hist(airquality$Temp)
 And here's an example of the default `ggplot2` histogram. Note the warning, and how it looks completely different from the default in base R.
 
 ```{r ggplot2 example}
+#| featured: TRUE
 library(ggplot2)
 ggplot(airquality) +
 	aes(x = Temp) +
