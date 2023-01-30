@@ -1,0 +1,5 @@
+_extensions/* linguist-vendored
+_freeze/* linguist-vendored
+_site/* linguist-vendored
+renv/* linguist-vendored
+*.qmd linguist-language=RMarkdown
