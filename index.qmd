@@ -39,3 +39,7 @@ I am currently a PhD student working with [Andreas Handel](http://handelgroup.ug
 * Seasonal influenza vaccines
 * Epidemiology and immunology of influenza
 * The `R` programming language
+
+<!--
+<a rel="me" href="https://fediscience.org/@wzbillings">Mastodon</a>
+-->
