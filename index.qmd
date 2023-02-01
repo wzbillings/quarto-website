@@ -25,7 +25,7 @@ about:
       href: "https://orcid.org/0000-0002-0184-6134"
 ---
 
-I am currently a PhD student working with [Andreas Handel](http://handelgroup.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. I like using data science and statistical methods to inform cool questions about viruses, mainly flu.
+I am currently a PhD student working with [Andreas Handel](http://handelgroup.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. I like using data science and statistical methods to inform cool questions about viruses, mainly flu. Find me on <a rel="me" href="https://fediscience.org/@wzbillings">Fediscience</a>!
 
 ### Education
 
@@ -41,5 +41,5 @@ I am currently a PhD student working with [Andreas Handel](http://handelgroup.ug
 * The `R` programming language
 
 <!--
-<a rel="me" href="https://fediscience.org/@wzbillings">Mastodon</a>
+
 -->
