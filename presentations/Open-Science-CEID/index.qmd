@@ -1,0 +1,21 @@
+---
+title: Intro to Open Science, v2
+abstract: Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science at a seminar for the Center for the Ecology of Infectious Disease (CEID) at UGA.
+event: "CEID Seminar"
+location: Athens, GA
+
+image: featured.png
+date: "2023-03-01"
+categories:
+  - talk
+  - other
+---
+
+![](featured.PNG)
+
+You can see the information for this talk [here](https://mailchi.mp/acc96bfdcebd/ceid-workshop-with-zane-billings?e=18ee2321bf).
+
+In January 2023, I was awarded a fellowship by the [Center for Open Science](https://cos.io), funded by [FluLab](https://theflulab.org). I got some excellent open science training, and one stipulation of my fellowship was that I had to share my training knowledge with my colleagues. So I talked about what open science is, why bother with open science, how to start doing open science, and briefly about the [Open Science Foundation](https://osf.io), an online platform developed by OSF to empower open science workflows. The slides are embedded below or you can get them [here](pres.pdf) if you're interested.
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>
