@@ -11,7 +11,7 @@ categories:
   - other
 ---
 
-![](featured.PNG)
+![](featured.jpg)
 
 You can see the information for this talk [here](https://mailchi.mp/acc96bfdcebd/ceid-workshop-with-zane-billings?e=18ee2321bf).
 
