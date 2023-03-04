@@ -1,0 +1,66 @@
+---
+title: "A Manifesto for Statistical Nihilists"
+author: "Zane Billings"
+date: "2023-03-04"
+description: |
+  Formalizing my thoughts about statistics as a field and concept, how we use
+  them, and how we get it wrong or right.
+license: "CC BY SA"
+draft: true
+---
+
+![Alt text.](thumbnail.jpg)
+
+> All models are wrong, but some are useful.
+
+This famous quote by statistician George Box [@box1976] is a pretty good
+summary of the viewpoint that I've come to call "statistical nihilism." There's
+a lot of ink spilled about the frequentist/bayesian testing/estimation
+parametric/nonparametric divide. Fortunately I'm able to settle that: your
+favorite statistical paradigm, in particular, is fake and wrong. And just in
+case you were wondering, it's not "less wrong" than any other viewpoint. It's
+statistics, so it's wrong. Sometimes it's useful, and perhaps your pet method
+is quite often very useful, but it's still wrong and I'm tired of pretending
+that it isn't.
+
+There's no such thing as a correct model or a correct method or a real estimate
+or unbiased sample or anything like that. Statistics doesn't even exist in
+real life and we should stop pretending that it does. I don't think there's a
+particularly eloquent way for me to convey this (I'm certainly not the best
+person to write this post), but the main takeaway I want anyone who reads this
+to have is that **all statistics are made up.** Even collecting data or
+making observations is only sort of real, but I'm not a philosopher so I won't
+get into perception or whatever here.
+
+Let's start with a simple example: the mean. If you go on an apple-picking
+adventure and all of your friends come and you all pick apples, you can count
+the number of apples that each of your friends picked. I'm not trying to argue
+whether or not those counts are real -- it depends on whether you think math
+is real. (I personally think that there is certainly some fundamental concept of
+quantity that *is* real, because there is some perceivable amount of apples
+that exists independently of our invented human concept of numbers, but at the
+tail end of this debate you get back to the philosophy of perception and what
+does it even mean to say something exists and two things are different and
+that isn't what I'm really interested in here.) You can even calculate the
+average number of apples that each person has. And you can then proceed to
+say something glib like "if we equally divided the apples amount each of us,
+the number of apples we would each get is this number that I calculated." Which
+is true in the sense of that physical application. But that calculated number
+is not a physical thing that exists -- it is a mathematical concept that tells
+you about a physical problem you want to solve.
+
+
+
+## Last updated {.appendix}
+ 
+2022-06-24 12:50:12 EDT
+ 
+## Details {.appendix}
+
+[source code](https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-03-04_Statistical-Nihilist-Manifesto/index.Rmd)
+
+```{r}
+sessionInfo()
+```
+
+
