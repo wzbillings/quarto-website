@@ -1,15 +1,17 @@
 # What is Zane doing right now?
 
-As of **2022-10-04**, this is what I am working on.
+As of **2023-03-06**, this is what I am working on.
 
 ## My projects
 
-* My main focus right now is a project analyzing the differences between clinical and patient reports of influenza symptoms. Patients seem to be likely to overreport symptoms, and this makes patient-reported data more difficult to use with clinical decision rules. Unfortunately the great undergrad student I got to work with, [Annika Cleven](https://www.linkedin.com/in/annika-cleven/), isn't here anymore, so I have to do all the work myself now.
-* I'm sort-of kind-of writing my dissertation proposal in the hopes to defend it in the spring (when I'll also be taking my comprehensive exam). Most of my proposed aims are about how vaccination affects flu immunity, given that everyone has a different pattern of flu infections and vaccinations.
+* I'll be joining StateFarm as a data science intern over the summer! Wow!! So I'll have a
+full time job and probably won't get too much research done, but I'll try my best.
+* I'm formatting and getting ready to submit a paper about differences between clinical and patient reports of influenza symptoms. Huge shout-out to the great undergrad students I got to work with on this one: [Annika Cleven](https://www.linkedin.com/in/annika-cleven/) and [Jackie Dworaczyk](https://www.linkedin.com/in/jacquelinedworaczyk/).
+* Writing my dissertation proposal, broadly on these areas.
   + How well did past vaccines confer immunity to future (at the time, they are past now) strains?
   + Is antigenic distance between vaccine strains and circulating strains important for determining how protective the vaccine will be? Fortunately, I've worked with a [great colleague](https://prevention.cancer.gov/about-dcp/staff-search/amanda-skarlupka-phd) who previously did a lot of hard work on this.
   + What is the best way to quantify the "breadth" of a flu response? That is, if you get a vaccine, how can we measure the extent of which flu strains you'll be protected against?
-* I'm still reading *Statistical Rethinking* by Richard McElreath. I'm currently working on the Chapter 5 exercises. You can see my progress [here](https://wzbillings.github.io/SR-notes/).
+* I'm still reading *Statistical Rethinking* by Richard McElreath. I'm currently working on the Chapter 6 exercises. You can see my progress [here](https://wzbillings.github.io/SR-notes/).
 * The norovirus challenge review (finding every norovirus challenge study that's ever been conducted) is currently on hold for a bit, but I hope to come back to it after my proposal and stuff.
 
 ## Collaborations
@@ -17,9 +19,9 @@ As of **2022-10-04**, this is what I am working on.
 * Making a lot of figures for a longitudinal analysis of influenza immune response trajectories. Most of the paper and analysis is being done by [Meng-Hsuan Sung](https://www.linkedin.com/in/meng-hsuan-sung-bba0b2228/?trk=public_profile_browsemap).
 
 ## Not research stuff
-* I'm still on my department's curriculum committee. We're currently revising our department's competency system and figuring out what course adjustments need to happen (and can happen under the constraints we have).
-* I'm the TA for an R programming class, where I mostly help students debug during course time. It's pretty fun.
+* I'm the TA for my adviser's [Modern Applied Data Analysis](https://andreashandel.github.io/MADAcourse/) course. We're having a lot of fun doing machine learning and that kind of stuff.
 * Currently trying to read, when I get a chance:
-  + *The great influenza* by John M. Barry
-  + *A field guide to grad school* by Jessica McCrory Calarco
-  + *The scientist's guide to writing* by Stephen B. Heard
+  + *Annihilation* by Jeff VanderMeer
+  + *The Stand* by Stephen King
+  + *Bayesian Statistics the Fun Way* by Will Kurt
+  

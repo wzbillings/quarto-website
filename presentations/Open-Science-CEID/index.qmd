@@ -4,7 +4,7 @@ abstract: Open science is a pretty broad term that broadly includes data sharing
 event: "CEID Seminar"
 location: Athens, GA
 
-image: featured.png
+image: featured.jpg
 date: "2023-03-01"
 categories:
   - talk
