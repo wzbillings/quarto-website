@@ -1,0 +1,23 @@
+---
+title: Dissertation Proposal
+abstract: Impact of Host and Vaccine Characteristics on Immune Responses following Influenza Vaccination
+location: Athens, GA
+
+image: featured.png
+date: "2023-04-06"
+categories:
+  - talk
+  - other
+---
+
+![](featured.PNG)
+
+This is my dissertation proposal. Here's the abstract:
+
+Influenza is a respiratory disease that occurs in seasonal epidemics worldwide. The Centers for Disease Control and Prevention recommend annual vaccination against seasonal influenza with a modified vaccine for adults in the United States, but the effectiveness of these vaccines varies greatly across seasons and individuals. Improved understanding of the drivers of the immune response following vaccination is crucial for improving influenza vaccines.
+
+The slides are embedded below or you can get them [here](pres.pdf) if you're interested.
+If you want, you can read the full proposal [here](doc.pdf).
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type = "application/pdf">
+</object>
