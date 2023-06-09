@@ -1,0 +1,19 @@
+---
+title: Reproducible research workshop
+abstract: Intro to reproducible research and R workflows for PopBio
+event: "2023 PopBio REU Site workshop"
+location: Athens, GA
+
+image: featured.png
+date: "2023-06-09"
+categories:
+  - talk
+  - other
+---
+
+![](featured.PNG)
+
+In June 2023, I led a workshop on reproducible research for the [Population Biology of Infectious Diseases REU site](https://reu.ecology.uga.edu/) at the University of Georgia.. The slides are embedded below or you can get them [here](pres.html) if you're interested.
+
+<object data="pres.html" width="100%" height="800" title = "presentation slides" class="objectSet">
+</object>
