@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.3",
+    "Version": "4.3.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -120,7 +120,7 @@
       "Package": "StanHeaders",
       "Version": "2.26.13",
       "Source": "Repository",
-      "Repository": "stan",
+      "Repository": "CRAN",
       "Hash": "f54ef22dec1b0710070e2d9bd3fc0174",
       "Requirements": [
         "RcppEigen",
