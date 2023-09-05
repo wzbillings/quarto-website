@@ -35,9 +35,6 @@ website:
         href: now.qmd
       - text: "misc"
         href: misc.qmd
-  
-  twitter-card: 
-    creator: "@andreashandel"
   cookie-consent: true    
   search: true
   site-url: "https://wzbillings.com"
@@ -45,7 +42,7 @@ website:
   
   page-footer:
     left: |
-      {{< fa regular copyright >}} Zane Billings, 2022<br>
+      {{< fa regular copyright >}} Zane Billings, 2023<br>
       All content licensed under {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-sa >}} {{< fa brands creative-commons-nc >}} [(CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
     
