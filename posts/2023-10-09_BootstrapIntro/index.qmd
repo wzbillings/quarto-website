@@ -1,0 +1,31 @@
+---
+title: "Intro to Bootstrap CIs"
+author: "Zane Billings"
+date: "2023-10-09"
+description: |
+  One of my lab mates wanted to calculate bootstrap CIs for a project, which
+  is something I know how to do. So I wanted to write a basic tutorial on
+  bootstrap confidence intervals.
+license: "CC BY-SA"
+draft: true
+---
+
+![A sample histogram showing what exciting results are to come!](thumbnail.png)
+
+## References
+
+> Davison AC and Hinkley DV. Bootstrap Methods and their Applications, 1997.
+Cambridge University Press.
+> Efron B and Hastie T. Computer Age Statistical Inference, student edition, 2021. Cambridge University Press.
+
+## Details {.appendix}
+
+Last updated at `r Sys.time()`.
+
+[source code](https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-10-09_BootstrapIntro/index.qmd)
+
+```{r}
+sessionInfo()
+```
+
+
