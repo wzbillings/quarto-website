@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2023-10-09_BootstrapIntro/index.html",
       "/posts/2023-07-25_Simulating-Titer-Data/index.html",
       "/posts/2022-12-17_histogram-bins/index.html",
       "/posts/2022-06-24_Bayes-Diagnostics/index.html"
