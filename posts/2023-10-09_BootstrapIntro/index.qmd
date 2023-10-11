@@ -10,7 +10,7 @@ license: "CC BY-SA"
 draft: false
 ---
 
-```{r setup, message = FALSE}
+```{r setup, message = FALSE, include = FALSE}
 # ggplot2 theme setup
 library(ggplot2)
 ggplot2::theme_set(
@@ -57,12 +57,12 @@ I'll talk about how to get these CIs with the `boot` package in `R`.
 
 For an example, we'll make some simulated data that's similar to the situation
 where we actually need to use a bootstrap CI in my lab group's research. We'll
-consider a fairly simple example: in a study sample of size $n$, $n_t$ people
-get a vaccine and $n_p$ people get a placebo. They are followed up for an
-appropriate amount of time (or challenge with virus, your choice), and we
-record which individuals get infected and which do not. For this simulated
-example, the effect we are interested in measuring is the vaccine effectiveness,
-which can be calculated from the risk ratio. That is,
+consider a fairly simple example: in a study sample of size $n = n_t + n_p$,
+where $n_t$ people get a vaccine and $n_p$ people get a placebo. They are
+followed up for an appropriate amount of time (or challenge with virus, your
+choice), and we record which individuals get infected and which do not. For this
+simulated example, the effect we are interested in measuring is the vaccine
+effectiveness, which can be calculated from the risk ratio. That is,
 $$\mathrm{VE} = 1 - \mathrm{RR} = 1 - \frac{\text{risk in vaccine group}}{\text{risk in placebo group}}.$$
 To do this, we'll simulate infection data for both groups. If we want our
 target VE to be, say, $75\%$, we want the risk ratio to be $25\%$, and we
@@ -74,10 +74,11 @@ and the risk in the placebo group is $40\%$. Let's simulate 100 patients where
 
 ```{r}
 set.seed(134122)
+n <- 100L
 sim_dat <- tibble::tibble(
 	# Treatment is 0 for placebo, 1 for vaccinated
-	treatment = rep(c(0, 1), each = 50),
-	outcome = rbinom(100, size = 1, prob = rep(c(0.4, 0.1), each = 50))
+	treatment = rep(c(0, 1), each = n / 2),
+	outcome = rbinom(n, size = 1, prob = rep(c(0.4, 0.1), each = n / 2))
 )
 
 table(
@@ -90,31 +91,38 @@ table(
 
 If we look at our table, we see that we get estimated risks of $23/50 = 46\%$
 in the placebo group, and $7/50 = 14\%$ in the vaccine group, giving us an
-observed VE of $1 - 0.3043 \approx 70\%.$
+observed VE of $1 - 0.3043 \approx 70\%.$ This is close to what we know is the
+true VE in the simulation, but different enough that we can immediately see
+the effect of sampling variability. Of course, as we simulate increasingly
+more people, we will get a more accurate estimate of the VE.
 
-Now, we might want to construct a confidence interval for that, but we forgot
-all the different methods for that, no matter how many of them they taught us
-or how many times we covered it during epidemiology class. (Or if you're like
-me, you did an epidemiology PhD without any intro to epi classes and never
-really learned…) So fortunately for us, nonparametric bootstrapping provides a
-really convenient and flexible way to automatically get a CI, as long as we
-have a decently fast computer.
+Now, we might want to construct a confidence interval for our sample, which
+would ideally cover the true VE. But we forgot all the different methods for
+building confidence intervals for the risk ratio, no matter how many of them
+they taught us or how many times we covered it during epidemiology class. (Or if
+you're like me, you did an epidemiology PhD without any intro to epi classes and
+never really learned…) So fortunately for us, nonparametric bootstrapping
+provides a really convenient and flexible way to "automatically" get a CI, as
+long as we have a relatively modern computer -- even though bootstrapping is
+called a computer intensive method, for simple statistics like this one, you
+can get bootstrap intervals pretty fast even on cheap hardware.
 
 ## Constructing resamples
 
 The first step of computing a bootstrap CI is to construct the bootstrap
 distribution. Bootstrapping refers to a specific type of **resampling** process
 that's similar to cross-validation or leave-one-out methods. Call our entire
-data set $D$. We construct a bootstrap resample $D_i$ ($i = 1, 2, \ldots, B$ where $B$ is the number of bootstrap resamples we do) by **sampling with
+data set $D$. We construct a bootstrap resample $D_i$ ($i = 1, 2, \ldots, B$
+where $B$ is the number of bootstrap resamples we do) by **sampling with
 replacement** $n$ records from $D$. This means that each resample can have the
 same observation repeated multiple times, and does not have to include every
-observation (in fact, we can use the bootstrap similarly to cross-validation
-for model tuning by using the bootstrap resample as the analysis set and the
-points not included in the resample as the assessment set). We resample in
-this way specifically, because it leads to specific properties (under certain
-regularity conditions) which allow our confidence intervals to work correctly.
-(Math stuff omitted since I don't understand it too well and it's not so
-important.)
+observation (in fact, we can use the bootstrap similarly to cross-validation for
+model tuning by using the bootstrap resample as the analysis set and the points
+not included in the resample as the assessment set). We resample in this way
+specifically, because it leads to specific properties (under certain regularity
+conditions) which allow our confidence intervals to work correctly. (Math
+details omitted since they're complicated and honestly not too important for
+what we're trying to do here.)
 
 We could of course do this by hand.
 
@@ -149,12 +157,13 @@ for (i in 1:B) {
 }
 
 res <- tibble::as_tibble(res)
-head(res)
+print(res, n = 6)
 ```
 
-This gives us a resampling or bootstrap distribution with 199 values for each
-of the calculated values ($p_p$, $p_t$, the $\mathrm{RR}$, and the $\mathrm{VE}$). We can look at those distributions. (I'll briefly explain why
-we might choose 199 in a moment.)
+This gives us a resampling or bootstrap distribution with 199 values for each of
+the calculated values ($p_p$, $p_t$, the $\mathrm{RR}$, and the $\mathrm{VE}$).
+We can look at those distributions. (I'll briefly explain why we might choose
+199 in a moment.)
 
 ```{r}
 res |>
@@ -177,10 +186,10 @@ res |>
 ```
 
 Here we only do 199 resamples because the program I wrote is super inefficient
-and doing much more would take a while. (Although it is worthwhile to note
-that the calculation of bootstrap statistics is trivially parallelizable, so
-with access to sufficient resources, even a computationally expensive statistic 
-can be computed in a reasonable amount of time.)
+and doing much more would take a while. (Although it is worthwhile to note that
+the calculation of bootstrap statistics is trivially parallelizable, so with
+access to sufficient resources, even a computationally expensive or poorly
+implemented statistic can be computed in a reasonable amount of time.)
 
 So now that we have calculated a bootstrap distribution for our statistic of
 interest (the VE, along with its component statistics as recordkeeping), how
@@ -237,14 +246,19 @@ quantile(res$VE, probs = c(0.025, 0.975), type = 1)
 ```
 
 So, we would pair this with our empirical estimate of the VE (we could take,
-e.g. the mean of the bootstraps, which should always be similar to the
-overall estimate we already got) to get an estimated VE of
-$$\widehat{VE} = 69.57\% \ \left(95\% \text{ CI: } 44.41\% \ - \ 90.32\%\right).$$
-Now that is maybe not the most precise estimate of VE in the world, but based
-on the bootstrap percentile method, it at least seems that our vaccine is
-conferring some protection, with the possibility of a pretty good amount. Note
-that we would expect this CI to get smaller as $n$ increases, but not as $B$
-increases (this is true of all bootstrap CIs).
+e.g. the mean of the bootstraps, which should always be similar to the overall
+estimate we already got) to get an estimated VE of $$\widehat{VE} = 69.57\% \
+\left(95\% \text{ CI: } 44.41\% \ - \ 90.32\%\right).$$ Now that is maybe not
+the most precise estimate of VE in the world, but based on the bootstrap
+percentile method, it at least seems that our vaccine is conferring some
+protection, with the possibility of a pretty good amount. And the CI covers our
+true estimate, as we would hope (although it's important to remember that we
+could've gotten unlucky with the random sample we drew, and if our CI didn't
+cover the true estimate on one experiment, that doesn't mean the CI is flawed).
+Note that we would expect this CI to get smaller as $n$ increases, but not as
+$B$ increases. Increasing $B$ decreases the "Monte Carlo" (MC) error, or random
+error introduced by the random process involved in the algorithm, but doesn't do
+anything about the actual sampling error.
 
 Of course, like I said, some people really don't like the percentile method. So
 we can instead appeal to a much more complicated method devised by Efron and
@@ -346,21 +360,25 @@ VE_ci
 ```
 
 We can see that the percentile CI is quite similar to the one we got by hand,
-which is nice and the difference is likely attributable to random error.
-Notice, however, that the normal and basic intervals are shifted upwards from
-the percentile interval, and the BCa interval is shifted down. The BCa interval
-is corrected for bias, which is why it is shifted down (in Efron and Hastie
-they discuss why our CIs might be biased upwards to begin with). In this case,
-the different intervals are actually a bit different, although again I'm not
-sure how useful it is to fret over whether the lower limit of the CI for our
-VE is $41\%$ or $37\%$. (But I do admit that a range of $46\%$ to $37\%$ across
-methods is not ideal, though I don't know that these two estimates would change 
+which is nice and the difference is likely attributable to random error. Notice,
+however, that the normal and basic intervals are shifted upwards from the
+percentile interval, and the BCa interval is shifted down. The BCa interval is
+corrected for bias, which is why it is shifted down (in Efron and Hastie they
+discuss why our CIs might be biased upwards to begin with). In this case, the
+different intervals are actually a bit different, although again I'm not sure
+how useful it is to fret over whether the lower limit of the CI for our VE is
+$41\%$ or $37\%$. (But I do admit that a range of $46\%$ to $37\%$ across
+methods is not ideal, though I don't know that these two estimates would change
 any qualitative decisions that you might make based on the analysis. But either
-way the normal method is not great, and I don't love the basic method, which
-is why I didn't recommend using either of those.)
-In general I would use the BCa limits, since
-they are the least controversial, technically the "best" in a specific sense,
-and are just as easy to calculate.
+way the normal method is not great, and I don't love the basic method, which is
+why I didn't recommend using either of those.)
+
+In general I would use the BCa limits, since they are the least controversial,
+technically the "best" in a specific sense, and are just as easy to calculate.
+And it's important to note that all of these CIs cover our true parameter for
+this simulated experiment; to truly investigate the convergence and bias
+properties of these different CIs we would need to run many simulated
+experiments.
 
 ## Conclusions
 
@@ -370,12 +388,12 @@ demonstrated how easy it is to obtain BCa intervals using the `boot` package in
 `R`.
 
 We should note that bootstrapping does not solve any issues induced by having
-too low of a sample size -- bootstrap CIs will often be just as bad as any
-other CIs if the sample size is quite small. If I were to keep writing this
-blog post, I would compute several of the other alternative CIs for the VE,
-like the normal approximate and whatever exact CIs people are using for that
-right now, I just couldn't think of those off the top of my head and I don't
-think comparing to only the normal approximate CI is useful.
+too low of a sample size -- bootstrap CIs will often be just as bad as any other
+CIs if the sample size is quite small. If I were to keep writing this blog post,
+I would compute several of the other alternative CIs for the VE, like the normal
+approximate and whatever exact CIs people are using for that right now, I just
+couldn't think of those off the top of my head and I don't think comparing to
+only the normal approximate CI is useful.
 
 There are some limitations to bootstrap, especially when we start using complex
 hierarchical models. But for simple CI calculations, nonparametric BCa
@@ -384,17 +402,20 @@ analytical derivations.
 
 ## References
 
-> Davison AC and Hinkley DV. Bootstrap Methods and their Applications, 1997.
+* Davison AC and Hinkley DV. Bootstrap Methods and their Applications, 1997.
 Cambridge University Press, Cambridge. ISBN 0-521-57391-2.
-> Efron B and Hastie T. Computer Age Statistical Inference, student edition, 2021. Cambridge University Press, Cambridge.
-> Rousselet GA, Pernet CR, Wilcox RR. The Percentile Bootstrap: A Primer With Step-by-Step Instructions in R. Advances in Methods and Practices in Psychological Science. 2021;4(1). doi:10.1177/2515245920911881.
-> Angelo Canty and Brian Ripley (2022). boot: Bootstrap R (S-Plus) Functions. R package version 1.3-28.1.
+* Efron B and Hastie T. Computer Age Statistical Inference, student edition, 2021. Cambridge University Press, Cambridge.
+* Rousselet GA, Pernet CR, Wilcox RR. The Percentile Bootstrap: A Primer With
+Step-by-Step Instructions in R. Advances in Methods and Practices in
+Psychological Science. 2021;4(1). doi:10.1177/2515245920911881.
+* Canty A and Ripley B (2022). boot: Bootstrap R (S-Plus) Functions.
+R package version 1.3-28.1.
 
 ## Details {.appendix}
 
 Last updated at `r Sys.time()`.
 
-[source code](https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-10-09_BootstrapIntro/index.qmd)
+[source code](https://github.com/wzbillings/quarto-website/blob/main/posts/2023-10-09_BootstrapIntro/index.qmd)
 
 ```{r}
 sessionInfo()

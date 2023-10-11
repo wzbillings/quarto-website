@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -99,8 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -240,54 +239,26 @@ cookieconsent.run({
 
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2 theme setup</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"white"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">22</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">16</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">2</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">19</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">l =</span> <span class="dv">2</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">size =</span> <span class="dv">16</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">t =</span> <span class="dv">2</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.spacing =</span> ggplot2<span class="sc">::</span><span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">6</span>, <span class="at">r =</span> <span class="dv">6</span>, <span class="at">b =</span> <span class="dv">6</span>, <span class="at">l =</span> <span class="dv">6</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>In this blog post, I’m going to go over a short example of using the nonparametric bootstrap to construct confidence intervals for arbitrary statistics. Exact and asymptotic limits are all great, but unfortunately they have to exist before you can calculate them, and these methods are often very analytically difficult (requiring, e.g., Taylor series analysis). We can often trade off computational power for analytical problem solving using the bootstrap method to construct pretty good confidence intervals instead.</p>
 <p>I’ll start by going over what I think is the most intuitive approach for bootstrap CIs, the percentile method. This method has some limitations though, so I’ll talk about the BCa adjustment which can produce better results, and I’ll talk about how to get these CIs with the <code>boot</code> package in <code>R</code>.</p>
 <section id="example-problem-setup" class="level2">
 <h2 class="anchored" data-anchor-id="example-problem-setup">Example problem setup</h2>
-<p>For an example, we’ll make some simulated data that’s similar to the situation where we actually need to use a bootstrap CI in my lab group’s research. We’ll consider a fairly simple example: in a study sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(n_t\)</span> people get a vaccine and <span class="math inline">\(n_p\)</span> people get a placebo. They are followed up for an appropriate amount of time (or challenge with virus, your choice), and we record which individuals get infected and which do not. For this simulated example, the effect we are interested in measuring is the vaccine effectiveness, which can be calculated from the risk ratio. That is, <span class="math display">\[\mathrm{VE} = 1 - \mathrm{RR} = 1 - \frac{\text{risk in vaccine group}}{\text{risk in placebo group}}.\]</span> To do this, we’ll simulate infection data for both groups. If we want our target VE to be, say, <span class="math inline">\(75\%\)</span>, we want the risk ratio to be <span class="math inline">\(25\%\)</span>, and we can set the two prevalences however we want, as long as they are sensible prevalences (between <span class="math inline">\(0\%\)</span> and <span class="math inline">\(100\%\)</span>) and their ratio is <span class="math inline">\(\frac{1}{4}\)</span>. So for ease of computation, let’s say that the risk in the vaccine group is <span class="math inline">\(10\%\)</span> and the risk in the placebo group is <span class="math inline">\(40\%\)</span>. Let’s simulate 100 patients where 50 are in the placebo group and 50 are in the vaccine group.</p>
+<p>For an example, we’ll make some simulated data that’s similar to the situation where we actually need to use a bootstrap CI in my lab group’s research. We’ll consider a fairly simple example: in a study sample of size <span class="math inline">\(n = n_t + n_p\)</span>, where <span class="math inline">\(n_t\)</span> people get a vaccine and <span class="math inline">\(n_p\)</span> people get a placebo. They are followed up for an appropriate amount of time (or challenge with virus, your choice), and we record which individuals get infected and which do not. For this simulated example, the effect we are interested in measuring is the vaccine effectiveness, which can be calculated from the risk ratio. That is, <span class="math display">\[\mathrm{VE} = 1 - \mathrm{RR} = 1 - \frac{\text{risk in vaccine group}}{\text{risk in placebo group}}.\]</span> To do this, we’ll simulate infection data for both groups. If we want our target VE to be, say, <span class="math inline">\(75\%\)</span>, we want the risk ratio to be <span class="math inline">\(25\%\)</span>, and we can set the two prevalences however we want, as long as they are sensible prevalences (between <span class="math inline">\(0\%\)</span> and <span class="math inline">\(100\%\)</span>) and their ratio is <span class="math inline">\(\frac{1}{4}\)</span>. So for ease of computation, let’s say that the risk in the vaccine group is <span class="math inline">\(10\%\)</span> and the risk in the placebo group is <span class="math inline">\(40\%\)</span>. Let’s simulate 100 patients where 50 are in the placebo group and 50 are in the vaccine group.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">134122</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Treatment is 0 for placebo, 1 for vaccinated</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.1</span>), <span class="at">each =</span> <span class="dv">50</span>))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    sim_dat<span class="sc">$</span>treatment,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    sim_dat<span class="sc">$</span>outcome,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"outcome"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addmargins</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">134122</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> 100L</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Treatment is 0 for placebo, 1 for vaccinated</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> n <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.1</span>), <span class="at">each =</span> n <span class="sc">/</span> <span class="dv">2</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    sim_dat<span class="sc">$</span>treatment,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    sim_dat<span class="sc">$</span>outcome,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"outcome"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addmargins</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         outcome
 treatment   0   1 Sum
@@ -296,47 +267,47 @@ treatment   0   1 Sum
       Sum  70  30 100</code></pre>
 </div>
 </div>
-<p>If we look at our table, we see that we get estimated risks of <span class="math inline">\(23/50 = 46\%\)</span> in the placebo group, and <span class="math inline">\(7/50 = 14\%\)</span> in the vaccine group, giving us an observed VE of <span class="math inline">\(1 - 0.3043 \approx 70\%.\)</span></p>
-<p>Now, we might want to construct a confidence interval for that, but we forgot all the different methods for that, no matter how many of them they taught us or how many times we covered it during epidemiology class. (Or if you’re like me, you did an epidemiology PhD without any intro to epi classes and never really learned…) So fortunately for us, nonparametric bootstrapping provides a really convenient and flexible way to automatically get a CI, as long as we have a decently fast computer.</p>
+<p>If we look at our table, we see that we get estimated risks of <span class="math inline">\(23/50 = 46\%\)</span> in the placebo group, and <span class="math inline">\(7/50 = 14\%\)</span> in the vaccine group, giving us an observed VE of <span class="math inline">\(1 - 0.3043 \approx 70\%.\)</span> This is close to what we know is the true VE in the simulation, but different enough that we can immediately see the effect of sampling variability. Of course, as we simulate increasingly more people, we will get a more accurate estimate of the VE.</p>
+<p>Now, we might want to construct a confidence interval for our sample, which would ideally cover the true VE. But we forgot all the different methods for building confidence intervals for the risk ratio, no matter how many of them they taught us or how many times we covered it during epidemiology class. (Or if you’re like me, you did an epidemiology PhD without any intro to epi classes and never really learned…) So fortunately for us, nonparametric bootstrapping provides a really convenient and flexible way to “automatically” get a CI, as long as we have a relatively modern computer – even though bootstrapping is called a computer intensive method, for simple statistics like this one, you can get bootstrap intervals pretty fast even on cheap hardware.</p>
 </section>
 <section id="constructing-resamples" class="level2">
 <h2 class="anchored" data-anchor-id="constructing-resamples">Constructing resamples</h2>
-<p>The first step of computing a bootstrap CI is to construct the bootstrap distribution. Bootstrapping refers to a specific type of <strong>resampling</strong> process that’s similar to cross-validation or leave-one-out methods. Call our entire data set <span class="math inline">\(D\)</span>. We construct a bootstrap resample <span class="math inline">\(D_i\)</span> (<span class="math inline">\(i = 1, 2, \ldots, B\)</span> where <span class="math inline">\(B\)</span> is the number of bootstrap resamples we do) by <strong>sampling with replacement</strong> <span class="math inline">\(n\)</span> records from <span class="math inline">\(D\)</span>. This means that each resample can have the same observation repeated multiple times, and does not have to include every observation (in fact, we can use the bootstrap similarly to cross-validation for model tuning by using the bootstrap resample as the analysis set and the points not included in the resample as the assessment set). We resample in this way specifically, because it leads to specific properties (under certain regularity conditions) which allow our confidence intervals to work correctly. (Math stuff omitted since I don’t understand it too well and it’s not so important.)</p>
+<p>The first step of computing a bootstrap CI is to construct the bootstrap distribution. Bootstrapping refers to a specific type of <strong>resampling</strong> process that’s similar to cross-validation or leave-one-out methods. Call our entire data set <span class="math inline">\(D\)</span>. We construct a bootstrap resample <span class="math inline">\(D_i\)</span> (<span class="math inline">\(i = 1, 2, \ldots, B\)</span> where <span class="math inline">\(B\)</span> is the number of bootstrap resamples we do) by <strong>sampling with replacement</strong> <span class="math inline">\(n\)</span> records from <span class="math inline">\(D\)</span>. This means that each resample can have the same observation repeated multiple times, and does not have to include every observation (in fact, we can use the bootstrap similarly to cross-validation for model tuning by using the bootstrap resample as the analysis set and the points not included in the resample as the assessment set). We resample in this way specifically, because it leads to specific properties (under certain regularity conditions) which allow our confidence intervals to work correctly. (Math details omitted since they’re complicated and honestly not too important for what we’re trying to do here.)</p>
 <p>We could of course do this by hand.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3547512</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> 199L</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> B, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"p_p"</span>, <span class="st">"p_t"</span>, <span class="st">"RR"</span>, <span class="st">"VE"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample the data indices that we should use for this sample</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(sim_dat), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    D_i <span class="ot">&lt;-</span> sim_dat[idx, ]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code to calculate the risk in the placebo group and the risk in the</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># treatment group</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We could write this in a much more compact/efficient way, but I did it</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this way for readability</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    p_p <span class="ot">&lt;-</span> D_i <span class="sc">|&gt;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">pull</span>(outcome) <span class="sc">|&gt;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>()</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    p_t <span class="ot">&lt;-</span> D_i <span class="sc">|&gt;</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">pull</span>(outcome) <span class="sc">|&gt;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>()</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    RR <span class="ot">&lt;-</span> p_t <span class="sc">/</span> p_p</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store results in output matrix</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">1</span>] <span class="ot">&lt;-</span> p_p</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">2</span>] <span class="ot">&lt;-</span> p_t</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">3</span>] <span class="ot">&lt;-</span> RR</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> RR</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(res)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3547512</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> 199L</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> B, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"p_p"</span>, <span class="st">"p_t"</span>, <span class="st">"RR"</span>, <span class="st">"VE"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample the data indices that we should use for this sample</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    idx <span class="ot">&lt;-</span> <span class="fu">sample.int</span>(<span class="fu">nrow</span>(sim_dat), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    D_i <span class="ot">&lt;-</span> sim_dat[idx, ]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code to calculate the risk in the placebo group and the risk in the</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># treatment group</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We could write this in a much more compact/efficient way, but I did it</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this way for readability</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    p_p <span class="ot">&lt;-</span> D_i <span class="sc">|&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">pull</span>(outcome) <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    p_t <span class="ot">&lt;-</span> D_i <span class="sc">|&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">filter</span>(treatment <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">pull</span>(outcome) <span class="sc">|&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>()</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    RR <span class="ot">&lt;-</span> p_t <span class="sc">/</span> p_p</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store results in output matrix</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">1</span>] <span class="ot">&lt;-</span> p_p</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">2</span>] <span class="ot">&lt;-</span> p_t</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">3</span>] <span class="ot">&lt;-</span> RR</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    res[i, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> RR</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(res)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res, <span class="at">n =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
+<pre><code># A tibble: 199 × 4
     p_p    p_t    RR    VE
   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 0.544 0.0698 0.128 0.872
@@ -344,33 +315,34 @@ treatment   0   1 Sum
 3 0.46  0.12   0.261 0.739
 4 0.467 0.15   0.321 0.679
 5 0.533 0.145  0.273 0.727
-6 0.341 0.125  0.367 0.633</code></pre>
+6 0.341 0.125  0.367 0.633
+# … with 193 more rows</code></pre>
 </div>
 </div>
 <p>This gives us a resampling or bootstrap distribution with 199 values for each of the calculated values (<span class="math inline">\(p_p\)</span>, <span class="math inline">\(p_t\)</span>, the <span class="math inline">\(\mathrm{RR}\)</span>, and the <span class="math inline">\(\mathrm{VE}\)</span>). We can look at those distributions. (I’ll briefly explain why we might choose 199 in a moment.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> value) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">binwidth =</span> <span class="fl">0.05</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">boundary =</span> <span class="dv">0</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"gray"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(ggplot2<span class="sc">::</span><span class="fu">vars</span>(name)) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>),</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> value) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_histogram</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">binwidth =</span> <span class="fl">0.05</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">boundary =</span> <span class="dv">0</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"gray"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">facet_wrap</span>(ggplot2<span class="sc">::</span><span class="fu">vars</span>(name)) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">scale_x_continuous</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Here we only do 199 resamples because the program I wrote is super inefficient and doing much more would take a while. (Although it is worthwhile to note that the calculation of bootstrap statistics is trivially parallelizable, so with access to sufficient resources, even a computationally expensive statistic can be computed in a reasonable amount of time.)</p>
+<p>Here we only do 199 resamples because the program I wrote is super inefficient and doing much more would take a while. (Although it is worthwhile to note that the calculation of bootstrap statistics is trivially parallelizable, so with access to sufficient resources, even a computationally expensive or poorly implemented statistic can be computed in a reasonable amount of time.)</p>
 <p>So now that we have calculated a bootstrap distribution for our statistic of interest (the VE, along with its component statistics as recordkeeping), how do we estimate the CI from this distribution? In my opinion, the most intuitive way is to use the percentile method.</p>
 </section>
 <section id="percentile-method" class="level2">
@@ -379,20 +351,21 @@ treatment   0   1 Sum
 <p>The percentile method indeed is so simple that skepticism is natural. Whereas other bootstrap methods rely on finding normalization transformations to ensure correct confidence limits, the percentile method relies only on the existence of such a transformation, which can be unknown to us, as this method is <em>scale-invariant.</em> This method literally just involves calculating the closest empirical quantiles of interest to those we are interested in. Using the percentile method, a <span class="math inline">\(95\%\)</span> confidence interval for the VE would be <span class="math display">\[\left( \mathrm{VE}^{*}_{(B+1)(0.025)}, \mathrm{VE}^{*}_{(B+1)(0.975)} \right)\]</span></p>
 <p>So if we chose <span class="math inline">\(B=199\)</span>, then we would order our observed statistics, and our percentile method CI would be formed by the 5th entry in that vector and the 195th entry in that vector. For such ease of computation, <span class="math inline">\(B = 399\)</span> or <span class="math inline">\(599\)</span> and so on are often used to ensure the quantiles are exact. However, again, this is an example of sweating over tiny amounts of CI coverage that likely are not too important to begin with, so choosing a nice round number like <span class="math inline">\(B = 2000\)</span> is often sufficient. Typically, you need at least <span class="math inline">\(B = 1000\)</span>, though <span class="math inline">\(B = 10000\)</span> (or <span class="math inline">\(9999\ldots\)</span>) is even better and typically not even too computationally demanding on modern machines. So, for our example, our percentile CI for the VE would be calculated as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(res<span class="sc">$</span>VE)[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">195</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(res<span class="sc">$</span>VE)[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">195</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4441367 0.9032258</code></pre>
 </div>
 </div>
 <p>R has a lot of quantile algorithms, but we can specifically use Type 1 or 2 to get the same estimates (2 is probably better if you don’t use a <span class="math inline">\(B\)</span> ending in 9’s). The others are all fairly similar though and like I said, I really don’t think being upset about the amount of difference you get between quantile algorithms really matters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(res<span class="sc">$</span>VE, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">type =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(res<span class="sc">$</span>VE, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">type =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     2.5%     97.5% 
 0.4441367 0.9032258 </code></pre>
 </div>
 </div>
-<p>So, we would pair this with our empirical estimate of the VE (we could take, e.g.&nbsp;the mean of the bootstraps, which should always be similar to the overall estimate we already got) to get an estimated VE of <span class="math display">\[\widehat{VE} = 69.57\% \ \left(95\% \text{ CI: } 44.41\% \ - \ 90.32\%\right).\]</span> Now that is maybe not the most precise estimate of VE in the world, but based on the bootstrap percentile method, it at least seems that our vaccine is conferring some protection, with the possibility of a pretty good amount. Note that we would expect this CI to get smaller as <span class="math inline">\(n\)</span> increases, but not as <span class="math inline">\(B\)</span> increases (this is true of all bootstrap CIs).</p>
+<p>So, we would pair this with our empirical estimate of the VE (we could take, e.g.&nbsp;the mean of the bootstraps, which should always be similar to the overall estimate we already got) to get an estimated VE of <span class="math display">\[\widehat{VE} = 69.57\% \
+\left(95\% \text{ CI: } 44.41\% \ - \ 90.32\%\right).\]</span> Now that is maybe not the most precise estimate of VE in the world, but based on the bootstrap percentile method, it at least seems that our vaccine is conferring some protection, with the possibility of a pretty good amount. And the CI covers our true estimate, as we would hope (although it’s important to remember that we could’ve gotten unlucky with the random sample we drew, and if our CI didn’t cover the true estimate on one experiment, that doesn’t mean the CI is flawed). Note that we would expect this CI to get smaller as <span class="math inline">\(n\)</span> increases, but not as <span class="math inline">\(B\)</span> increases. Increasing <span class="math inline">\(B\)</span> decreases the “Monte Carlo” (MC) error, or random error introduced by the random process involved in the algorithm, but doesn’t do anything about the actual sampling error.</p>
 <p>Of course, like I said, some people really don’t like the percentile method. So we can instead appeal to a much more complicated method devised by Efron and some coworkers called the BCa method, and I’ll show how to automate the calculation of these CIs.</p>
 </section>
 <section id="bca-method-and-boot" class="level2">
@@ -400,41 +373,41 @@ treatment   0   1 Sum
 <p>The bias-corrected and accelerated (BCa) percentile method introduces, as you might guess, new complications to reduce the bias and accelerate the convergence of the percentile bootstrap method. Davison and Hinkley agree with Efron and Hastie that this method fixes many of the issues with the basic percentile CI, and there are not really any major objections in the same way that there are for the percentile method. However, this method can be more computationally intensive and certainly more demanding to calculate, and as such I do not recommend implementing in by hand in everyday situations. The central problem here is the estimation of the acceleration parameter <span class="math inline">\(a\)</span>, although there is fortunately a nonparametric estimator that works well in many situations.</p>
 <p>So, we will use the <code>boot</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first step to getting bootstrap CIs via <code>boot</code> is to write a function with a specific order of arguments. The first argument passed to this function will be the original data, and the second will be a vector of indices which are sampled by the bootstrapping procedure. Additional arguments are allowed. For our problem, a function might look like this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>est_VE <span class="ot">&lt;-</span> <span class="cf">function</span>(data, idx) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample the data indices that we should use for this sample</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    D_i <span class="ot">&lt;-</span> data[idx, ]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code to calculate the risk in the placebo group and the risk in the</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># treatment group</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    p_p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(D_i, treatment <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">$</span>outcome)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    p_t <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(D_i, treatment <span class="sc">==</span> <span class="dv">1</span>)<span class="sc">$</span>outcome)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    RR <span class="ot">&lt;-</span> p_t <span class="sc">/</span> p_p</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the VE</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="dv">1</span> <span class="sc">-</span> RR)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>est_VE <span class="ot">&lt;-</span> <span class="cf">function</span>(data, idx) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample the data indices that we should use for this sample</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    D_i <span class="ot">&lt;-</span> data[idx, ]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code to calculate the risk in the placebo group and the risk in the</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># treatment group</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    p_p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(D_i, treatment <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">$</span>outcome)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    p_t <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(D_i, treatment <span class="sc">==</span> <span class="dv">1</span>)<span class="sc">$</span>outcome)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    RR <span class="ot">&lt;-</span> p_t <span class="sc">/</span> p_p</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the VE</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="dv">1</span> <span class="sc">-</span> RR)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we need to create a resampling object using the <code>boot::boot()</code> function. I’ll comment the important arguments in the code chunk. There are many other arguments we could pass in, and the details of those are described in the manual or in Davison and Hinkley (see references). In particular, the <code>parallel</code>, <code>cl</code>, and <code>ncpus</code> arguments can be used for easy parallel computing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7071234</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>VE_boot <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First argument is the data frame</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> sim_dat,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Second argument is the function we want to calculate on resamples</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> est_VE,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># R is the number of resamples, which I called B before</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">R =</span> <span class="dv">9999</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We want to use ordinary nonparametric bootstrap -- this is the default</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># but I wanted to emphasize it</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sim =</span> <span class="st">"ordinary"</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7071234</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>VE_boot <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First argument is the data frame</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> sim_dat,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Second argument is the function we want to calculate on resamples</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> est_VE,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># R is the number of resamples, which I called B before</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">R =</span> <span class="dv">9999</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We want to use ordinary nonparametric bootstrap -- this is the default</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># but I wanted to emphasize it</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sim =</span> <span class="st">"ordinary"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because the <code>boot</code> package is optimized so well, that seems like it actually took less time than my simple example earlier. If we just print the object, we can see the estimated statistic and bootstrap SE.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>VE_boot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>VE_boot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ORDINARY NONPARAMETRIC BOOTSTRAP
@@ -451,7 +424,7 @@ t1* 0.6956522 -0.0074171   0.1223473</code></pre>
 </div>
 <p>We can also plot the bootstrap distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(VE_boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(VE_boot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -459,11 +432,11 @@ t1* 0.6956522 -0.0074171   0.1223473</code></pre>
 <p>We can see that it is nonnormal, with a long left tail. Such nonnormality indicates that the normal approximate bootstrap method (which I didn’t discuss) is not appropriate, and the BCa method is generally much better in this case.</p>
 <p>There is a lot you can do with this package that I am not going to talk about and don’t really know about. But the next thing we want to do for this example is compute those BCa confidence intervals. Fortunately for us, we can actually calculate all the types of CI available with one function call. Note that we could also compute the “studentized” CI, but that requires us to specify variances for each observation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>VE_ci <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot.ci</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    VE_boot, <span class="at">conf =</span> <span class="fl">0.95</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"norm"</span>, <span class="st">"basic"</span>, <span class="st">"perc"</span>, <span class="st">"bca"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>VE_ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>VE_ci <span class="ot">&lt;-</span> boot<span class="sc">::</span><span class="fu">boot.ci</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    VE_boot, <span class="at">conf =</span> <span class="fl">0.95</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"norm"</span>, <span class="st">"basic"</span>, <span class="st">"perc"</span>, <span class="st">"bca"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>VE_ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
 Based on 9999 bootstrap replicates
@@ -481,7 +454,8 @@ Level     Percentile            BCa
 Calculations and Intervals on Original Scale</code></pre>
 </div>
 </div>
-<p>We can see that the percentile CI is quite similar to the one we got by hand, which is nice and the difference is likely attributable to random error. Notice, however, that the normal and basic intervals are shifted upwards from the percentile interval, and the BCa interval is shifted down. The BCa interval is corrected for bias, which is why it is shifted down (in Efron and Hastie they discuss why our CIs might be biased upwards to begin with). In this case, the different intervals are actually a bit different, although again I’m not sure how useful it is to fret over whether the lower limit of the CI for our VE is <span class="math inline">\(41\%\)</span> or <span class="math inline">\(37\%\)</span>. (But I do admit that a range of <span class="math inline">\(46\%\)</span> to <span class="math inline">\(37\%\)</span> across methods is not ideal, though I don’t know that these two estimates would change any qualitative decisions that you might make based on the analysis. But either way the normal method is not great, and I don’t love the basic method, which is why I didn’t recommend using either of those.) In general I would use the BCa limits, since they are the least controversial, technically the “best” in a specific sense, and are just as easy to calculate.</p>
+<p>We can see that the percentile CI is quite similar to the one we got by hand, which is nice and the difference is likely attributable to random error. Notice, however, that the normal and basic intervals are shifted upwards from the percentile interval, and the BCa interval is shifted down. The BCa interval is corrected for bias, which is why it is shifted down (in Efron and Hastie they discuss why our CIs might be biased upwards to begin with). In this case, the different intervals are actually a bit different, although again I’m not sure how useful it is to fret over whether the lower limit of the CI for our VE is <span class="math inline">\(41\%\)</span> or <span class="math inline">\(37\%\)</span>. (But I do admit that a range of <span class="math inline">\(46\%\)</span> to <span class="math inline">\(37\%\)</span> across methods is not ideal, though I don’t know that these two estimates would change any qualitative decisions that you might make based on the analysis. But either way the normal method is not great, and I don’t love the basic method, which is why I didn’t recommend using either of those.)</p>
+<p>In general I would use the BCa limits, since they are the least controversial, technically the “best” in a specific sense, and are just as easy to calculate. And it’s important to note that all of these CIs cover our true parameter for this simulated experiment; to truly investigate the convergence and bias properties of these different CIs we would need to run many simulated experiments.</p>
 </section>
 <section id="conclusions" class="level2">
 <h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
@@ -491,22 +465,25 @@ Calculations and Intervals on Original Scale</code></pre>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<blockquote class="blockquote">
-<p>Davison AC and Hinkley DV. Bootstrap Methods and their Applications, 1997. Cambridge University Press, Cambridge. ISBN 0-521-57391-2. Efron B and Hastie T. Computer Age Statistical Inference, student edition, 2021. Cambridge University Press, Cambridge. Rousselet GA, Pernet CR, Wilcox RR. The Percentile Bootstrap: A Primer With Step-by-Step Instructions in R. Advances in Methods and Practices in Psychological Science. 2021;4(1). doi:10.1177/2515245920911881. Angelo Canty and Brian Ripley (2022). boot: Bootstrap R (S-Plus) Functions. R package version 1.3-28.1.</p>
-</blockquote>
+<ul>
+<li>Davison AC and Hinkley DV. Bootstrap Methods and their Applications, 1997. Cambridge University Press, Cambridge. ISBN 0-521-57391-2.</li>
+<li>Efron B and Hastie T. Computer Age Statistical Inference, student edition, 2021. Cambridge University Press, Cambridge.</li>
+<li>Rousselet GA, Pernet CR, Wilcox RR. The Percentile Bootstrap: A Primer With Step-by-Step Instructions in R. Advances in Methods and Practices in Psychological Science. 2021;4(1). doi:10.1177/2515245920911881.</li>
+<li>Canty A and Ripley B (2022). boot: Bootstrap R (S-Plus) Functions. R package version 1.3-28.1.</li>
+</ul>
 </section>
 
 
 <div id="quarto-appendix" class="default"><section id="details" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Details</h2><div class="quarto-appendix-contents">
 
-<p>Last updated at 2023-10-09 20:44:27.346987.</p>
-<p><a href="https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-10-09_BootstrapIntro/index.qmd">source code</a></p>
+<p>Last updated at 2023-10-11 09:28:58.632938.</p>
+<p><a href="https://github.com/wzbillings/quarto-website/blob/main/posts/2023-10-09_BootstrapIntro/index.qmd">source code</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.1 (2023-06-16 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19044)
+Running under: Windows 10 x64 (build 19045)
 
 Matrix products: default
 
