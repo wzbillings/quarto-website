@@ -1,0 +1,360 @@
+---
+title: "My data are censored!! What do I do??"
+author: "Zane Billings"
+date: "2023-10-30"
+description: |
+  I needed to make some censored data plots for a presentation, and it turned
+  out to be easier to write the material as a blog post first and then convert
+  that into a presentation afterwards.
+license: "CC BY-SA"
+draft: true
+---
+
+```{r setup, include = FALSE}
+pth_base <- "2023-10-30-Censored-Data-Diagrams"
+library(ggplot2)
+# TODO add HAI breaks function to zlib?
+ggplot2::theme_set(zlib::theme_ms())
+
+library(lubridate)
+study_start <- lubridate::as_date("2023-01-10")
+study_end <- lubridate::as_date("2023-05-16")
+
+pretty_date <- lubridate::stamp_date("October 07, 1998")
+```
+
+Recently, I've been working a lot on censored data in the context of antibody
+measurements, which often have limits of detection or precision issues that
+can be treated as censored data problems. I've been working with my
+[awesome lab group](https://handelgroup.uga.edu/) on a larger project about
+approaches for censored data analyses, but this blog post will cover the
+very basics. I needed to make a presentation for a seminar about this topic,
+and it turned out it was easier to write the blog post first and then
+convert it into a presentation.
+
+Here are the learning goals for this blog post, and the motivating issues for
+me to write about. If I've done a decent job, by the end of this post, a
+diligent reader should be able to:
+
+1. Explain what censored data is, and give an example of how censoring might
+occur;
+1. List the types of censored data, and be able to identify these types in 
+practical examples;
+1. Write down a data generating model for censored data, and write down the
+likelihood for the censored variables;
+1. Explain how censored data are handled in survival, tobit-type, and Bayesian
+models using the likelihood;
+1. Identify pros and cons for frequentist and Bayesian approaches to handle
+censored data.
+
+## What is censored data?
+
+**Censoring** is a type of data coarsening which occurs due to the way
+data are observed. Such data are only partially known, i.e., we know a range
+of values for a given data point, but not the exact value of that
+data point. The most common example in the literature occurs in survival
+analysis. Notably, when data are censored, we still have a record for a given
+individual, with an imprecise measurement -- we will not consider **truncated**
+data here, where the measurement process completely excludes measurements
+which are not known precisely.
+
+## Censored survival data
+
+Survival analysis methods are used to analyze data where the outcome is the
+time when a specific event occurs -- originally death, which is where the
+name comes from. Survival analysis is also called reliability analysis in
+fields where instruments or machines are the subject of consideration rather
+than people. But as an epidemiologist, I'm most familiar with this in the
+context of a **cohort study**. We recruit a bunch of people, follow them for
+a specific amount of time, and observe when certain outcomes happen. Of course,
+if the study ends before we observe an outcome for a given individual, that
+does not mean the individual never gets an outcome.
+
+Instead, our observation of no outcome occurrence for that individual is a
+feature of our observation process -- we would follow all individuals in our
+study until they were no longer at risk for the event if we could, but real
+world constraints limit the amount of follow-up or observation time we can
+have. The outcome observation for this person is said to be **right censored**,
+which is the classical type of censoring dealt with in epidemiology. The term
+"right" censoring comes from the fact that this individual's time-to-event
+is in the interval $(\text{end of study}, \ \infty)$, so the true value could
+be anywhere to the right of our observed measurement on a number line.
+
+Of course, a cohort study can be defined in calendar time or in event time, but
+for the sake of simplicity we'll assume that our cohort is in calendar time.
+Say for example, that we started our study (and had all patients recruited) on
+`r pretty_date(study_start)` and completed all of our follow-up on
+`r pretty_date(study_end)`.
+
+```{r rc-data, include=FALSE}
+set.seed(1254813)
+rc <-
+	tibble::tribble(
+		~event_time,
+		"2023-01-21",
+		"2023-01-23",
+		"2023-02-12",
+		"2023-02-12",
+		"2023-02-17",
+		"2023-03-05",
+		"2023-03-30",
+		"2023-05-03",
+		"2023-05-21",
+		"2023-07-20"
+	) |>
+	dplyr::slice_sample(n = 10) |>
+	dplyr::mutate(
+		censored = factor(
+			event_time >= study_end,
+			levels = c(FALSE, TRUE),
+			labels = c("Observed", "Censored")
+		),
+		event_time = lubridate::ymd(event_time),
+		c_event_time = dplyr::if_else(
+			event_time >= study_end,
+			study_end,
+			event_time
+		),
+		id = dplyr::row_number()
+	)
+```
+
+
+```{r}
+#| label: fig-rc
+#| fig-cap: |
+#|   Example study data which include right censored observations. For
+#|   this example, we assume that no one experienced the event before the study
+#|   began, so only right censoring is possible. Individuals who did not
+#|   experience the event before the end of the study are right-censored, and
+#|   their study times are colored red. Individuals who experienced the
+#|   event before the end of the study are not censored, and their study
+#|   times are colored black. The points (circles for completely observed
+#|   data, x's for censored data) show the value we observe as part of the
+#|   study.
+ggplot(rc) +
+	aes(x = study_start, color = censored, group = id) +
+	geom_vline(xintercept = study_start, color = "gray", lwd = 2) +
+	geom_vline(xintercept = study_end, color = "gray", lwd = 2) +
+	geom_segment(
+		aes(xend = event_time, y = id, yend = id),
+		lwd = 1.5,
+		show.legend = FALSE
+	) +
+	geom_point(
+		aes(x = study_start, y = id),
+		size = 3, stroke = 2, shape = 16,
+		show.legend = FALSE
+	) +
+	geom_point(
+		aes(x = c_event_time, y = id, shape = censored),
+		size = 3, stroke = 2
+	) +
+	scale_color_manual(values = c("black", "red"), name = NULL) +
+	scale_x_date(
+		name = "Event time",
+		expand = expansion(mult = 0.025),
+		#date_breaks = "2 weeks",
+		breaks = seq(study_start, study_end + 14, 14),
+		date_labels = "%b %d"
+	) +
+	coord_cartesian(xlim = c(study_start, study_end + 14)) +
+	scale_y_continuous(breaks = NULL, name = "Participant") +
+	scale_shape_manual(values = c(16, 4), name = NULL)
+```
+
+The particular design where no participant has experienced the outcome when the
+study begins is typically just called a cohort study, but we could specifically
+call this an **incident cohort study**, because the design allows us to estimate
+the incidence of the outcome in the source population. While an incident cohort
+study of this type is typically preferable, logistical constraints may prevent
+us from utilizing an incident cohort study design. One alternative is a
+**prevalent cohort study**, which can be used when prevalence is the outcome
+of interest rather than incidence.
+
+In a prevalent cohort design, we
+recruit individuals who have already experience the outcome of interest. I
+was having trouble thinking of an example for when this study design might be
+appropriate and there is no competing risk (which I want to avoid talking about
+here because it makes things more complicated), but after some googling, I found
+that one example might be assessment of the harms caused by an environmental or
+occupational exposure.
+
+<!-- EXAMPLE HERE
+For example, suppose a cohort of factory workers during
+a specific calendar time period are exposed to a dangerous chemical.
+In the future, we begin to suspect that exposure to the chemical is associated
+with developing a specific cancer later in life. There are likely sporadic
+cases of this cancer which have been traced back to the chemical exposure, 
+but we may want to enroll as many of the other exposed individuals as possible
+into a surveillance program. So, any individuals who have already been diagnosed
+with the specific cancer would be **left censored** in this study design: that
+is, they experienced the outcome before we began the study.
+-->
+
+For now, the specific example is not too important but I'll try to think of
+one and add it here later.
+
+```{r lc-data, include=FALSE}
+set.seed(1254814)
+lc <-
+	tibble::tribble(
+		~t1, ~t2,
+		"2022-11-16", "2023-05-29",
+		"2023-03-27", "2023-05-02",
+		"2023-01-04", "2023-03-07",
+		"2022-12-29", "2023-02-15",
+		"2023-01-21", "2023-04-17",
+		"2023-01-11", "2023-05-05",
+		"2023-02-04", "2023-03-30",
+		"2023-02-01", "2023-05-03",
+		"2023-03-21", "2023-05-21",
+		"2023-05-01", "2023-07-20"
+	) |>
+	dplyr::slice_sample(n = 10) |>
+	dplyr::mutate(
+		r_censored = factor(
+			t2 >= study_end,
+			levels = c(FALSE, TRUE),
+			labels = c("Observed", "Censored")
+		),
+		l_censored = factor(
+			t1 <= study_start,
+			levels = c(FALSE, TRUE),
+			labels = c("Observed", "Censored")
+		),
+		censored = factor(
+			(t2 >= study_end) | (t1 <= study_start),
+			levels = c(FALSE, TRUE),
+			labels = c("Observed", "Censored")
+		),
+		t1 = lubridate::ymd(t1),
+		t2 = lubridate::ymd(t2),
+		# # Deal with right censoring dot marks
+		# c_event_time = dplyr::if_else(
+		# 	t2 >= study_end,
+		# 	study_end,
+		# 	t2
+		# ),
+		# # Deal with left censoring dot marks
+		# c_event_time = dplyr::if_else(
+		# 	t2 <= study_start,
+		# 	study_start,
+		# 	t2
+		# ),
+		id = dplyr::row_number()
+	)
+```
+
+```{r}
+#| label: fig-lc
+#| fig-cap: |
+#|   The caption
+
+ggplot(lc) +
+	aes(x = t2, y = id, color = censored, group = id) +
+	geom_vline(xintercept = study_start, color = "gray", lwd = 2) +
+	geom_vline(xintercept = study_end, color = "gray", lwd = 2) +
+	geom_segment(
+		aes(xend = t1, y = id, yend = id),
+		lwd = 1.5,
+		show.legend = FALSE
+	) +
+	# geom_segment(
+	# 	aes(
+	# 		x = t1, xend = t1,
+	# 		y = id - 0.5, yend = id + 0.5
+	# 	),
+	# 	lwd = 1.5,
+	# 	show.legend = FALSE
+	# ) +
+	geom_label(
+		aes(
+			# Insane date math to get the graphical midpoint
+			x = lubridate::as_date((
+				pmax(as.numeric(t1), as.numeric(study_start - 14 * 2)) +
+					pmin(as.numeric(t2), as.numeric(study_end + 14 * 1))
+			) / 2),
+			label = paste0("Participant #", id)
+		)
+	) +
+	geom_point(
+		aes(x = t2, y = id, shape = r_censored),
+		size = 3, stroke = 2
+	) +
+	geom_point(
+		aes(x = t1, y = id, shape = l_censored),
+		size = 3, stroke = 2
+	) +
+	annotate(
+		"label",
+		x = study_start,
+		y = 10.75,
+		label = "Study start"
+	) +
+	annotate(
+		"label",
+		x = study_end,
+		y = 10.75,
+		label = "Study end"
+	) +
+	scale_color_manual(values = c("black", "red"), name = NULL) +
+	scale_x_date(
+		name = "Event time",
+		expand = expansion(mult = 0.025),
+		#date_breaks = "2 weeks",
+		breaks = seq(study_start - 14 * 1, study_end + 14 * 1, 14),
+		date_labels = "%b %d"
+	) +
+	coord_cartesian(xlim = c(study_start - 14 * 1, study_end + 14 * 1)) +
+	scale_y_continuous(breaks = NULL, name = "Participant") +
+	scale_shape_manual(values = c(16, 4), name = NULL)
+```
+
+## Censored non-survival data
+
+```{r}
+
+```
+
+## An aside on the likelihood
+
+## MLE on censored data
+
+```{r}
+set.seed(134123)
+x_star <- rnorm(10000, 0, 1)
+x <- ifelse(x_star < 0, 0, x_star)
+
+star_dens <- density(x_star, kernel = "gaussian")
+x_dens <- density(x, kernel = "gaussian", bw = star_dens$bw)
+
+plot(
+	NULL, NULL,
+	xlim = c(min(star_dens$x, x_dens$x), max(star_dens$x, x_dens$x)),
+	ylim = c(min(star_dens$y, x_dens$y), max(star_dens$y, x_dens$y)),
+	xlab = "x", ylab = "density"
+)
+hist(x_star, breaks = seq(-5, 5, 0.1), freq = FALSE, add = TRUE,
+	 col = "#E69F0060")
+hist(x, breaks = seq(-5, 5, 0.1), freq = FALSE, add = TRUE,
+	 col = "#56B4E960")
+lines(star_dens, lty = 1, col = "orange", lwd = 2)
+lines(x_dens, lty = 2, col = "blue", lwd = 2)
+```
+
+## The Bayesian alternative
+
+## Conclusion
+
+## Details {.appendix}
+
+Last updated at `r Sys.time()`.
+
+[source code](https://github.com/wzbillings/quarto-website/blob/main/posts/2023-10-30-Censored-Data-Diagrams)
+
+```{r}
+sessionInfo()
+```
+
+
