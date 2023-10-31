@@ -60,15 +60,15 @@ which are not known precisely.
 
 ## Censored survival data
 
-Survival analysis methods are used to analyze data where the outcome is the
-time when a specific event occurs -- originally death, which is where the
-name comes from. Survival analysis is also called reliability analysis in
-fields where instruments or machines are the subject of consideration rather
-than people. But as an epidemiologist, I'm most familiar with this in the
-context of a **cohort study**. We recruit a bunch of people, follow them for
-a specific amount of time, and observe when certain outcomes happen. Of course,
-if the study ends before we observe an outcome for a given individual, that
-does not mean the individual never gets an outcome.
+Survival analysis methods are used to analyze data where the outcome is the time
+when a specific event occurs -- originally death, which is where the name comes
+from. Survival analysis is also called reliability analysis in fields where
+instruments or machines are the subject of consideration rather than people. In
+epidemiology, these types of survival outcomes often come up in the context of a
+**cohort study**. We recruit a bunch of people, follow them for a specific
+amount of time, and observe when certain outcomes happen. Importantly, *if the
+study ends before we observe an outcome for a given individual, that does not
+mean the individual never gets an outcome.*
 
 Instead, our observation of no outcome occurrence for that individual is a
 feature of our observation process -- we would follow all individuals in our
@@ -161,16 +161,76 @@ ggplot(rc) +
 	coord_cartesian(xlim = c(study_start, study_end + 14)) +
 	scale_y_continuous(breaks = NULL, name = "Participant") +
 	scale_shape_manual(values = c(16, 4), name = NULL)
+
+ggsave(
+	here::here("posts", pth_base, "rc.png"),
+	width = 16, height = 9
+)
 ```
+
+Thinking about censored data in this way is useful for analyzing survival data,
+but can be misleading when trying to understand the general idea of censored
+data. Such a study would produce a distribution of survival times which is
+**censored in the right tail.** With only 10 observations like we show in the
+previous figure, visualizing the distribution of survival times might be
+difficult. But if we draw survival times from some parametric model, and then
+censor them, we can see this effect in practice. So suppose these are 10
+individuals from a study that had 1000 individuals. The nature of the parametric
+model and how I made this distribution is not important but is explained in
+the callout box for anyone curious.
+
+CALLOUT BOX FOR MODEL HERE
+
+```{r rc-dist}
+total_time <- lubridate::interval(study_start, study_end) / lubridate::days(1)
+set.seed(12341234)
+rc_vals <- lubridate::interval(study_start, rc$event_time) / lubridate::days(1)
+est <- MASS::fitdistr(rc_vals, densfun = "weibull")
+sim_dist_rc <- tibble::tibble(
+	y_star = c(
+		rc_vals,
+		rweibull(990, shape = est$estimate[[1]], scale = est$estimate[[2]])
+	),
+	orig = c(rep(1, times = 10), rep(0, times = 990)),
+	cens = ifelse(y_star <= total_time, 0, 1),
+	y_cens = ifelse(cens, total_time, y_star)
+)
+
+dist_dat <- tibble::tibble(
+	x = seq(0, 300, 0.01),
+	y = dweibull(x, shape = est$estimate[[1]], scale = est$estimate[[2]])
+)
+ggplot(sim_dist_rc) +
+	#geom_vline(xintercept = total_time) +
+	geom_histogram(
+		aes(x = y_cens, y = after_stat(density)), binwidth = 5,
+		boundary = 0,
+		color = "black", fill = "gray"
+	) +
+	geom_line(data = dist_dat, aes(x = x, y = y)) +
+	labs(x = "Survival time")
+```
+
+Here, the histogram is showing the observed data from our censored sample.
+There is a huge bin containing the censored values, which in this case are all
+survival times that were larger than the amount of time each individual spent
+in the study. The black curve shows the true density curve from which I
+sampled the data, so we can see that the censored data are censored at a
+specific measurement. Basically all of the density that would be above the
+censoring point gets pushed into the closest bin just below the censoring point.
+So this is how we can understand the term "right" censoring.
+
+Similarly, 
+
 
 The particular design where no participant has experienced the outcome when the
 study begins is typically just called a cohort study, but we could specifically
 call this an **incident cohort study**, because the design allows us to estimate
-the incidence of the outcome in the source population. While an incident cohort
-study of this type is typically preferable, logistical constraints may prevent
-us from utilizing an incident cohort study design. One alternative is a
-**prevalent cohort study**, which can be used when prevalence is the outcome
-of interest rather than incidence.
+the incidence of the outcome in the source population.
+
+In this type of incident cohort study, we cannot have **left censored data** by
+definition. An individual with a left-censored time-to-event would have to be
+at risk before the study begins.
 
 In a prevalent cohort design, we
 recruit individuals who have already experience the outcome of interest. I
