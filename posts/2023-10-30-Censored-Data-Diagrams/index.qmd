@@ -220,8 +220,8 @@ specific measurement. Basically all of the density that would be above the
 censoring point gets pushed into the closest bin just below the censoring point.
 So this is how we can understand the term "right" censoring.
 
-Similarly, 
-
+If there is right censoring, you might be wondering, is there also left
+censoring? The answer is yes, and it occurs in much the same way.
 
 The particular design where no participant has experienced the outcome when the
 study begins is typically just called a cohort study, but we could specifically
