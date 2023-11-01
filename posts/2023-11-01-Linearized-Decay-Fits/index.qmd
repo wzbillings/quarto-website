@@ -1,0 +1,273 @@
+---
+title: "Linear fits for exponential and power law decay models"
+author: "Zane Billings"
+date: "2023-07-25"
+description: |
+  In a strange confluence of events that I did not expect, a particular fact
+  that I learned in my scientific computing class in undergrad is actually very
+  relevant to a research project in my group. One of my group members is
+  working on a project involving some decay models, and I actually learned
+  about how to fit those as linear models in that class. So let's talk about
+  that, and see whether it adapts to the hierarchical case.
+license: "CC BY-SA"
+draft: true
+---
+
+```{r setup, include = FALSE}
+library(ggplot2)
+ggplot2::theme_set(zlib::theme_ms())
+```
+
+
+intro stuff
+
+## The models and their linear forms
+
+## Simulating and fitting non-hierarchical data
+
+```{r}
+gen_data_fe <- function(tmin = 1, tmax = 10, tstep = 1, N = 25, S = 101,
+						error_var = 0.1, intercept = 1, slope = -0.5,
+						latent = TRUE) {
+	set.seed(S)
+	
+	# Times for each individual
+	t_vec <- seq(tmin, tmax, tstep)
+	
+	# Generate a grid of individuals and times
+	ind <-
+		t_vec |>
+		replicate(n = N) |>
+		`colnames<-`(stringr::str_pad(1:N, width = 2, pad = "0")) |>
+		tibble::as_tibble() |>
+		tidyr::expand_grid() |>
+		tidyr::pivot_longer(
+			cols = dplyr::everything(),
+			names_to = "id",
+			values_to = "t"
+		)
+	
+	# Sample the data for each individual, using fixed effects for the
+	# slope and intercept
+	out <-
+		ind |>
+		# TODO replace this with a function that can be dispatched separately
+		# for RE/FE.
+		# Set the model parameters for each individual as data variables
+		dplyr::mutate(
+			# Fixed intercept
+			log_a = intercept,
+			# Fixed slope
+			k = slope
+		) |>
+		# Calculate outcomes at observation level
+		dplyr::mutate(
+			# Random noise -- same for both models to better see differences
+			noise = rnorm(dplyr::n(), 0, error_var),
+			# Exponential decay model
+			exp_mu = log_a + k * t,
+			exp_y = exp(exp_mu + noise),
+			# Power law decay model
+			pow_mu = log_a + k * log(t),
+			pow_y = exp(pow_mu + noise)
+		) |>
+		# The price for code that is so readable in the mutate part is that
+		# now we have to pivot, separate, and pivot again
+		# First pivot is to get all of the outcome data in one column
+		tidyr::pivot_longer(
+			cols = c(exp_mu, exp_y, pow_mu, pow_y),
+			names_to = "model_var"
+		) |>
+		# Now separate the name column into a column for the model (exp, pow),
+		# and a column for the variable (mu, y).
+		tidyr::separate(model_var, into = c("model", "variable"), sep = "_") |>
+		# Pivot wider now so that y and mu are columns
+		tidyr::pivot_wider(
+			names_from = variable,
+			values_from = value
+		) |>
+		# Clean up model names
+		dplyr::mutate(
+			model = factor(
+				model,
+				levels = c("exp", "pow"),
+				labels = c("Exponential decay", "Power law decay")
+			)
+		)
+	
+	# If latent is FALSE, drop all of the variables that we
+	# wouldn't observe irl
+	if (isFALSE(latent)) {
+		out <- dplyr::select(out, id, t, model, y)
+	}
+	
+	return(out)
+}
+
+fe_data <- gen_data_fe()
+
+p_fe <-
+	ggplot(fe_data) +
+	aes(x = t, y = y / max(y), color = id) +
+	geom_line(show.legend = FALSE) +
+	geom_point(show.legend = FALSE) +
+	scale_y_continuous(limits = c(0, 1), breaks = scales::breaks_pretty()) +
+	scale_x_continuous(limits = c(1, 10), breaks = scales::breaks_pretty()) +
+	facet_wrap(~model) +
+	labs(
+		title = "Simulation with fixed slope and intercept\n",
+		y = "Normalized y"
+	) +
+	scale_color_grey()
+
+p_fe
+```
+
+```{r}
+exp_mod_fe <- lm(
+	log(y) ~ t,
+	data = subset(fe_data, model == "Exponential decay")
+)
+summary(exp_mod_fe)
+
+pow_mod_fe <- lm(
+	log(y) ~ log(t),
+	data = subset(fe_data, model == "Power law decay")
+)
+summary(pow_mod_fe)
+```
+
+
+
+## Simulating and fitting hierarchical data
+
+```{r}
+gen_data_re <- function(tmin = 1, tmax = 10, tstep = 1, N = 25, S = 101,
+						error_var = 0.1, intercept = c(1, 0.5),
+						slope = c(-0.5, 0.25), latent = TRUE) {
+	set.seed(S)
+	
+	# Times for each individual
+	t_vec <- seq(tmin, tmax, tstep)
+	
+	# Generate a grid of individuals and times
+	ind <-
+		t_vec |>
+		replicate(n = N) |>
+		`colnames<-`(stringr::str_pad(1:N, width = 2, pad = "0")) |>
+		tibble::as_tibble() |>
+		tidyr::expand_grid() |>
+		tidyr::pivot_longer(
+			cols = dplyr::everything(),
+			names_to = "id",
+			values_to = "t"
+		)
+	
+	out <-
+		ind |>
+		# Sample random parameters at subject level
+		dplyr::group_by(id) |>
+		dplyr::mutate(
+			# Random intercept
+			log_a = rnorm(1, intercept[1], intercept[2]),
+			# Random slope
+			k = rnorm(1, slope[1], slope[2])
+		) |>
+		dplyr::ungroup() |>
+		# Calculate outcomes at observation level
+		dplyr::mutate(
+			# Random noise -- same for both models to better see differences
+			noise = rnorm(dplyr::n(), 0, error_var),
+			# Exponential decay model
+			exp_mu = log_a + k * t,
+			exp_y = exp(exp_mu + noise),
+			# Power law decay model
+			pow_mu = log_a + k * log(t),
+			pow_y = exp(pow_mu + noise)
+		) |>
+		# The price for code that is so readable in the mutate part is that
+		# now we have to pivot, separate, and pivot again
+		# First pivot is to get all of the outcome data in one column
+		tidyr::pivot_longer(
+			cols = c(exp_mu, exp_y, pow_mu, pow_y),
+			names_to = "model_var"
+		) |>
+		# Now separate the name column into a column for the model (exp, pow),
+		# and a column for the variable (mu, y).
+		tidyr::separate(model_var, into = c("model", "variable"), sep = "_") |>
+		# Pivot wider now so that y and mu are columns
+		tidyr::pivot_wider(
+			names_from = variable,
+			values_from = value
+		) |>
+		# Clean up model names
+		dplyr::mutate(
+			model = factor(
+				model,
+				levels = c("exp", "pow"),
+				labels = c("Exponential decay", "Power law decay")
+			)
+		)
+	
+	# If latent is FALSE, drop all of the variables that we
+	# wouldn't observe irl
+	if (isFALSE(latent)) {
+		out <- dplyr::select(out, id, t, model, y)
+	}
+	
+	return(out)
+}
+
+re_data <- gen_data_re(N = 100)
+
+p_re <-
+	ggplot(re_data) +
+	aes(x = t, y = y / max(y), color = id) +
+	geom_line(show.legend = FALSE) +
+	geom_point(show.legend = FALSE) +
+	scale_y_continuous(limits = c(0, 1), breaks = scales::breaks_pretty()) +
+	scale_x_continuous(limits = c(1, 10), breaks = scales::breaks_pretty()) +
+	facet_wrap(~model) +
+	ggtitle("Simulation with random slope and intercept\n") +
+	labs(
+		title = "Simulation with random slope and intercept\n",
+		y = "Normalized y"
+	) +
+	scale_color_grey()
+
+p_re
+```
+
+```{r}
+cowplot::plot_grid(p_fe, p_re, ncol = 1)
+```
+
+```{r}
+my_model <-
+	brms::brm(
+		formula = log(y) ~ 0 + (1 + t | id),
+		data = re_data
+	)
+```
+
+```{r}
+my_model |>
+	brms::posterior_summary()
+```
+
+
+## Can we include covariates?
+
+## The Wrap-Up
+
+## Details {.appendix}
+
+Last updated at `r Sys.time()`.
+
+[source code](https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-07-25_Simulating-Titer-Data/index.Rmd)
+
+```{r}
+sessionInfo()
+```
+
+

@@ -87,7 +87,7 @@ Say for example, that we started our study (and had all patients recruited) on
 `r pretty_date(study_end)`.
 
 ```{r rc-data, include=FALSE}
-set.seed(1254813)
+set.seed(1981235)
 rc <-
 	tibble::tribble(
 		~event_time,
@@ -95,9 +95,9 @@ rc <-
 		"2023-01-23",
 		"2023-02-12",
 		"2023-02-12",
-		"2023-02-17",
+		"2023-04-13",
 		"2023-03-05",
-		"2023-03-30",
+		"2023-05-29",
 		"2023-05-03",
 		"2023-05-21",
 		"2023-07-20"
@@ -147,12 +147,23 @@ ggplot(rc) +
 		show.legend = FALSE
 	) +
 	geom_point(
-		aes(x = c_event_time, y = id, shape = censored),
+		aes(x = event_time, y = id, shape = censored),
 		size = 3, stroke = 2
+	) +
+	geom_label(
+		aes(
+			# Insane date math to get the graphical midpoint
+			x = lubridate::as_date((
+				pmax(as.numeric(study_start), as.numeric(study_start - 14 * 2)) +
+					pmin(as.numeric(event_time), as.numeric(study_end + 14 * 1))
+			) / 2),
+			label = paste0("Participant #", id),
+			y = id + 0.25
+		), fill = "#ffffff", col = "black"
 	) +
 	scale_color_manual(values = c("black", "red"), name = NULL) +
 	scale_x_date(
-		name = "Event time",
+		name = "Calendar time",
 		expand = expansion(mult = 0.025),
 		#date_breaks = "2 weeks",
 		breaks = seq(study_start, study_end + 14, 14),
@@ -168,6 +179,14 @@ ggsave(
 )
 ```
 
+Note that here we have also implicitly assumed that the only reason for a
+person to drop out of the study is because the event occurs. We could,
+in real life, have subjects who dropped out of the study before the event
+occurred, and in real life we would likely not have a fixed calendar date
+for enrollment. But we make these simplifying assumptions for now, because
+this kind of survival analysis is not the main point here, the idea of
+censoring is the main point and survival analysis is a motivating example.
+
 Thinking about censored data in this way is useful for analyzing survival data,
 but can be misleading when trying to understand the general idea of censored
 data. Such a study would produce a distribution of survival times which is
@@ -179,7 +198,28 @@ individuals from a study that had 1000 individuals. The nature of the parametric
 model and how I made this distribution is not important but is explained in
 the callout box for anyone curious.
 
-CALLOUT BOX FOR MODEL HERE
+::: {.callout-note icon=false collapse=true appearance="simple"}
+### Generating histogram data {.unnumbered}
+
+1. To create the data in the previous chart showing observation and event times
+for each participant, I just made up dates until I got a plot that looked how
+I wanted it to.
+1. The outcome we're showing the distribution of here is the time-to-event,
+that is, the (latent) event time minus the study start time. There are several
+typical parametric distributions for time-to-event variables, so I randomly
+chose a common one called the Weibull distribution and used the function
+`MASS::fitdistr()` to obtain the maximum likelihood estimates for the Weibull
+distribution matching my made up data. *We can then
+plot the density curve on the plot below using the parameters from that
+distribution.*
+1. I then generated 990 independent random deviates from the Weibull
+distribution with those estimated parameters, then concenate those to the
+values I made up. We now have a larger sample that best matches the numbers
+I made up randomly (under a specific parametric assumption).
+1. Apply censoring. That is, if a failure time is greater than the total time
+elapsed during the study, record it instead as the total time elapsed.
+
+:::
 
 ```{r rc-dist}
 total_time <- lubridate::interval(study_start, study_end) / lubridate::days(1)
@@ -193,7 +233,7 @@ sim_dist_rc <- tibble::tibble(
 	),
 	orig = c(rep(1, times = 10), rep(0, times = 990)),
 	cens = ifelse(y_star <= total_time, 0, 1),
-	y_cens = ifelse(cens, total_time, y_star)
+	y_cens = pmin(total_time, y_star)
 )
 
 dist_dat <- tibble::tibble(
@@ -208,7 +248,12 @@ ggplot(sim_dist_rc) +
 		color = "black", fill = "gray"
 	) +
 	geom_line(data = dist_dat, aes(x = x, y = y)) +
-	labs(x = "Survival time")
+	labs(x = "Time-to-event (survival time)")
+
+ggsave(
+	here::here("posts", pth_base, "rc-hist.png"),
+	width = 16, height = 9
+)
 ```
 
 Here, the histogram is showing the observed data from our censored sample.
@@ -222,38 +267,32 @@ So this is how we can understand the term "right" censoring.
 
 If there is right censoring, you might be wondering, is there also left
 censoring? The answer is yes, and it occurs in much the same way.
+In my first draft of this post, I got into a detailed discussion of survival
+analysis and censoring types here, but then realized it was not particularly
+helpful. So I decided to leave that bit out.
 
-The particular design where no participant has experienced the outcome when the
-study begins is typically just called a cohort study, but we could specifically
-call this an **incident cohort study**, because the design allows us to estimate
-the incidence of the outcome in the source population.
 
-In this type of incident cohort study, we cannot have **left censored data** by
-definition. An individual with a left-censored time-to-event would have to be
-at risk before the study begins.
+<!--
+If we can also recruit patients who have **already experienced the event**,
+such subjects would have **left censored** survival times in our analysis. We
+know that those subjects have a survival time that is less than or equal to
+the amount of elapsed time since the study start and their recruitment into
+the study. I think that was a really complicated way to explain that, so let's
+consider an example.
 
-In a prevalent cohort design, we
-recruit individuals who have already experience the outcome of interest. I
-was having trouble thinking of an example for when this study design might be
-appropriate and there is no competing risk (which I want to avoid talking about
-here because it makes things more complicated), but after some googling, I found
-that one example might be assessment of the harms caused by an environmental or
-occupational exposure.
+Suppose we are interested in conducting a large-scale study of risk factors for
+dementia in adults who are 65 or older. We will, for the purposes of this
+example, exclude cases of early-onset dementia from our analysis, and thus
+assume that dementia does not occur until after age 65. We continuously
+recruit new patients into our study with the only inclusion criteria being
+that they are at least 65 and visit a clinical site which is part of our
+study. Thus, we could recruit a patient who is age 70 and has already been
+diagnosed with dementia. Said participant's survival time is therefore
+left-censored: we know it is less than 5, but not the actual value. (Note
+here that survival times **must** be greater than zero. In a future section
+we will see examples without a natural lower bound.)
 
-<!-- EXAMPLE HERE
-For example, suppose a cohort of factory workers during
-a specific calendar time period are exposed to a dangerous chemical.
-In the future, we begin to suspect that exposure to the chemical is associated
-with developing a specific cancer later in life. There are likely sporadic
-cases of this cancer which have been traced back to the chemical exposure, 
-but we may want to enroll as many of the other exposed individuals as possible
-into a surveillance program. So, any individuals who have already been diagnosed
-with the specific cancer would be **left censored** in this study design: that
-is, they experienced the outcome before we began the study.
--->
-
-For now, the specific example is not too important but I'll try to think of
-one and add it here later.
+Such a cohort might have a diagram that looks something like this.
 
 ```{r lc-data, include=FALSE}
 set.seed(1254814)
@@ -346,21 +385,21 @@ ggplot(lc) +
 		aes(x = t1, y = id, shape = l_censored),
 		size = 3, stroke = 2
 	) +
-	annotate(
-		"label",
-		x = study_start,
-		y = 10.75,
-		label = "Study start"
-	) +
-	annotate(
-		"label",
-		x = study_end,
-		y = 10.75,
-		label = "Study end"
-	) +
+	# annotate(
+	# 	"label",
+	# 	x = study_start,
+	# 	y = 10.75,
+	# 	label = "Study start"
+	# ) +
+	# annotate(
+	# 	"label",
+	# 	x = study_end,
+	# 	y = 10.75,
+	# 	label = "Study end"
+	# ) +
 	scale_color_manual(values = c("black", "red"), name = NULL) +
 	scale_x_date(
-		name = "Event time",
+		name = "Calendar time",
 		expand = expansion(mult = 0.025),
 		#date_breaks = "2 weeks",
 		breaks = seq(study_start - 14 * 1, study_end + 14 * 1, 14),
@@ -371,11 +410,145 @@ ggplot(lc) +
 	scale_shape_manual(values = c(16, 4), name = NULL)
 ```
 
+Importantly, in this type of study, we **cannot define our study time-scale
+in calendar time -- it doesn't make sense any more, because then our left
+censored individuals would have negative time-to-event.** In the dementia
+study example, we would define the survival time as the amount of time between
+the participant's 65th birthday and the onset of dementia.
+
+Leaving aside that example (so I don't have to simulate all that stuff), we can visualize what a left-censored distribution
+might look like. Suppose we use the same parametric model as the previous
+histogram, but this time we have as much follow-up time as we want, but we
+don't observe any values 
+
+-->
+
+Instead, let's focus on the more general idea of censored data, and censored
+data types.
+
+## Types of censored data
+
+Let's start by writing down the **data generating process** for our
+familiar survival analysis model. This will hopefully be instructive for the
+types of censoring we'll list momentarily. Recall we assume that the survival
+time, let's say $t_i$, where $i$ stands for a given individual and counts up
+from $1$ to $n$, the sample size, has some parametric model. The formula
+for the model doesn't matter, so we'll call it $f(t)$ to be general. However,
+we don't actually observe the value $t_i$, we observe the censored value, say
+$c_i$ instead. The value $c_i$ is equal to $t_i$, if it is less than the
+amount of elapased time in our study, say $t_{\text{max}}$, otherwise it
+is equal to $t_{\text{max}}$. So in math language, we would write the DGP as
+$$
+\begin{aligned}
+t_i &\sim f(t) \\
+c_i &= \min\left(t_i, t_{\max} \right).
+\end{aligned}
+$$
+If we wanted to use that Weibull distribution from before as our parametric
+model, we would write
+$$
+\begin{aligned}
+t_i &\sim \mathrm{Weibull}\left(\theta\right) \\
+c_i &= \min\left(t_i, t_{\max} \right)
+\end{aligned}
+$$
+where $\theta$ is a vector of parameters. Remember that this is called
+**right-censored data**. We can define a few other types of censoring by
+analogy.
+
+* **Right censoring**: the censored values are less than or equal to some
+maximum value.
+* **Left censoring**: the censored values are greater than or equal to some
+minimum value.
+* **Interval censoring**: the censored values are known to be in some
+interval, but we do not know where in that interval.
+
+Left censoring can be understood mostly by analogy to right censoring. For
+left censored data, we would just say
+$$c_i = \max (t_i, t_{\min})$$
+instead of what we wrote before. Interval censoring is somewhat more tricky
+however, although it occurs in a good number of circumstances.
+
+To understand interval censoring, let's talk about an example. Suppose we
+recruit a cohort of people who do not have HIV. If our outcome is time until
+diagnosis of HIV, we have to regularly test those people for HIV. Suppose
+we ask them to come get a test once per month because we don't have enough
+funding to do it any more frequently. Once an individual tests positive, we
+could say their survival time was $X$ months, but this is not really true --
+we only know that their survival time is somewhere between this month and
+the previous month, so this outcome is **interval censored**.
+
+Of course there are a lot more complications too. Here's an incomplete list
+of types of censoring that you might see referenced in the wild with a
+short explanation.
+
+* **Singly censored**: the censoring point or threshold is a fixed, constant
+value, and is the same for all observations. All of the examples we've
+discussed so far are singly censored.
+* **Multiply censored**: Censoring times vary across observations. This is
+common in chemical or environmental studies where concentration analysis
+where the threshold can change across instruments or batches.
+* **Doubly censored**: values have both an upper and a lower threshold.
+Confusingly, this is not related to the idea of singly vs. multiply censored
+data. In this case, the observed censored value is given by
+$c_i = \max \left\{ \min \left\{t_i, t_{\max}\right\}, t_{\min} \right\}.$
+Many lab measurements are doubly censored due to equipment limits. Note that
+this is distinct from interval censoring though they seem similar; additionally,
+a given observation can only be left censored or right censored, but a variable
+can be doubly censored.
+* **Type I censoring**: also called "time-terminated" censoring, when the study
+ends at a specific point in time. Almost all epidemiologic studies fall into this
+category.
+* **Type II censoring**: also called "failure-" or "event-terminated" censoring,
+when the study ends after a pre-specified number of failures. Such a study
+design can help with statistical power, but is impractical to run.
+* **Progressive censoring**: There is a sequence of censoring times (generally
+called terminals) $T_1 < T_2 < \ldots < T_j \ldots < T_k$. At the value
+$T_j$, there are a total of $c_j$ censored observations of the variable $x$
+where we know only that $x > T_j$. Given a sample size $N$ and a number of
+fully observed measurements $n$, we have that $N = n + \sum_{j=1}^k c_j$. This
+censoring scheme is rare and complicated, and we will not discuss it further.
+
+Now, given that laundry list, we can get back to the interesting discussion.
+
 ## Censored non-survival data
 
-```{r}
+So far, we have only discussed right-censored survival data. But censoring
+is part of the observation process, and can occur in arbitrarily complex ways
+on data with arbitrary generating processes. See for example the 2013 Polish
+*matura* exam scores in @fig-matura. The data in this figure are available from
+a [2014 reddit thread](https://web.archive.org/web/20140608024521/https://www.reddit.com/r/dataisbeautiful/comments/27dx4q/distribution_of_results_of_the_matura_high_school/) and from the [original source, in Polish](https://web.archive.org/web/20141213135754/http://www.cke.edu.pl/images/files/matura/informacje_o_wynikach/2013/2013_Matura.pdf) (p. 18).
 
-```
+![Polish matura exam scores in 2013.](matura.png){#fig-matura}
+
+I guess you can tell what the passing grade for the exam was!
+We have a definite case of censoring here, although it is more complicated
+than our previous case. Here, it looks like there is some probability, based
+on the exam score and the grader, that a grade in the range $\{23, \ldots, 29\}$
+got bumped up to a 30 (the minimum passing score) or 31. This is a censoring
+process with both a systematic and a random element that would probably
+be quite hard to model without a lot of data. Although I need to remind myself
+in the future
+that doing a little demo of a DGP to get data that looks like that might
+be kind of fun!
+
+Extremely complicated censoring processes aside, **censored non-survival data
+are quite common**! We don't hear about them often in epidemiology, because
+unfortunately as a field we are very likely to simply ignore censoring in these
+values and pretend it doesn't exist. For example, I work with a lot of antibody
+data in my research. Antibody data, and most immunological data for that matter,
+tends to feature a **lower limit of detection** -- what we called
+$t_{\min}$ earlier. Instead of observing the true underlying value, we observe
+$\max\{t_i, t_{\min}\}$, giving us **left-censored data**! And of course
+antibody titers are not survival times, and do not follow the same distributions.
+
+In fact, the most common distributional assumptions for antibody data are
+log-normal or gamma. Now, these can be used for parametric survival models
+under certain assumptions. And we are lucky that most survival models, such
+as the ones implemented in `R`, include those distributions in what they can
+fit. And we are even luckier that if $x$ is a left-censored variable, $-x$ is
+a right-censored variable, so we can just do a survival model with the correct
+distribution where the outcome is $-x$.
 
 ## An aside on the likelihood
 
