@@ -679,6 +679,22 @@
       ],
       "Hash": "a36c4a3eade472039a3ec8cb824e6dc4"
     },
+    "forcats": {
+      "Package": "forcats",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "rlang",
+        "tibble"
+      ],
+      "Hash": "1a0a9a3d5083d0d573c4214576f1e690"
+    },
     "fs": {
       "Package": "fs",
       "Version": "1.5.2",
@@ -847,6 +863,18 @@
         "rprojroot"
       ],
       "Hash": "24b224366f9c2e7534d2344d10d59211"
+    },
+    "hgp": {
+      "Package": "hgp",
+      "Version": "0.0.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ahgroup",
+      "RemoteRepo": "hgp",
+      "RemoteRef": "main",
+      "RemoteSha": "665c17f0ac7dee6534147a30f0d97bc2aca24d60",
+      "Hash": "440afe67f3238e90e12cea5aea09770a"
     },
     "highr": {
       "Package": "highr",

@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Zane Billings">
-<meta name="dcterms.date" content="2023-07-25">
+<meta name="dcterms.date" content="2023-08-10">
 <meta name="description" content="Personal homepage for Zane Billings">
 
-<title>W. Zane Billings - Simulating Titer Data</title>
+<title>W. Zane Billings - Simulating Titer Data with Distance as a Covariate</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,8 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -183,10 +182,10 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Simulating Titer Data</h1>
+      <h1 class="title">Simulating Titer Data with Distance as a Covariate</h1>
                   <div>
         <div class="description">
-          <p>So I work with a lot of immunological titer data, particularly HAI titers for flu. And I’ve recently needed to work out how to do some simulations. So this post will cover the generative model I’ve developed and show some examples, while hopefully explaining each step in a way. Mostly so my adviser can tell me what he thinks I did wrong.</p>
+          <p>In the second part of the HAI data manifesto, we’ll discuss how to incorporate a single covariate into the data generating process.</p>
         </div>
       </div>
                 </div>
@@ -205,7 +204,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 25, 2023</p>
+        <p class="date">August 10, 2023</p>
       </div>
     </div>
     
@@ -220,12 +219,10 @@ cookieconsent.run({
     <h2 id="toc-title">contents</h2>
    
   <ul class="collapse">
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
-  <li><a href="#simulation-methods" id="toc-simulation-methods" class="nav-link" data-scroll-target="#simulation-methods">Simulation methods</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
-  <ul class="collapse">
+  <li><a href="#data-generating-process-without-covariates" id="toc-data-generating-process-without-covariates" class="nav-link active" data-scroll-target="#data-generating-process-without-covariates">Data-generating process without covariates</a></li>
+  <li><a href="#perfectly-known-covariates-and-linear-models" id="toc-perfectly-known-covariates-and-linear-models" class="nav-link" data-scroll-target="#perfectly-known-covariates-and-linear-models">Perfectly known covariates and linear models</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   
-  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -239,40 +236,41 @@ cookieconsent.run({
 
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="thumbnail.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">A sample histogram showing what exciting results are to come!</figcaption>
-</figure>
-</div>
-<p>So this will probably be a shorter post, but it will hopefully be the first in a series of posts about some immunological data problems I’m working on right now. In this post, I’ll give a brief background on immunological titer data, a short explanation of why I care, and then I’ll walk through the generative model I’ve adopted for simulating titer data. I plan to explain the steps of my model and show how each part works both in math and in <code>R</code> code. Of course I will have to make some simplifying assumptions, but I’ll try to explain what those are and what any alternatives might be.</p>
-<section id="background" class="level1">
-<h1>Background</h1>
-<p>I’m currently interested in antigenic distance, and particularly how it relates to the immunogenicity of the flu vaccine. However, there are some unique challenges in trying to quantify the immunogenicity of a given seasonal vaccine because of how often flu mutates. In the process of developing better methods for this task, we need to validate our method in situations where we know what the expected answer should be, and then we can compare the performance in simulated settings to the real-world results we get.</p>
-<p>So, I need to be able to simulate titer data. Specifically, I’m interested in HAI titer data, but there’s no reason this couldn’t be adapted to work on other measurements. HAI titers are a bit peculiar, because they start at 10 and then each successive measurement doubles, i.e., 10, 20, 40, 80, etc. A titer of 10 is the limit of detection (LoD) of the assay, and any value below 10 will be <em>censored</em>! That is, we know the value is below 10, but not quite where. We can further say that we know the value should be 0 or greater, but we will work on the log scale where this constraint is enforced naturally.</p>
-<p>So whatever generative model we adapt needs to take on only these values, and needs to have a censoring mechanism. In reality, we know that a given HAI measurement is really <em>interval-censored</em>: if your HAI measurement is 40, what we really know is that your true HAI titer is in the range <span class="math inline">\([40, 80]\)</span>. So, when we generate someone’s titer, it needs to come from an <strong>underlying data generating process that can generate any positive titer value,</strong> but our observations are flawed. (I think we can then also incorporate the LoD issue into this interval censoring framework but until I can figure that out explicitly they remain conceptually different in my brain.)</p>
-<p>Anyways, the last thing I’ll mention before talking about my proposed data generating process is the scale of interest. I’ve already mentioning working on the log scale, but that isn’t 100% accurate. So for the rest of this post (and potentially series), I’ll refer to the <strong>natural scale</strong> when I’m talking about measures of titers like I discussed before, i.e.&nbsp;10, 20, 40, and so on. When I refer to the <strong>log scale</strong>, I specifically mean that we’ll apply the transformation <span class="math display">\[g(x) = \log_2 \left(\frac{x}{5}\right)\]</span> to the natural scale variables. Since values at the LoD are typically recoded as 5, and the numbers on the natural scale double consecutively, the values on this transformed scale will start at 0 and increase by 1, e.g.&nbsp;0, 1, 2, 3, would correspond to the natural scale titers 5, 10, 20, 40.</p>
-<p>OK, with that background out of the way I’ll talk about simulating titer data.</p>
+<p>In my <a href="https://wzbillings.com/posts/2023-07-25_simulating-titer-data/">previous blog post</a> I talked about how to simulate a common type of immunological titer data, which is subject to both interval censoring and a lower limit of detection. In that blog post, we describing the data generating process for the observed values, and our simulation depended on the prespecification of the mean and variance of the distribution. In this blog post, we’ll discuss how we can extend the data generating process to include other variables. In particular, my research focuses on how <em>antigenic distance</em> can affect these titer values, but the way I’ll extend these simulations is very general.</p>
+<p>First let’s review the data-generating process – this is actually probably better written than my original post on this, because I’ve been thinking about these issues a lot and trying to improve my descriptions and notations.</p>
+<section id="data-generating-process-without-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="data-generating-process-without-covariates">Data-generating process without covariates</h2>
+<p>If we recall our DGP from the previous post, <span class="math display">\[
+\begin{aligned}
+z_i^* &amp;\sim \mathcal{N}\left(\mu, \sigma^2\right) \\
+z_i &amp;= \max\left\{0, \left\lfloor z_i^* \right\rfloor \right\} \\
+y_i &amp;= g(z_i) = 5 \cdot 2 ^{z_i}
+\end{aligned}
+\]</span> This data generation process is composed of the following parts:</p>
+<ul>
+<li>The <strong>log-scale latent titer</strong>, <span class="math inline">\(z_i^*\)</span>, which is a real-valued random variable;</li>
+<li>The <strong>log-scale censored titer</strong>, <span class="math inline">\(z_i\)</span>, which is a nonnegative integer- valued random variable. This reflects the limit of detection – our transformation function <span class="math inline">\(g(\cdot)\)</span> which takes us from the natural scale to the log scale ensures that the limit of detection is represented as <span class="math inline">\(0\)</span> on the log scale. So if <span class="math inline">\(z_i\)</span> is below the log-scale LoD, it gets rounded up to <span class="math inline">\(0\)</span>. Otherwise, we take the floor of the underlying titer to represent interval-censoring in our measurements.</li>
+<li>The <strong>natural-scale observed titer</strong>, <span class="math inline">\(y_i\)</span>, is a nonnegative integer on the natural scale and so takes values in the set <span class="math inline">\(\{5, 10, 20, 40, \ldots \}\)</span>. This value has been censored and transformed back to the natural scale.</li>
+</ul>
+<p>This data generating process assumes that the latent titers follow a log-normal distribution. Another plausible model would be a gamma distribution, which is somewhat more annoying to deal with, so we’ll deal with that in a future post.</p>
+<p>Now, I promised we would incorporate some covariates, so that’s what we’ll do next.</p>
 </section>
-<section id="simulation-methods" class="level1">
-<h1>Simulation methods</h1>
-<p>First, I’ll attempt to simulate raw titer data, without including antigenic distance in the simulation. Of course since I care about antigenic distance, eventually that will need to be part of the simulation and that will probably be the next blog post. So we’ll first develop a model to simulate observations of a single titer measurement, and then adapt that in the future.</p>
-<p>The outcome we want this simulation to produce is a semi-realistic distribution of titer values with support on the observed measurement space. We adopt the following model, where <span class="math inline">\(y_i\)</span> is the <span class="math inline">\(i\)</span>th individual’s measured titer.</p>
+<section id="perfectly-known-covariates-and-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="perfectly-known-covariates-and-linear-models">Perfectly known covariates and linear models</h2>
+<p>There are a lot of different ways to incorporate covariates into this type of model, but the most common way by far is to make the mean titer value dependent on the value of some covariate, i.e., we would add the line <span class="math display">\[\mu_i = f(x_i) \]</span> to the DGP above. Choosing the correct function here is a very complex problem which relies on “good-enough” approximations in the real world. One incredibly simple, but also very useful, function is the simple linear regression model. Linear models cover a wide range of patterns, but in the simple linear model, we assume that <span class="math inline">\(f(x) = \beta_0 + \beta_1 x\)</span>, which is a linear function of <span class="math inline">\(x\)</span>. For my specific example of incorporating antigenic distance, <span class="math inline">\(d\)</span> into the data generating process, we’ll use this simple linear regression model.</p>
+<p>At the risk of repeating a lot of text, our data generating process when the mean of the titer depends on the antigenic distance in a linear relationship is as follows.</p>
 <p><span class="math display">\[
-\begin{align*}
-\log_2 y_i &amp;\sim \mathcal{N}(\mu, \sigma^2) \\
-y_i^* &amp;= \begin{cases}
-5 &amp; \log_2 y_i &lt; 1 \\
-5 \cdot \lfloor 2 ^ {y_i} \rfloor &amp; \log_2 y_i \geq 1
-\end{cases}
-\end{align*}
-\]</span> We adopt the transformation <span class="math display">\[
-g^{-1}(y) = 5 \cdot 2^{y_i},
-\]</span> as previously stated, because the physical limit of detection (LoD) of the HAI assay is <span class="math display">\[
-10 = 5 \cdot 2 ^ 1
-\]</span> and values below this threshold are typically recorded as <span class="math inline">\(5\)</span>. So we know those values are below the LoD, but not what the values are. The distributional parameters <span class="math inline">\(\mu\)</span>, the mean, and <span class="math inline">\(\sigma^2\)</span>, the variance, are unknown to us practically and must be estimated from the data.</p>
-<p><strong>Note.</strong> I chose a normal distribution for the underlying continuous titer values because it is the easiest distribution to work with. In this framework, <span class="math inline">\(y_i\)</span> has a (scaled) log-normal distribution. And honestly, things just tend to work out find with the normal distribution. An alternative distribution could be used here, such as the gamma distribution, for a different shape of titer distributions.</p>
-<p>Writing <code>R</code> code to sample from this model is simple.</p>
+\begin{aligned}
+z_i^* &amp;\sim \mathcal{N}\left(\mu_i, \sigma^2\right) \\
+\mu_i &amp;= \beta_0 + \beta_1 \cdot d_i \\
+z_i &amp;= \max\left\{0, \left\lfloor z_i^* \right\rfloor \right\} \\
+y_i &amp;= g(z_i) = 5 \cdot 2 ^{z_i}
+\end{aligned}
+\]</span></p>
+<p>We would expect <span class="math inline">\(\beta_0 &gt; 0\)</span> and <span class="math inline">\(\beta_1 &lt; 0\)</span> here. The parameter <span class="math inline">\(\beta_0\)</span> would correspond to the homologous immune response – we’re testing the HAI titer against the exact same strain a person has been exposed to. The parameter <span class="math inline">\(\beta_1\)</span> then represents the expected decrease in the immune response as a test strain becomes further away from the exposure strain. If we normalize our distances to fall in <span class="math inline">\([0, 1]\)</span>, where <span class="math inline">\(0\)</span> is the homologous strain and <span class="math inline">\(1\)</span> is the maximally different strain (although still not completely different, depending on the sample), we would also note that <span class="math display">\[E[y \mid x = 1] - E[y \mid x = 0] = \mu(1) - \mu(0) = \beta_1,\]</span> so we can interpret <span class="math inline">\(\beta_1\)</span> as the difference in the mean response between the maximally distant strain and the homologous strain. If the maximally distant strain should represent a completely novel strain for which there should be no immune response, we could enforce the constraint <span class="math display">\[\mu_i(1) = 0 \implies \beta_0 + \beta_1 = 0,\]</span> which is linear and could be incorporated into a solution using a constrained maximum likelihood estimation framework.</p>
+<p>The data is easy to simulate, similar to the previous example. For a test example, we assume that we can choose which antigenic distances to measure, and at each antigenic distance, we obtain some number of independent titer values (we could relax the independence assumption here by using a more complex model, but we choose not to deal with that right now).</p>
+<p>For this example, we’ll set our distances for each individual to be <span class="math inline">\(d_i = \{0, 0.1, 0.2, \ldots, 1.0\}\)</span>, and we’ll assume we have <span class="math inline">\(1000\)</span> individuals. We collect their titers at each distance. For our simulation parameters, we’ll set <span class="math inline">\(\beta_0 = 4\)</span>, <span class="math inline">\(\beta_1 = -3\)</span>, and <span class="math inline">\(\sigma^2 = 2\)</span>.</p>
+<p>We start with the same simulation function we used previously.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>one_titer_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">N =</span> <span class="fl">1e4</span>, <span class="at">seed =</span> <span class="dv">370</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(seed)</span>
@@ -289,33 +287,111 @@ g^{-1}(y) = 5 \cdot 2^{y_i},
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">sim_titer =</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">^</span> rounded_titer</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">arrange</span>(raw_log_titer)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">one_titer_sim</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(out$raw_log_titer, out$trunc_log_titer)</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#points(out$raw_log_titer, out$rounded_titer, col = "blue")</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(out<span class="sc">$</span>sim_titer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we calculate the value of <span class="math inline">\(\mu_i\)</span> at each value of <span class="math inline">\(d_i\)</span>, and draw 1000 observations at each <span class="math inline">\(\mu\)</span> value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ex_dist_sim <span class="ot">&lt;-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">d =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="dv">4</span> <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> d</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim =</span> purrr<span class="sc">::</span><span class="fu">map</span>(mu, \(x) <span class="fu">one_titer_sim</span>(<span class="dv">1000</span>, <span class="at">mean =</span> x, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(sim)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ex_dist_sim <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim_titer =</span> <span class="fu">factor</span>(sim_titer),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">factor</span>(mu) <span class="sc">|&gt;</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>(),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">distance =</span> <span class="fu">factor</span>(d) <span class="sc">|&gt;</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> sim_titer) <span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">col =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>distance, <span class="at">labeller =</span> <span class="st">"label_both"</span>) <span class="sc">+</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Observed titer"</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">700</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts"</span>, <span class="st">"2023-08-10_Titer-w-Distance"</span>, <span class="st">"thumbnail.png"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">filename =</span> fn,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> plt,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">13</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">8</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="thumbnail.png" class="img-fluid"></p>
 </div>
 </div>
-<p>In the above plot, you can see the result of 1000 simulations, where <span class="math inline">\(\mu = 3\)</span> and <span class="math inline">\(\sigma = \sigma^2 = 1\)</span>. Notably, while the mean was specified as <span class="math inline">\(3\)</span> (an observed titer of <span class="math inline">\(40\)</span>), the mode of the distribution is at <span class="math inline">\(20\)</span> instead.</p>
-<p>We can also notice that the observed mean is biased, estimated at <span class="math inline">\(2.55\)</span> on the scale of <span class="math inline">\(y_i\)</span> in the above model (<span class="math inline">\(29.28\)</span> on the natural scale). A <a href="https://math.stackexchange.com/questions/3662314/statistics-of-a-gaussian-random-variable-with-the-floor-function-transformation">stackexchange post</a> suggested that as long as <span class="math inline">\(\sigma^2\)</span> is “not small” (suggested as <span class="math inline">\(\sigma^2 \geq 1\)</span> <a href="https://mathematica.stackexchange.com/questions/278040/finding-the-mean-and-variance-of-a-distribution/278164#278164">here</a>), <span class="math inline">\(\mu \approx \bar{x} + \frac{1}{2}\)</span> is a good approximation to the mean (on the log scale), which is close to what we observed.</p>
+<p>If we simulate a more extreme example, say where <span class="math inline">\(|\beta_1| &gt; \beta_0\)</span>, we can generate titers which decay rapidly towards the limit of detection. In the next simulation, we left all simulation parameters the same except we set <span class="math inline">\(\beta_1 = -6\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ex_dist_sim <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">d =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="dv">4</span> <span class="sc">-</span> <span class="dv">6</span> <span class="sc">*</span> d</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim =</span> purrr<span class="sc">::</span><span class="fu">map</span>(mu, \(x) <span class="fu">one_titer_sim</span>(<span class="dv">1000</span>, <span class="at">mean =</span> x, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(sim)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ex_dist_sim <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sim_titer =</span> <span class="fu">factor</span>(sim_titer),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">factor</span>(mu) <span class="sc">|&gt;</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>(),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">distance =</span> <span class="fu">factor</span>(d) <span class="sc">|&gt;</span> forcats<span class="sc">::</span><span class="fu">fct_inorder</span>()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> sim_titer) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">col =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>distance, <span class="at">labeller =</span> <span class="st">"label_both"</span>) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Observed titer"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">700</span>))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts"</span>, <span class="st">"2023-08-10_Titer-w-Distance"</span>, <span class="st">"p2.png"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">filename =</span> fn,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot =</span> plt,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">13</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">8</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="p2.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>So I think that was a pretty simple probability model, but I think the hard part will be dealing with the unique challenges that censoring entails. In the next step, I’ll incorporate antigenic distance into the generative model by replacing the mean with a linear function. After that, we can dive into methods of estimation, using Stan models. But overall I’m pretty happy with this generative model, though I always welcome thoughts and comments on how it can be improved.</p>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>In this relatively short post, I showed a quick example of including distance as a covariate in a linear model for titers. There are a couple more things we need to do for an HAI manifesto though, and we’re currently working on them right now! Not sure if they will be blog posts or part of something else though. Importantly, we might be interested in</p>
+<ul>
+<li>Modeling the post-vaccination titer as a function of distance and pre-vaccination titer;</li>
+<li>Covariates with their own parametric models, such as for measurement error;</li>
+<li>On the idea of measurement error, accounting for measurement error in the outcome variable along with censoring; and most importantly</li>
+<li>How do we account for all of those issues in a statistical model, and hopefully recover the parameters of the known DGP?</li>
+</ul>
+</section>
 
-</section>
 
 <div id="quarto-appendix" class="default"><section id="details" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Details</h2><div class="quarto-appendix-contents">
 
-<p>Last updated at 2023-09-05 18:19:09.619391.</p>
-<p><a href="https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-07-25_Simulating-Titer-Data/index.Rmd">source code</a></p>
+<p>Last updated at 2023-11-06 10:54:38.522226.</p>
+<p><a href="https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-08-10_Titer-w-Distance/index.Rmd">source code</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21 ucrt)
+<pre><code>R version 4.3.1 (2023-06-16 ucrt)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 10 x64 (build 19045)
 
@@ -335,29 +411,36 @@ tzcode source: internal
 attached base packages:
 [1] stats     graphics  grDevices datasets  utils     methods   base     
 
+other attached packages:
+[1] ggplot2_3.4.4
+
 loaded via a namespace (and not attached):
- [1] vctrs_0.5.0       cli_3.4.1         knitr_1.40        rlang_1.0.6      
- [5] xfun_0.34         stringi_1.7.8     renv_0.16.0       generics_0.1.3   
- [9] jsonlite_1.8.3    glue_1.6.2        htmltools_0.5.3   fansi_1.0.3      
-[13] rmarkdown_2.17    evaluate_0.17     tibble_3.1.8      fastmap_1.1.0    
-[17] yaml_2.3.6        lifecycle_1.0.3   stringr_1.4.1     compiler_4.3.0   
-[21] dplyr_1.0.10      htmlwidgets_1.5.4 pkgconfig_2.0.3   digest_0.6.30    
-[25] R6_2.5.1          tidyselect_1.2.0  utf8_1.2.2        pillar_1.8.1     
-[29] magrittr_2.0.3    tools_4.3.0      </code></pre>
+ [1] gtable_0.3.1      jsonlite_1.8.7    dplyr_1.0.10      compiler_4.3.1   
+ [5] renv_1.0.3        tidyselect_1.2.0  stringr_1.4.1     tidyr_1.2.1      
+ [9] scales_1.2.1      yaml_2.3.6        fastmap_1.1.0     here_1.0.1       
+[13] R6_2.5.1          labeling_0.4.2    generics_0.1.3    knitr_1.40       
+[17] forcats_1.0.0     htmlwidgets_1.5.4 tibble_3.1.8      rprojroot_2.0.3  
+[21] munsell_0.5.0     pillar_1.8.1      rlang_1.1.1       utf8_1.2.2       
+[25] stringi_1.7.8     xfun_0.34         cli_3.6.1         withr_2.5.0      
+[29] magrittr_2.0.3    digest_0.6.33     grid_4.3.1        lifecycle_1.0.3  
+[33] vctrs_0.5.0       hgp_0.0.1         evaluate_0.23     glue_1.6.2       
+[37] farver_2.1.1      fansi_1.0.3       colorspace_2.0-3  rmarkdown_2.17   
+[41] purrr_0.3.5       tools_4.3.1       pkgconfig_2.0.3   ellipsis_0.3.2   
+[45] htmltools_0.5.3  </code></pre>
 </div>
 </div>
 
 
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{billings2023,
   author = {Billings, Zane},
-  title = {Simulating {Titer} {Data}},
-  date = {2023-07-25},
+  title = {Simulating {Titer} {Data} with {Distance} as a {Covariate}},
+  date = {2023-08-10},
   url = {https://wzbillings.com/posts/2023-08-10_Titer-w-Distance},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-billings2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Billings, Zane. 2023. <span>“Simulating Titer Data.”</span> July 25,
-2023. <a href="https://wzbillings.com/posts/2023-08-10_Titer-w-Distance">https://wzbillings.com/posts/2023-08-10_Titer-w-Distance</a>.
+Billings, Zane. 2023. <span>“Simulating Titer Data with Distance as a
+Covariate.”</span> August 10, 2023. <a href="https://wzbillings.com/posts/2023-08-10_Titer-w-Distance">https://wzbillings.com/posts/2023-08-10_Titer-w-Distance</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

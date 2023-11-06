@@ -1,95 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wzbillings.com/uses.html</loc>
-    <lastmod>2023-10-29T02:19:50.734Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/REU-Workshop2023/index.html</loc>
-    <lastmod>2023-10-29T02:19:49.850Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/Open-Science-CEID/index.html</loc>
-    <lastmod>2023-10-29T02:19:49.061Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/IDIG-2022-10-25/index.html</loc>
-    <lastmod>2023-10-29T02:19:48.261Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/2023-CEIRR/index.html</loc>
-    <lastmod>2023-10-29T02:19:47.487Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/2021-EEID/index.html</loc>
-    <lastmod>2023-10-29T02:19:46.663Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/presentations/2021-CIVIC/index.html</loc>
-    <lastmod>2023-10-29T02:19:45.843Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/posts/2023-10-28_TI-vs-Post-Regression/index.html</loc>
-    <lastmod>2023-10-29T02:19:44.223Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/posts/2022-06-24_Bayes-Diagnostics/index.html</loc>
-    <lastmod>2023-10-29T02:19:36.308Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wzbillings.com/misc.html</loc>
-    <lastmod>2023-10-29T02:19:34.722Z</lastmod>
-  </url>
-  <url>
     <loc>https://wzbillings.com/blog.html</loc>
-    <lastmod>2023-10-29T02:19:33.923Z</lastmod>
+    <lastmod>2023-11-06T15:57:01.513Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/index.html</loc>
-    <lastmod>2023-10-29T02:19:34.315Z</lastmod>
+    <lastmod>2023-11-06T15:55:56.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/misc.html</loc>
+    <lastmod>2023-11-06T15:55:56.587Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/now.html</loc>
-    <lastmod>2023-10-29T02:19:35.154Z</lastmod>
+    <lastmod>2023-11-06T15:55:57.137Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/posts/2022-06-24_Bayes-Diagnostics/index.html</loc>
+    <lastmod>2023-11-06T15:55:58.417Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/posts/2022-12-17_histogram-bins/index.html</loc>
-    <lastmod>2023-10-29T02:19:39.377Z</lastmod>
+    <lastmod>2023-11-06T15:56:02.097Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/posts/2023-07-25_Simulating-Titer-Data/index.html</loc>
-    <lastmod>2023-10-29T02:19:41.181Z</lastmod>
+    <lastmod>2023-11-06T15:56:04.325Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/posts/2023-08-10_Titer-w-Distance/index.html</loc>
+    <lastmod>2023-11-06T15:56:05.558Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/posts/2023-10-09_BootstrapIntro/index.html</loc>
-    <lastmod>2023-10-29T02:19:43.341Z</lastmod>
+    <lastmod>2023-11-06T15:56:07.104Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/posts/2023-10-28_TI-vs-Post-Regression/index.html</loc>
+    <lastmod>2023-11-06T15:56:08.311Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations.html</loc>
-    <lastmod>2023-10-29T02:19:45.451Z</lastmod>
+    <lastmod>2023-11-06T15:56:12.634Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/2021-CIVIC/index.html</loc>
+    <lastmod>2023-11-06T15:56:13.257Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations/2021-CIVR-HRP/index.html</loc>
-    <lastmod>2023-10-29T02:19:46.255Z</lastmod>
+    <lastmod>2023-11-06T15:56:13.835Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/2021-EEID/index.html</loc>
+    <lastmod>2023-11-06T15:56:14.402Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations/2022-CIVIC/index.html</loc>
-    <lastmod>2023-10-29T02:19:47.072Z</lastmod>
+    <lastmod>2023-11-06T15:56:14.971Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/2023-CEIRR/index.html</loc>
+    <lastmod>2023-11-06T15:56:15.562Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations/Dissertation-Proposal/index.html</loc>
-    <lastmod>2023-10-29T02:19:47.843Z</lastmod>
+    <lastmod>2023-11-06T15:56:16.082Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/IDIG-2022-10-25/index.html</loc>
+    <lastmod>2023-11-06T15:56:16.623Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations/IDIG-Challenge-Studies/index.html</loc>
-    <lastmod>2023-10-29T02:19:48.642Z</lastmod>
+    <lastmod>2023-11-06T15:56:17.149Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/Open-Science-CEID/index.html</loc>
+    <lastmod>2023-11-06T15:56:17.746Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/presentations/Open-Science-IDIG/index.html</loc>
-    <lastmod>2023-10-29T02:19:49.468Z</lastmod>
+    <lastmod>2023-11-06T15:56:18.261Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/presentations/REU-Workshop2023/index.html</loc>
+    <lastmod>2023-11-06T15:56:18.834Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/projects.html</loc>
-    <lastmod>2023-10-29T02:19:50.224Z</lastmod>
+    <lastmod>2023-11-06T15:56:19.408Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/uses.html</loc>
+    <lastmod>2023-11-06T15:56:20.117Z</lastmod>
   </url>
 </urlset>

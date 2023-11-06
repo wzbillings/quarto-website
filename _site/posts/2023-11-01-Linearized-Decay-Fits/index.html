@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zane Billings">
+<meta name="dcterms.date" content="2023-07-25">
+<meta name="description" content="Personal homepage for Zane Billings">
+
+<title>W. Zane Billings - Linear fits for exponential and power law decay models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  });
+});
+</script> 
+  
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">W. Zane Billings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
+ <span class="menu-text">blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../presentations.html" rel="" target="">
+ <span class="menu-text">presentations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../uses.html" rel="" target="">
+ <span class="menu-text">uses</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../now.html" rel="" target="">
+ <span class="menu-text">now</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../misc.html" rel="" target="">
+ <span class="menu-text">misc</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/wzbillings/quarto-website/" rel="me" target="">
+ <span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" github=""></iconify-icon></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Linear fits for exponential and power law decay models</h1>
+                  <div>
+        <div class="description">
+          <p>In a strange confluence of events that I did not expect, a particular fact that I learned in my scientific computing class in undergrad is actually very relevant to a research project in my group. One of my group members is working on a project involving some decay models, and I actually learned about how to fit those as linear models in that class. So let’s talk about that, and see whether it adapts to the hierarchical case.</p>
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Zane Billings </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 25, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#the-models-and-their-linear-forms" id="toc-the-models-and-their-linear-forms" class="nav-link active" data-scroll-target="#the-models-and-their-linear-forms">The models and their linear forms</a></li>
+  <li><a href="#simulating-and-fitting-non-hierarchical-data" id="toc-simulating-and-fitting-non-hierarchical-data" class="nav-link" data-scroll-target="#simulating-and-fitting-non-hierarchical-data">Simulating and fitting non-hierarchical data</a></li>
+  <li><a href="#simulating-and-fitting-hierarchical-data" id="toc-simulating-and-fitting-hierarchical-data" class="nav-link" data-scroll-target="#simulating-and-fitting-hierarchical-data">Simulating and fitting hierarchical data</a></li>
+  <li><a href="#can-we-include-covariates" id="toc-can-we-include-covariates" class="nav-link" data-scroll-target="#can-we-include-covariates">Can we include covariates?</a></li>
+  <li><a href="#the-wrap-up" id="toc-the-wrap-up" class="nav-link" data-scroll-target="#the-wrap-up">The Wrap-Up</a></li>
+  
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>intro stuff</p>
+<section id="the-models-and-their-linear-forms" class="level2">
+<h2 class="anchored" data-anchor-id="the-models-and-their-linear-forms">The models and their linear forms</h2>
+</section>
+<section id="simulating-and-fitting-non-hierarchical-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-and-fitting-non-hierarchical-data">Simulating and fitting non-hierarchical data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gen_data_fe <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">tmin =</span> <span class="dv">1</span>, <span class="at">tmax =</span> <span class="dv">10</span>, <span class="at">tstep =</span> <span class="dv">1</span>, <span class="at">N =</span> <span class="dv">25</span>, <span class="at">S =</span> <span class="dv">101</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">error_var =</span> <span class="fl">0.1</span>, <span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">slope =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">latent =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(S)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Times for each individual</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(tmin, tmax, tstep)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate a grid of individuals and times</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ind <span class="ot">&lt;-</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        t_vec <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">replicate</span>(<span class="at">n =</span> N) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">colnames&lt;-</span><span class="st">`</span>(stringr<span class="sc">::</span><span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">expand_grid</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>(),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_to =</span> <span class="st">"id"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">values_to =</span> <span class="st">"t"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sample the data for each individual, using fixed effects for the</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># slope and intercept</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        ind <span class="sc">|&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co"> replace this with a function that can be dispatched separately</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># for RE/FE.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Set the model parameters for each individual as data variables</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Fixed intercept</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">log_a =</span> intercept,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Fixed slope</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">k =</span> slope</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate outcomes at observation level</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Random noise -- same for both models to better see differences</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="at">noise =</span> <span class="fu">rnorm</span>(dplyr<span class="sc">::</span><span class="fu">n</span>(), <span class="dv">0</span>, error_var),</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Exponential decay model</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">exp_mu =</span> log_a <span class="sc">+</span> k <span class="sc">*</span> t,</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">exp_y =</span> <span class="fu">exp</span>(exp_mu <span class="sc">+</span> noise),</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Power law decay model</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">pow_mu =</span> log_a <span class="sc">+</span> k <span class="sc">*</span> <span class="fu">log</span>(t),</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">pow_y =</span> <span class="fu">exp</span>(pow_mu <span class="sc">+</span> noise)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The price for code that is so readable in the mutate part is that</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="co"># now we have to pivot, separate, and pivot again</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># First pivot is to get all of the outcome data in one column</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="at">cols =</span> <span class="fu">c</span>(exp_mu, exp_y, pow_mu, pow_y),</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_to =</span> <span class="st">"model_var"</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Now separate the name column into a column for the model (exp, pow),</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="co"># and a column for the variable (mu, y).</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">separate</span>(model_var, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"model"</span>, <span class="st">"variable"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pivot wider now so that y and mu are columns</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_from =</span> variable,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>            <span class="at">values_from =</span> value</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Clean up model names</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>            <span class="at">model =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>                model,</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"exp"</span>, <span class="st">"pow"</span>),</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Exponential decay"</span>, <span class="st">"Power law decay"</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If latent is FALSE, drop all of the variables that we</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># wouldn't observe irl</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">isFALSE</span>(latent)) {</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        out <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(out, id, t, model, y)</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>fe_data <span class="ot">&lt;-</span> <span class="fu">gen_data_fe</span>()</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>p_fe <span class="ot">&lt;-</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(fe_data) <span class="sc">+</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> y <span class="sc">/</span> <span class="fu">max</span>(y), <span class="at">color =</span> id) <span class="sc">+</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>()) <span class="sc">+</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>()) <span class="sc">+</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>model) <span class="sc">+</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Simulation with fixed slope and intercept</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Normalized y"</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_grey</span>()</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>p_fe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exp_mod_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(y) <span class="sc">~</span> t,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(fe_data, model <span class="sc">==</span> <span class="st">"Exponential decay"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(exp_mod_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(y) ~ t, data = subset(fe_data, model == "Exponential decay"))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.28465 -0.06225 -0.00141  0.06400  0.21528 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.987366   0.012899   76.55   &lt;2e-16 ***
+t           -0.497859   0.002079 -239.48   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.09441 on 248 degrees of freedom
+Multiple R-squared:  0.9957,    Adjusted R-squared:  0.9957 
+F-statistic: 5.735e+04 on 1 and 248 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pow_mod_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(y) <span class="sc">~</span> <span class="fu">log</span>(t),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(fe_data, model <span class="sc">==</span> <span class="st">"Power law decay"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pow_mod_fe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(y) ~ log(t), data = subset(fe_data, model == 
+    "Power law decay"))
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.285059 -0.062353 -0.002936  0.065286  0.213384 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.986596   0.014282   69.08   &lt;2e-16 ***
+log(t)      -0.491694   0.008589  -57.25   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.09444 on 248 degrees of freedom
+Multiple R-squared:  0.9297,    Adjusted R-squared:  0.9294 
+F-statistic:  3277 on 1 and 248 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="simulating-and-fitting-hierarchical-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-and-fitting-hierarchical-data">Simulating and fitting hierarchical data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gen_data_re <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">tmin =</span> <span class="dv">1</span>, <span class="at">tmax =</span> <span class="dv">10</span>, <span class="at">tstep =</span> <span class="dv">1</span>, <span class="at">N =</span> <span class="dv">25</span>, <span class="at">S =</span> <span class="dv">101</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">error_var =</span> <span class="fl">0.1</span>, <span class="at">intercept =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">slope =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.25</span>), <span class="at">latent =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(S)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Times for each individual</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(tmin, tmax, tstep)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate a grid of individuals and times</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ind <span class="ot">&lt;-</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        t_vec <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">replicate</span>(<span class="at">n =</span> N) <span class="sc">|&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">colnames&lt;-</span><span class="st">`</span>(stringr<span class="sc">::</span><span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span>N, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">expand_grid</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">cols =</span> dplyr<span class="sc">::</span><span class="fu">everything</span>(),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_to =</span> <span class="st">"id"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">values_to =</span> <span class="st">"t"</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        ind <span class="sc">|&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sample random parameters at subject level</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Random intercept</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">log_a =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, intercept[<span class="dv">1</span>], intercept[<span class="dv">2</span>]),</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Random slope</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">k =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, slope[<span class="dv">1</span>], slope[<span class="dv">2</span>])</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate outcomes at observation level</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Random noise -- same for both models to better see differences</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">noise =</span> <span class="fu">rnorm</span>(dplyr<span class="sc">::</span><span class="fu">n</span>(), <span class="dv">0</span>, error_var),</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Exponential decay model</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            <span class="at">exp_mu =</span> log_a <span class="sc">+</span> k <span class="sc">*</span> t,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">exp_y =</span> <span class="fu">exp</span>(exp_mu <span class="sc">+</span> noise),</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Power law decay model</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">pow_mu =</span> log_a <span class="sc">+</span> k <span class="sc">*</span> <span class="fu">log</span>(t),</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">pow_y =</span> <span class="fu">exp</span>(pow_mu <span class="sc">+</span> noise)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The price for code that is so readable in the mutate part is that</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># now we have to pivot, separate, and pivot again</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># First pivot is to get all of the outcome data in one column</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>            <span class="at">cols =</span> <span class="fu">c</span>(exp_mu, exp_y, pow_mu, pow_y),</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_to =</span> <span class="st">"model_var"</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Now separate the name column into a column for the model (exp, pow),</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># and a column for the variable (mu, y).</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">separate</span>(model_var, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"model"</span>, <span class="st">"variable"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pivot wider now so that y and mu are columns</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>            <span class="at">names_from =</span> variable,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>            <span class="at">values_from =</span> value</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Clean up model names</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>            <span class="at">model =</span> <span class="fu">factor</span>(</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>                model,</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"exp"</span>, <span class="st">"pow"</span>),</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Exponential decay"</span>, <span class="st">"Power law decay"</span>)</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If latent is FALSE, drop all of the variables that we</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># wouldn't observe irl</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">isFALSE</span>(latent)) {</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>        out <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(out, id, t, model, y)</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>re_data <span class="ot">&lt;-</span> <span class="fu">gen_data_re</span>(<span class="at">N =</span> <span class="dv">100</span>)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>p_re <span class="ot">&lt;-</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(re_data) <span class="sc">+</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> y <span class="sc">/</span> <span class="fu">max</span>(y), <span class="at">color =</span> id) <span class="sc">+</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>()) <span class="sc">+</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_pretty</span>()) <span class="sc">+</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>model) <span class="sc">+</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Simulation with random slope and intercept</span><span class="sc">\n</span><span class="st">"</span>) <span class="sc">+</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Simulation with random slope and intercept</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Normalized y"</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_grey</span>()</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>p_re</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(p_fe, p_re, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_model <span class="ot">&lt;-</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    brms<span class="sc">::</span><span class="fu">brm</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">formula =</span> <span class="fu">log</span>(y) <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> t <span class="sc">|</span> id),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> re_data</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Compiling Stan program...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Start sampling</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 0.000347 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.47 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 13.135 seconds (Warm-up)
+Chain 1:                11.536 seconds (Sampling)
+Chain 1:                24.671 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 0.00021 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 2.1 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 12.778 seconds (Warm-up)
+Chain 2:                11.155 seconds (Sampling)
+Chain 2:                23.933 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 0.000218 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 2.18 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 12.657 seconds (Warm-up)
+Chain 3:                9.373 seconds (Sampling)
+Chain 3:                22.03 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 0.00021 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 2.1 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 12.087 seconds (Warm-up)
+Chain 4:                10.081 seconds (Sampling)
+Chain 4:                22.168 seconds (Total)
+Chain 4: </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_model <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    brms<span class="sc">::</span><span class="fu">posterior_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Estimate   Est.Error          Q2.5         Q97.5
+sd_id__Intercept      7.878988e-01  0.09676235  6.027681e-01  9.798097e-01
+sd_id__t              3.352292e-01  0.02602874  2.871164e-01  3.892547e-01
+cor_id__Intercept__t -7.957416e-01  0.05670066 -8.911847e-01 -6.649574e-01
+sigma                 1.373704e+00  0.02242877  1.330872e+00  1.418150e+00
+r_id[01,Intercept]    4.823682e-01  0.45584258 -4.085870e-01  1.400195e+00
+r_id[02,Intercept]    7.306468e-01  0.47040217 -1.548266e-01  1.677212e+00
+r_id[03,Intercept]    2.110841e-01  0.46588448 -6.863857e-01  1.142080e+00
+r_id[04,Intercept]    4.682258e-01  0.46990724 -4.299083e-01  1.377515e+00
+r_id[05,Intercept]    5.679946e-01  0.47666617 -3.447224e-01  1.558221e+00
+r_id[06,Intercept]    8.198621e-01  0.47205940 -8.103918e-02  1.783221e+00
+r_id[07,Intercept]    6.668077e-01  0.46687409 -2.580269e-01  1.615714e+00
+r_id[08,Intercept]    8.683797e-01  0.46891327 -3.696360e-02  1.798792e+00
+r_id[09,Intercept]    8.755267e-01  0.47388561 -3.956403e-02  1.827733e+00
+r_id[10,Intercept]    3.358184e-01  0.44468035 -5.151299e-01  1.226728e+00
+r_id[100,Intercept]   7.655211e-01  0.44864811 -1.163243e-01  1.688350e+00
+r_id[11,Intercept]    4.991809e-01  0.45732354 -3.935506e-01  1.391624e+00
+r_id[12,Intercept]    8.011804e-01  0.46641954 -1.120304e-01  1.751250e+00
+r_id[13,Intercept]    1.176473e-01  0.45005551 -7.759713e-01  1.009900e+00
+r_id[14,Intercept]    4.721945e-01  0.45806356 -4.217753e-01  1.398290e+00
+r_id[15,Intercept]    7.511117e-01  0.47363029 -1.867124e-01  1.695016e+00
+r_id[16,Intercept]    5.482153e-01  0.45711904 -3.392816e-01  1.431003e+00
+r_id[17,Intercept]    7.427874e-01  0.47445989 -1.968146e-01  1.682045e+00
+r_id[18,Intercept]    5.621255e-01  0.45660208 -3.199667e-01  1.451070e+00
+r_id[19,Intercept]    1.089601e-01  0.44839641 -7.483122e-01  9.604228e-01
+r_id[20,Intercept]    7.194943e-01  0.46635086 -1.828655e-01  1.628773e+00
+r_id[21,Intercept]    8.508513e-01  0.46445523 -5.912872e-02  1.776990e+00
+r_id[22,Intercept]    8.431731e-01  0.45485077 -5.553276e-02  1.713454e+00
+r_id[23,Intercept]    4.380436e-01  0.46952803 -5.009122e-01  1.349656e+00
+r_id[24,Intercept]    7.005265e-01  0.46518516 -1.968254e-01  1.633235e+00
+r_id[25,Intercept]    4.780526e-01  0.44089180 -4.029390e-01  1.323371e+00
+r_id[26,Intercept]    7.760639e-01  0.44503632 -8.664010e-02  1.658594e+00
+r_id[27,Intercept]    6.586053e-01  0.45019610 -2.219457e-01  1.565518e+00
+r_id[28,Intercept]    4.819559e-01  0.46867353 -4.067000e-01  1.403421e+00
+r_id[29,Intercept]    8.616640e-01  0.46809927 -5.231795e-02  1.786722e+00
+r_id[30,Intercept]    8.393070e-01  0.47639428 -5.824267e-02  1.817834e+00
+r_id[31,Intercept]    6.347174e-01  0.45931795 -2.499231e-01  1.542019e+00
+r_id[32,Intercept]    7.900792e-01  0.46495119 -1.000785e-01  1.752716e+00
+r_id[33,Intercept]    4.968667e-01  0.47350801 -4.392583e-01  1.404155e+00
+r_id[34,Intercept]    6.799424e-01  0.46995477 -2.268162e-01  1.629956e+00
+r_id[35,Intercept]    7.366811e-01  0.47688840 -1.893400e-01  1.683188e+00
+r_id[36,Intercept]    3.845471e-01  0.47541996 -5.237375e-01  1.354867e+00
+r_id[37,Intercept]    5.277706e-01  0.47404224 -3.858358e-01  1.484485e+00
+r_id[38,Intercept]    1.089729e-01  0.44560295 -7.528352e-01  9.715802e-01
+r_id[39,Intercept]    7.668702e-01  0.46507834 -1.531259e-01  1.693097e+00
+r_id[40,Intercept]    7.934961e-01  0.45180859 -8.551846e-02  1.684770e+00
+r_id[41,Intercept]    7.983615e-01  0.45408005 -4.494048e-02  1.717175e+00
+r_id[42,Intercept]    3.814322e-01  0.48488303 -5.813221e-01  1.340414e+00
+r_id[43,Intercept]    4.103482e-01  0.46411684 -5.051002e-01  1.322025e+00
+r_id[44,Intercept]    3.364068e-01  0.46301999 -5.313783e-01  1.257598e+00
+r_id[45,Intercept]    7.410836e-01  0.45556113 -1.551124e-01  1.652125e+00
+r_id[46,Intercept]    6.455244e-01  0.45746818 -2.185399e-01  1.560685e+00
+r_id[47,Intercept]    5.657322e-01  0.45218251 -3.242958e-01  1.444819e+00
+r_id[48,Intercept]    5.721582e-01  0.46009510 -3.109385e-01  1.488036e+00
+r_id[49,Intercept]    4.117687e-01  0.44241849 -4.596563e-01  1.280687e+00
+r_id[50,Intercept]    5.104964e-01  0.45306952 -3.981466e-01  1.401983e+00
+r_id[51,Intercept]    5.129275e-01  0.45252995 -3.751228e-01  1.430858e+00
+r_id[52,Intercept]    7.830840e-01  0.45067338 -7.423210e-02  1.677050e+00
+r_id[53,Intercept]    2.087005e-01  0.47246541 -7.003291e-01  1.141298e+00
+r_id[54,Intercept]    8.027521e-01  0.44283623 -4.352549e-02  1.688749e+00
+r_id[55,Intercept]    7.906511e-01  0.47605324 -1.722508e-01  1.685963e+00
+r_id[56,Intercept]    5.061418e-01  0.44799545 -3.609726e-01  1.401895e+00
+r_id[57,Intercept]    5.449413e-01  0.47402261 -3.357008e-01  1.516546e+00
+r_id[58,Intercept]    8.484069e-01  0.46255179 -4.076591e-02  1.755069e+00
+r_id[59,Intercept]    5.088581e-01  0.45458412 -3.638020e-01  1.409367e+00
+r_id[60,Intercept]    5.481358e-01  0.44737492 -3.424354e-01  1.412200e+00
+r_id[61,Intercept]    2.490203e-01  0.45563528 -6.474058e-01  1.121639e+00
+r_id[62,Intercept]    6.890141e-01  0.46267755 -1.954301e-01  1.610253e+00
+r_id[63,Intercept]    8.956869e-01  0.45873747 -2.041980e-02  1.798422e+00
+r_id[64,Intercept]    7.545629e-01  0.45536822 -1.329103e-01  1.672383e+00
+r_id[65,Intercept]    5.634039e-01  0.44477765 -2.973623e-01  1.463396e+00
+r_id[66,Intercept]    6.268942e-01  0.45178008 -2.646929e-01  1.503291e+00
+r_id[67,Intercept]    8.131823e-01  0.45599769 -6.702206e-02  1.732986e+00
+r_id[68,Intercept]    6.068282e-01  0.45330658 -2.962517e-01  1.514424e+00
+r_id[69,Intercept]    8.320259e-01  0.44281744 -3.811683e-02  1.718694e+00
+r_id[70,Intercept]    6.847420e-01  0.45975690 -1.714816e-01  1.641790e+00
+r_id[71,Intercept]    9.746495e-01  0.46830708  7.812239e-02  1.915868e+00
+r_id[72,Intercept]    6.921716e-01  0.47150098 -2.093677e-01  1.663995e+00
+r_id[73,Intercept]    4.413721e-01  0.45552681 -4.402676e-01  1.334873e+00
+r_id[74,Intercept]    3.057976e-01  0.45920869 -6.144443e-01  1.190400e+00
+r_id[75,Intercept]    2.676931e-01  0.45709622 -6.294956e-01  1.166916e+00
+r_id[76,Intercept]    6.808617e-01  0.45997828 -2.064652e-01  1.636091e+00
+r_id[77,Intercept]    4.213405e-01  0.46186001 -4.880488e-01  1.338982e+00
+r_id[78,Intercept]    3.986494e-01  0.44125969 -4.398854e-01  1.290472e+00
+r_id[79,Intercept]    7.114585e-01  0.45137715 -1.804681e-01  1.577105e+00
+r_id[80,Intercept]    7.509779e-01  0.48878784 -1.591516e-01  1.735996e+00
+r_id[81,Intercept]    9.167920e-01  0.45069149  6.921411e-02  1.803211e+00
+r_id[82,Intercept]    4.481816e-01  0.44744471 -4.326310e-01  1.342009e+00
+r_id[83,Intercept]    4.580422e-01  0.45675425 -4.296327e-01  1.356791e+00
+r_id[84,Intercept]    2.893816e-01  0.45205843 -6.014770e-01  1.173419e+00
+r_id[85,Intercept]    8.828780e-01  0.46598519  7.516025e-04  1.804643e+00
+r_id[86,Intercept]    5.683980e-01  0.45734425 -3.372558e-01  1.466812e+00
+r_id[87,Intercept]    8.296349e-01  0.46983757 -7.976712e-02  1.790896e+00
+r_id[88,Intercept]    7.592363e-01  0.45931921 -1.258455e-01  1.672758e+00
+r_id[89,Intercept]    6.006855e-01  0.49165594 -3.393566e-01  1.611287e+00
+r_id[90,Intercept]    8.175685e-01  0.46374646 -5.992283e-02  1.779936e+00
+r_id[91,Intercept]    5.519531e-01  0.46158392 -3.165665e-01  1.482473e+00
+r_id[92,Intercept]    3.836409e-01  0.45909108 -4.925077e-01  1.311625e+00
+r_id[93,Intercept]    4.146003e-01  0.44822766 -4.602467e-01  1.289665e+00
+r_id[94,Intercept]    7.550234e-01  0.45228326 -1.544320e-01  1.626612e+00
+r_id[95,Intercept]    4.726672e-01  0.44677987 -3.833808e-01  1.337647e+00
+r_id[96,Intercept]    6.136176e-01  0.45601495 -2.857291e-01  1.524138e+00
+r_id[97,Intercept]    4.881221e-01  0.47283839 -3.770916e-01  1.449013e+00
+r_id[98,Intercept]    7.477579e-01  0.45764839 -1.372873e-01  1.653930e+00
+r_id[99,Intercept]    4.871366e-01  0.44767669 -3.753577e-01  1.370304e+00
+r_id[01,t]           -2.245107e-01  0.08537825 -3.883565e-01 -5.343331e-02
+r_id[02,t]           -3.346754e-01  0.08652497 -5.084225e-01 -1.687901e-01
+r_id[03,t]            7.247120e-02  0.08659724 -9.861057e-02  2.393592e-01
+r_id[04,t]           -4.460357e-02  0.08649943 -2.156651e-01  1.279010e-01
+r_id[05,t]           -1.195534e-01  0.08612476 -2.883417e-01  5.105722e-02
+r_id[06,t]           -2.499879e-01  0.08527108 -4.191533e-01 -8.371355e-02
+r_id[07,t]           -2.055109e-01  0.08661815 -3.756218e-01 -3.454858e-02
+r_id[08,t]           -6.234696e-01  0.08472915 -7.922701e-01 -4.540167e-01
+r_id[09,t]           -3.044947e-01  0.08908631 -4.813503e-01 -1.317920e-01
+r_id[10,t]            2.132636e-02  0.08313969 -1.421435e-01  1.832414e-01
+r_id[100,t]          -3.340340e-01  0.08317069 -5.013298e-01 -1.709327e-01
+r_id[11,t]           -2.996219e-01  0.08466497 -4.643662e-01 -1.336927e-01
+r_id[12,t]           -2.125879e-01  0.08728742 -3.819111e-01 -4.241629e-02
+r_id[13,t]           -3.883754e-02  0.08689390 -2.063379e-01  1.326944e-01
+r_id[14,t]           -1.315904e-01  0.08549239 -3.036364e-01  3.865581e-02
+r_id[15,t]           -4.075746e-01  0.08617724 -5.757129e-01 -2.384080e-01
+r_id[16,t]           -3.996284e-01  0.08626711 -5.663360e-01 -2.269886e-01
+r_id[17,t]           -4.034425e-01  0.08781714 -5.752404e-01 -2.328451e-01
+r_id[18,t]           -3.879350e-01  0.08571507 -5.578152e-01 -2.190060e-01
+r_id[19,t]           -1.706477e-01  0.08200598 -3.302619e-01 -1.160917e-02
+r_id[20,t]           -3.916427e-01  0.08554536 -5.612945e-01 -2.261285e-01
+r_id[21,t]           -3.642138e-01  0.08824517 -5.368174e-01 -1.920719e-01
+r_id[22,t]           -6.189164e-01  0.08389230 -7.840766e-01 -4.564905e-01
+r_id[23,t]           -4.060656e-01  0.08594101 -5.706974e-01 -2.383884e-01
+r_id[24,t]           -1.560276e-01  0.08671063 -3.278985e-01  1.303650e-02
+r_id[25,t]           -4.435553e-01  0.08388636 -6.076116e-01 -2.810922e-01
+r_id[26,t]           -3.648796e-01  0.08430051 -5.261428e-01 -1.985911e-01
+r_id[27,t]           -3.183425e-01  0.08506387 -4.939418e-01 -1.507568e-01
+r_id[28,t]            3.518616e-02  0.08610221 -1.320087e-01  2.029640e-01
+r_id[29,t]           -4.533839e-01  0.08764646 -6.252821e-01 -2.801618e-01
+r_id[30,t]           -3.589331e-01  0.08607661 -5.297954e-01 -1.872360e-01
+r_id[31,t]           -2.037137e-01  0.08391417 -3.704154e-01 -4.039225e-02
+r_id[32,t]           -2.349302e-01  0.08409940 -3.999977e-01 -7.008100e-02
+r_id[33,t]           -6.168669e-01  0.08508849 -7.791003e-01 -4.466638e-01
+r_id[34,t]           -4.801078e-02  0.08707974 -2.161810e-01  1.266628e-01
+r_id[35,t]           -5.916673e-01  0.08641998 -7.595374e-01 -4.205709e-01
+r_id[36,t]            4.985613e-02  0.08856352 -1.252826e-01  2.233275e-01
+r_id[37,t]            9.951954e-02  0.08676243 -6.804882e-02  2.702781e-01
+r_id[38,t]           -6.301260e-02  0.08306984 -2.213425e-01  9.740708e-02
+r_id[39,t]           -3.127614e-01  0.08506608 -4.766035e-01 -1.484290e-01
+r_id[40,t]           -3.882069e-01  0.08381399 -5.554458e-01 -2.267151e-01
+r_id[41,t]           -2.847918e-01  0.08431628 -4.509664e-01 -1.226563e-01
+r_id[42,t]           -5.931806e-01  0.08622441 -7.583325e-01 -4.204546e-01
+r_id[43,t]           -2.250796e-01  0.08539810 -3.969627e-01 -6.472107e-02
+r_id[44,t]           -1.937598e-01  0.08508160 -3.671152e-01 -3.035800e-02
+r_id[45,t]           -2.940076e-01  0.08526414 -4.613768e-01 -1.282929e-01
+r_id[46,t]           -1.513580e-01  0.08570873 -3.222435e-01  1.624199e-02
+r_id[47,t]           -3.690028e-01  0.08505510 -5.362577e-01 -2.072813e-01
+r_id[48,t]           -3.167918e-01  0.08432530 -4.806431e-01 -1.534928e-01
+r_id[49,t]           -3.965917e-01  0.08279122 -5.583790e-01 -2.372784e-01
+r_id[50,t]           -4.090292e-01  0.08654900 -5.790413e-01 -2.385345e-01
+r_id[51,t]           -2.285481e-01  0.08441023 -3.975753e-01 -6.221297e-02
+r_id[52,t]           -3.538608e-01  0.08321952 -5.181849e-01 -1.961715e-01
+r_id[53,t]           -1.702863e-01  0.08550331 -3.387768e-01 -2.498618e-03
+r_id[54,t]           -2.984731e-01  0.08370105 -4.692461e-01 -1.366280e-01
+r_id[55,t]           -7.798704e-01  0.08707879 -9.519536e-01 -6.110275e-01
+r_id[56,t]           -1.688302e-01  0.08505943 -3.346740e-01 -2.312460e-03
+r_id[57,t]            1.416182e-01  0.08732566 -4.078585e-02  3.079197e-01
+r_id[58,t]           -2.656462e-01  0.08707781 -4.336321e-01 -9.840395e-02
+r_id[59,t]           -2.386953e-01  0.08506124 -4.077002e-01 -7.716909e-02
+r_id[60,t]           -2.660343e-01  0.08491252 -4.269940e-01 -9.457369e-02
+r_id[61,t]           -2.381846e-01  0.08681885 -4.035236e-01 -6.576825e-02
+r_id[62,t]           -5.348346e-01  0.08452807 -7.010344e-01 -3.700399e-01
+r_id[63,t]           -5.283510e-01  0.08447237 -6.917691e-01 -3.642547e-01
+r_id[64,t]           -3.793931e-01  0.08423798 -5.435954e-01 -2.128078e-01
+r_id[65,t]           -9.503409e-02  0.08239428 -2.578126e-01  6.991361e-02
+r_id[66,t]           -4.259054e-01  0.08469852 -5.891179e-01 -2.619709e-01
+r_id[67,t]           -4.644432e-01  0.08320724 -6.298842e-01 -3.013765e-01
+r_id[68,t]           -2.620794e-01  0.08557164 -4.327189e-01 -9.970027e-02
+r_id[69,t]           -5.747780e-01  0.08337712 -7.396244e-01 -4.154145e-01
+r_id[70,t]           -8.553363e-02  0.08625543 -2.578411e-01  8.219972e-02
+r_id[71,t]           -2.774658e-01  0.08724981 -4.460541e-01 -1.071739e-01
+r_id[72,t]           -8.822327e-02  0.08736649 -2.611596e-01  7.580413e-02
+r_id[73,t]           -8.287737e-02  0.08455812 -2.469821e-01  7.847812e-02
+r_id[74,t]           -2.808320e-01  0.08721958 -4.503443e-01 -1.112166e-01
+r_id[75,t]           -1.005083e-01  0.08703758 -2.728029e-01  6.343560e-02
+r_id[76,t]           -2.542960e-01  0.08626879 -4.234873e-01 -8.002815e-02
+r_id[77,t]           -3.189643e-01  0.08468662 -4.881596e-01 -1.529105e-01
+r_id[78,t]           -2.779591e-02  0.08313191 -1.940265e-01  1.328830e-01
+r_id[79,t]           -4.324184e-01  0.08438083 -5.998022e-01 -2.642251e-01
+r_id[80,t]           -1.637894e-02  0.08935029 -1.935062e-01  1.555274e-01
+r_id[81,t]           -3.669151e-01  0.08653708 -5.389513e-01 -1.985622e-01
+r_id[82,t]           -2.589038e-01  0.08306586 -4.231882e-01 -1.009498e-01
+r_id[83,t]           -1.891834e-01  0.08383889 -3.567436e-01 -2.545385e-02
+r_id[84,t]           -2.444569e-01  0.08466229 -4.115280e-01 -7.971098e-02
+r_id[85,t]           -3.959116e-01  0.08643113 -5.674696e-01 -2.314694e-01
+r_id[86,t]           -2.692336e-01  0.08554795 -4.370866e-01 -1.019397e-01
+r_id[87,t]           -2.262043e-01  0.08486361 -3.942083e-01 -6.349339e-02
+r_id[88,t]           -2.635232e-01  0.08556589 -4.286357e-01 -9.736530e-02
+r_id[89,t]            1.085745e-01  0.08887373 -6.950312e-02  2.801099e-01
+r_id[90,t]           -1.831025e-01  0.08842552 -3.559431e-01 -1.033669e-02
+r_id[91,t]           -1.781971e-01  0.08492792 -3.463761e-01 -1.635688e-02
+r_id[92,t]           -3.242553e-02  0.08446516 -2.037862e-01  1.300436e-01
+r_id[93,t]           -2.207934e-01  0.08496931 -3.840393e-01 -5.301437e-02
+r_id[94,t]           -3.875416e-01  0.08539704 -5.515540e-01 -2.216094e-01
+r_id[95,t]           -2.885337e-01  0.08375636 -4.510392e-01 -1.263112e-01
+r_id[96,t]           -3.991741e-01  0.08446088 -5.652518e-01 -2.352840e-01
+r_id[97,t]            1.535958e-01  0.08750912 -1.743827e-02  3.231499e-01
+r_id[98,t]           -3.314627e-01  0.08591678 -5.032270e-01 -1.640520e-01
+r_id[99,t]           -2.960925e-01  0.08455324 -4.635446e-01 -1.329025e-01
+lprior               -4.635144e+00  0.01741485 -4.672426e+00 -4.604572e+00
+lp__                 -3.761466e+03 14.26880767 -3.791282e+03 -3.734558e+03</code></pre>
+</div>
+</div>
+</section>
+<section id="can-we-include-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="can-we-include-covariates">Can we include covariates?</h2>
+</section>
+<section id="the-wrap-up" class="level2">
+<h2 class="anchored" data-anchor-id="the-wrap-up">The Wrap-Up</h2>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="details" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Details</h2><div class="quarto-appendix-contents">
+
+<p>Last updated at 2023-11-06 09:09:31.364427.</p>
+<p><a href="https://github.com/wzbillings/zlog/tree/master/_posts/posts/2023-07-25_Simulating-Titer-Data/index.Rmd">source code</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.1 (2023-06-16 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices datasets  utils     methods   base     
+
+other attached packages:
+[1] ggplot2_3.4.4
+
+loaded via a namespace (and not attached):
+  [1] tidyselect_1.2.0     dplyr_1.0.10         farver_2.1.1        
+  [4] loo_2.5.1            fastmap_1.1.0        tensorA_0.36.2      
+  [7] shinystan_2.6.0      promises_1.2.0.1     shinyjs_2.1.0       
+ [10] digest_0.6.33        mime_0.12            lifecycle_1.0.3     
+ [13] StanHeaders_2.26.13  ellipsis_0.3.2       processx_3.8.2      
+ [16] magrittr_2.0.3       posterior_1.3.1      compiler_4.3.1      
+ [19] rlang_1.1.1          tools_4.3.1          igraph_1.3.5        
+ [22] utf8_1.2.2           yaml_2.3.6           knitr_1.40          
+ [25] prettyunits_1.1.1    bridgesampling_1.1-2 htmlwidgets_1.5.4   
+ [28] curl_4.3.3           pkgbuild_1.3.1       plyr_1.8.7          
+ [31] dygraphs_1.1.1.6     abind_1.4-5          miniUI_0.1.1.1      
+ [34] withr_2.5.0          purrr_0.3.5          grid_4.3.1          
+ [37] stats4_4.3.1         fansi_1.0.3          xts_0.12.2          
+ [40] xtable_1.8-4         colorspace_2.0-3     inline_0.3.19       
+ [43] scales_1.2.1         gtools_3.9.3         ggridges_0.5.4      
+ [46] cli_3.6.1            mvtnorm_1.1-3        crayon_1.5.2        
+ [49] rmarkdown_2.17       generics_0.1.3       RcppParallel_5.1.5  
+ [52] reshape2_1.4.4       rstan_2.26.13        zlib_0.0.1          
+ [55] stringr_1.4.1        shinythemes_1.2.0    bayesplot_1.9.0     
+ [58] parallel_4.3.1       matrixStats_0.62.0   base64enc_0.1-3     
+ [61] brms_2.20.4          vctrs_0.5.0          V8_4.2.1            
+ [64] Matrix_1.5-3         jsonlite_1.8.7       callr_3.7.3         
+ [67] crosstalk_1.2.0      tidyr_1.2.1          glue_1.6.2          
+ [70] codetools_0.2-19     ps_1.7.5             cowplot_1.1.1       
+ [73] DT_0.26              distributional_0.3.1 stringi_1.7.8       
+ [76] gtable_0.3.1         later_1.3.0          munsell_0.5.0       
+ [79] tibble_3.1.8         colourpicker_1.1.1   pillar_1.8.1        
+ [82] htmltools_0.5.3      Brobdingnag_1.2-9    R6_2.5.1            
+ [85] evaluate_0.23        shiny_1.7.2          lattice_0.20-45     
+ [88] markdown_1.2         backports_1.4.1      threejs_0.3.3       
+ [91] renv_1.0.3           httpuv_1.6.6         rstantools_2.2.0    
+ [94] Rcpp_1.0.9           coda_0.19-4          gridExtra_2.3       
+ [97] nlme_3.1-162         checkmate_2.1.0      xfun_0.34           
+[100] zoo_1.8-11           pkgconfig_2.0.3     </code></pre>
+</div>
+</div>
+
+
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{billings2023,
+  author = {Billings, Zane},
+  title = {Linear Fits for Exponential and Power Law Decay Models},
+  date = {2023-07-25},
+  url = {https://wzbillings.com/posts/2023-11-01-Linearized-Decay-Fits},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-billings2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Billings, Zane. 2023. <span>“Linear Fits for Exponential and Power Law
+Decay Models.”</span> July 25, 2023. <a href="https://wzbillings.com/posts/2023-11-01-Linearized-Decay-Fits">https://wzbillings.com/posts/2023-11-01-Linearized-Decay-Fits</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="wzbillings/quarto-website" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-regular fa-copyright" aria-hidden="true"></i> Zane Billings, 2023<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-sa" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></div>   
+    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/wzbillings/quarto-website">Source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
