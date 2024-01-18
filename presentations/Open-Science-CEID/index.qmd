@@ -3,7 +3,7 @@ title: Intro to Open Science, v2
 abstract: Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science at a seminar for the Center for the Ecology of Infectious Disease (CEID) at UGA.
 event: "CEID Seminar"
 location: Athens, GA
-
+license: "CC BY"
 image: featured.jpg
 date: "2023-03-01"
 categories:
@@ -19,3 +19,6 @@ In January 2023, I was awarded a fellowship by the [Center for Open Science](htt
 
 <object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
 </object>
+
+**Note that, as an** ***exception*** **to the rest of my website, this slide set is released under the
+CC BY 4.0 license, rather than the CC BY-NC-SA 4.0 license.**

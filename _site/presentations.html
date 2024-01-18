@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.4.510">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -55,7 +55,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -65,7 +71,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -109,6 +116,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en"
   });
 });
 </script> 
@@ -124,9 +133,9 @@ cookieconsent.run({
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">W. Zane Billings</span>
     </a>
@@ -138,38 +147,38 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">home</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html" rel="" target="">
- <span class="menu-text">blog</span></a>
+    <a class="nav-link" href="./blog.html"> 
+<span class="menu-text">blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./presentations.html" rel="" target="" aria-current="page">
- <span class="menu-text">presentations</span></a>
+    <a class="nav-link active" href="./presentations.html" aria-current="page"> 
+<span class="menu-text">presentations</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./uses.html" rel="" target="">
- <span class="menu-text">uses</span></a>
+    <a class="nav-link" href="./uses.html"> 
+<span class="menu-text">uses</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./now.html" rel="" target="">
- <span class="menu-text">now</span></a>
+    <a class="nav-link" href="./now.html"> 
+<span class="menu-text">now</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./misc.html" rel="" target="">
- <span class="menu-text">misc</span></a>
+    <a class="nav-link" href="./misc.html"> 
+<span class="menu-text">misc</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/wzbillings/quarto-website/" rel="me" target="">
- <span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" github=""></iconify-icon></span></a>
+    <a class="nav-link" href="https://github.com/wzbillings/quarto-website/" rel="me"> 
+<span class="menu-text"><iconify-icon inline="" icon="bi:github" style="font-size: 1.1em;" github=""></iconify-icon></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -182,7 +191,7 @@ cookieconsent.run({
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       
     
@@ -198,6 +207,7 @@ cookieconsent.run({
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="flu">flu <span class="quarto-category-count">(5)</span></div><div class="category" data-category="other">other <span class="quarto-category-count">(6)</span></div><div class="category" data-category="poster">poster <span class="quarto-category-count">(1)</span></div><div class="category" data-category="research">research <span class="quarto-category-count">(5)</span></div><div class="category" data-category="talk">talk <span class="quarto-category-count">(10)</span></div><div class="category" data-category="trajectories">trajectories <span class="quarto-category-count">(1)</span></div><div class="category" data-category="vaccines">vaccines <span class="quarto-category-count">(5)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+
 
 
 
@@ -233,19 +243,19 @@ cookieconsent.run({
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1693454400000" data-listing-file-modified-sort="1693952643941" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1693454400000" data-listing-file-modified-sort="1696888564172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319">
 <div class="thumbnail">
-<p><a href="./presentations/2023-CEIRR/index.html"> <img src="./presentations/2023-CEIRR/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/2023-CEIRR/index.html" class="no-external"></a></p><a href="./presentations/2023-CEIRR/index.html" class="no-external">
+<p><img src="./presentations/2023-CEIRR/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/2023-CEIRR/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/2023-CEIRR/index.html">
 <h3 class="no-anchor listing-title">
-Quantifying the breadth of vaccine response with antigenic distance
+<a href="./presentations/2023-CEIRR/index.html" class="no-external">Quantifying the breadth of vaccine response with antigenic distance</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/2023-CEIRR/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -260,33 +270,31 @@ vaccines
 research
 </div>
 </div>
-<a href="./presentations/2023-CEIRR/index.html">
 <div class="listing-description">
-<p>What does it even mean when we talk about vaccine breadth? If we have a universal vaccine candidate, how can we calculate its breadth? We propose a framework utilizing antigenic distance and summary antibody landscapes based on data from cohort studies with panels of immunogenicity data to multiple strains.</p>
+<a href="./presentations/2023-CEIRR/index.html" class="no-external">What does it even mean when we talk about vaccine breadth? If we have a universal vaccine candidate, how can we calculate its breadth? We propose a framework utilizing antigenic distance and summary antibody landscapes based on data from cohort studies with panels of immunogenicity data to multiple strains.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/2023-CEIRR/index.html">
+<a href="./presentations/2023-CEIRR/index.html" class="no-external">
 <div class="listing-date">
 Aug 31, 2023
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="talk,other" data-listing-date-sort="1686283200000" data-listing-file-modified-sort="1693950151847" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="1" data-categories="talk,other" data-listing-date-sort="1686283200000" data-listing-file-modified-sort="1686312493028" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
 <div class="thumbnail">
-<p><a href="./presentations/REU-Workshop2023/index.html"> <img src="./presentations/REU-Workshop2023/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/REU-Workshop2023/index.html" class="no-external"></a></p><a href="./presentations/REU-Workshop2023/index.html" class="no-external">
+<p><img src="./presentations/REU-Workshop2023/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/REU-Workshop2023/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/REU-Workshop2023/index.html">
 <h3 class="no-anchor listing-title">
-Reproducible research workshop
+<a href="./presentations/REU-Workshop2023/index.html" class="no-external">Reproducible research workshop</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/REU-Workshop2023/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -295,33 +303,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/REU-Workshop2023/index.html">
 <div class="listing-description">
-<p>Intro to reproducible research and R workflows for PopBio</p>
+<a href="./presentations/REU-Workshop2023/index.html" class="no-external">Intro to reproducible research and R workflows for PopBio</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/REU-Workshop2023/index.html">
+<a href="./presentations/REU-Workshop2023/index.html" class="no-external">
 <div class="listing-date">
 Jun 9, 2023
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="talk,other" data-listing-date-sort="1680753600000" data-listing-file-modified-sort="1693950151711" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="2" data-categories="talk,other" data-listing-date-sort="1680753600000" data-listing-file-modified-sort="1686312904986" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="103">
 <div class="thumbnail">
-<p><a href="./presentations/Dissertation-Proposal/index.html"> <img src="./presentations/Dissertation-Proposal/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/Dissertation-Proposal/index.html" class="no-external"></a></p><a href="./presentations/Dissertation-Proposal/index.html" class="no-external">
+<p><img src="./presentations/Dissertation-Proposal/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/Dissertation-Proposal/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/Dissertation-Proposal/index.html">
 <h3 class="no-anchor listing-title">
-Dissertation Proposal
+<a href="./presentations/Dissertation-Proposal/index.html" class="no-external">Dissertation Proposal</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/Dissertation-Proposal/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -330,33 +336,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/Dissertation-Proposal/index.html">
 <div class="listing-description">
-<p>Impact of Host and Vaccine Characteristics on Immune Responses following Influenza Vaccination</p>
+<a href="./presentations/Dissertation-Proposal/index.html" class="no-external">Impact of Host and Vaccine Characteristics on Immune Responses following Influenza Vaccination</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/Dissertation-Proposal/index.html">
+<a href="./presentations/Dissertation-Proposal/index.html" class="no-external">
 <div class="listing-date">
 Apr 6, 2023
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="talk,other" data-listing-date-sort="1677646800000" data-listing-file-modified-sort="1678122477050" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="3" data-categories="talk,other" data-listing-date-sort="1677646800000" data-listing-file-modified-sort="1702948428179" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="137">
 <div class="thumbnail">
-<p><a href="./presentations/Open-Science-CEID/index.html"> <img src="./presentations/Open-Science-CEID/featured.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/Open-Science-CEID/index.html" class="no-external"></a></p><a href="./presentations/Open-Science-CEID/index.html" class="no-external">
+<p><img src="./presentations/Open-Science-CEID/featured.jpg" class="thumbnail-image"></p>
+</a><p><a href="./presentations/Open-Science-CEID/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/Open-Science-CEID/index.html">
 <h3 class="no-anchor listing-title">
-Intro to Open Science, v2
+<a href="./presentations/Open-Science-CEID/index.html" class="no-external">Intro to Open Science, v2</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/Open-Science-CEID/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -365,33 +369,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/Open-Science-CEID/index.html">
 <div class="listing-description">
-<p>Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science at a seminar for the Center for the Ecology of Infectious Disease (CEID) at UGA.</p>
+<a href="./presentations/Open-Science-CEID/index.html" class="no-external">Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science at a seminar for the Center for the Ecology of Infectious Disease (CEID) at UGA.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/Open-Science-CEID/index.html">
+<a href="./presentations/Open-Science-CEID/index.html" class="no-external">
 <div class="listing-date">
 Mar 1, 2023
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="talk,other" data-listing-date-sort="1676350800000" data-listing-file-modified-sort="1676403046669" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="4" data-categories="talk,other" data-listing-date-sort="1676350800000" data-listing-file-modified-sort="1677944836717" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="102">
 <div class="thumbnail">
-<p><a href="./presentations/Open-Science-IDIG/index.html"> <img src="./presentations/Open-Science-IDIG/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/Open-Science-IDIG/index.html" class="no-external"></a></p><a href="./presentations/Open-Science-IDIG/index.html" class="no-external">
+<p><img src="./presentations/Open-Science-IDIG/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/Open-Science-IDIG/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/Open-Science-IDIG/index.html">
 <h3 class="no-anchor listing-title">
-Intro to Open Science
+<a href="./presentations/Open-Science-IDIG/index.html" class="no-external">Intro to Open Science</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/Open-Science-IDIG/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -400,33 +402,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/Open-Science-IDIG/index.html">
 <div class="listing-description">
-<p>Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science for my weekly working group.</p>
+<a href="./presentations/Open-Science-IDIG/index.html" class="no-external">Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science for my weekly working group.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/Open-Science-IDIG/index.html">
+<a href="./presentations/Open-Science-IDIG/index.html" class="no-external">
 <div class="listing-date">
 Feb 14, 2023
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="talk,other" data-listing-date-sort="1666670400000" data-listing-file-modified-sort="1666713801366" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="5" data-categories="talk,other" data-listing-date-sort="1666670400000" data-listing-file-modified-sort="1671292582425" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="121">
 <div class="thumbnail">
-<p><a href="./presentations/IDIG-2022-10-25/index.html"> <img src="./presentations/IDIG-2022-10-25/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/IDIG-2022-10-25/index.html" class="no-external"></a></p><a href="./presentations/IDIG-2022-10-25/index.html" class="no-external">
+<p><img src="./presentations/IDIG-2022-10-25/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/IDIG-2022-10-25/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/IDIG-2022-10-25/index.html">
 <h3 class="no-anchor listing-title">
-Journal club (Nauta et al.)
+<a href="./presentations/IDIG-2022-10-25/index.html" class="no-external">Journal club (Nauta et al.)</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/IDIG-2022-10-25/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -435,33 +435,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/IDIG-2022-10-25/index.html">
 <div class="listing-description">
-<p>Slides from a paper discussion that I led at my seminar.</p>
+<a href="./presentations/IDIG-2022-10-25/index.html" class="no-external">Slides from a paper discussion that I led at my seminar.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/IDIG-2022-10-25/index.html">
+<a href="./presentations/IDIG-2022-10-25/index.html" class="no-external">
 <div class="listing-date">
 Oct 25, 2022
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="talk,other" data-listing-date-sort="1666065600000" data-listing-file-modified-sort="1666713643541" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="6" data-categories="talk,other" data-listing-date-sort="1666065600000" data-listing-file-modified-sort="1671292582433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="85">
 <div class="thumbnail">
-<p><a href="./presentations/IDIG-Challenge-Studies/index.html"> <img src="./presentations/IDIG-Challenge-Studies/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external"></a></p><a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external">
+<p><img src="./presentations/IDIG-Challenge-Studies/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/IDIG-Challenge-Studies/index.html">
 <h3 class="no-anchor listing-title">
-Challenge Study Ethics
+<a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external">Challenge Study Ethics</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -470,33 +468,31 @@ talk
 other
 </div>
 </div>
-<a href="./presentations/IDIG-Challenge-Studies/index.html">
 <div class="listing-description">
-<p>Challenge studies need to be highly regulated to ensure they are beneficial rather than harmful. I led a discussion with one of my colleagues about some of these ethical issues.</p>
+<a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external">Challenge studies need to be highly regulated to ensure they are beneficial rather than harmful. I led a discussion with one of my colleagues about some of these ethical issues.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/IDIG-Challenge-Studies/index.html">
+<a href="./presentations/IDIG-Challenge-Studies/index.html" class="no-external">
 <div class="listing-date">
 Oct 18, 2022
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="talk,flu,vaccines,research,trajectories" data-listing-date-sort="1647748800000" data-listing-file-modified-sort="1666629184545" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="7" data-categories="talk,flu,vaccines,research,trajectories" data-listing-date-sort="1647748800000" data-listing-file-modified-sort="1671292582417" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="169">
 <div class="thumbnail">
-<p><a href="./presentations/2022-CIVIC/index.html"> <img src="./presentations/2022-CIVIC/featured.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/2022-CIVIC/index.html" class="no-external"></a></p><a href="./presentations/2022-CIVIC/index.html" class="no-external">
+<p><img src="./presentations/2022-CIVIC/featured.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./presentations/2022-CIVIC/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/2022-CIVIC/index.html">
 <h3 class="no-anchor listing-title">
-Longitudinal trajectories of influenza immune response after repeat vaccination
+<a href="./presentations/2022-CIVIC/index.html" class="no-external">Longitudinal trajectories of influenza immune response after repeat vaccination</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/2022-CIVIC/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -514,33 +510,31 @@ research
 trajectories
 </div>
 </div>
-<a href="./presentations/2022-CIVIC/index.html">
 <div class="listing-description">
-<p>Repeat vaccination is sort of a hot topic in flu immunity right now, but most analyses are still done in a cross-sectional format. Using data from an ongoing influenza vaccination cohort study, we break trajectories up into component segments to analyze patterns of boosting and waning. This allows us to quantify trends across strata and allow for measurement error in responses of a specific magnitude.</p>
+<a href="./presentations/2022-CIVIC/index.html" class="no-external">Repeat vaccination is sort of a hot topic in flu immunity right now, but most analyses are still done in a cross-sectional format. Using data from an ongoing influenza vaccination cohort study, we break trajectories up into component segments to analyze patterns of boosting and waning. This allows us to quantify trends across strata and allow for measurement error in responses of a specific magnitude. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/2022-CIVIC/index.html">
+<a href="./presentations/2022-CIVIC/index.html" class="no-external">
 <div class="listing-date">
 Mar 20, 2022
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1628395200000" data-listing-file-modified-sort="1666629184514" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="8" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1628395200000" data-listing-file-modified-sort="1671292582392" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
 <div class="thumbnail">
-<p><a href="./presentations/2021-CIVIC/index.html"> <img src="./presentations/2021-CIVIC/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/2021-CIVIC/index.html" class="no-external"></a></p><a href="./presentations/2021-CIVIC/index.html" class="no-external">
+<p><img src="./presentations/2021-CIVIC/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/2021-CIVIC/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/2021-CIVIC/index.html">
 <h3 class="no-anchor listing-title">
-How do pre-existing immunity and host factors interact to impact influenza vaccine response?
+<a href="./presentations/2021-CIVIC/index.html" class="no-external">How do pre-existing immunity and host factors interact to impact influenza vaccine response?</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/2021-CIVIC/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -555,33 +549,31 @@ vaccines
 research
 </div>
 </div>
-<a href="./presentations/2021-CIVIC/index.html">
 <div class="listing-description">
-<p>Some prior mechanistic modeling studies show that dose should modulate the effect of an influenza vaccine, but do not make strong predictions about the roles of covariates. Using data from an ongoing cohort study, we examine these predictions and also examine whether other covariates should be included in future models.</p>
+<a href="./presentations/2021-CIVIC/index.html" class="no-external">Some prior mechanistic modeling studies show that dose should modulate the effect of an influenza vaccine, but do not make strong predictions about the roles of covariates. Using data from an ongoing cohort study, we examine these predictions and also examine whether other covariates should be included in future models.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/2021-CIVIC/index.html">
+<a href="./presentations/2021-CIVIC/index.html" class="no-external">
 <div class="listing-date">
 Aug 8, 2021
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="poster,flu,vaccines,research" data-listing-date-sort="1623643200000" data-listing-file-modified-sort="1666629184531" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="9" data-categories="poster,flu,vaccines,research" data-listing-date-sort="1623643200000" data-listing-file-modified-sort="1671292582405" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="91">
 <div class="thumbnail">
-<p><a href="./presentations/2021-EEID/index.html"> <img src="./presentations/2021-EEID/featured.png" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/2021-EEID/index.html" class="no-external"></a></p><a href="./presentations/2021-EEID/index.html" class="no-external">
+<p><img src="./presentations/2021-EEID/featured.png" class="thumbnail-image"></p>
+</a><p><a href="./presentations/2021-EEID/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/2021-EEID/index.html">
 <h3 class="no-anchor listing-title">
-Exploring the effect of host factors on the relationship between pre-existing immunity and influenza vaccine response
+<a href="./presentations/2021-EEID/index.html" class="no-external">Exploring the effect of host factors on the relationship between pre-existing immunity and influenza vaccine response</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/2021-EEID/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('poster'); return false;">
 poster
@@ -596,33 +588,31 @@ vaccines
 research
 </div>
 </div>
-<a href="./presentations/2021-EEID/index.html">
 <div class="listing-description">
-<p>Mechanistic models suggest that fold change in flu immunity after vaccination should be linearly decreasing with pre-vaccination immunity. However, these models do not account for host factors, such as age. We found that mechanistic model predictions were sometimes supported by the data, and we are working to explore when they are and are not.</p>
+<a href="./presentations/2021-EEID/index.html" class="no-external">Mechanistic models suggest that fold change in flu immunity after vaccination should be linearly decreasing with pre-vaccination immunity. However, these models do not account for host factors, such as age. We found that mechanistic model predictions were sometimes supported by the data, and we are working to explore when they are and are not.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/2021-EEID/index.html">
+<a href="./presentations/2021-EEID/index.html" class="no-external">
 <div class="listing-date">
 Jun 14, 2021
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1617681600000" data-listing-file-modified-sort="1666629184524" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="10" data-categories="talk,flu,vaccines,research" data-listing-date-sort="1617681600000" data-listing-file-modified-sort="1671292582400" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="101">
 <div class="thumbnail">
-<p><a href="./presentations/2021-CIVR-HRP/index.html"> <img src="./presentations/2021-CIVR-HRP/featured.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./presentations/2021-CIVR-HRP/index.html" class="no-external"></a></p><a href="./presentations/2021-CIVR-HRP/index.html" class="no-external">
+<p><img src="./presentations/2021-CIVR-HRP/featured.jpg" class="thumbnail-image"></p>
+</a><p><a href="./presentations/2021-CIVR-HRP/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./presentations/2021-CIVR-HRP/index.html">
 <h3 class="no-anchor listing-title">
-How does pre-existing immunity interact with other factors to impact influenza vaccine responses?
+<a href="./presentations/2021-CIVR-HRP/index.html" class="no-external">How does pre-existing immunity interact with other factors to impact influenza vaccine responses?</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./presentations/2021-CIVR-HRP/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('talk'); return false;">
 talk
@@ -637,14 +627,12 @@ vaccines
 research
 </div>
 </div>
-<a href="./presentations/2021-CIVR-HRP/index.html">
 <div class="listing-description">
-<p>Previous mechanistic models predict that fold change in influenza antibody level should have a negative linear relationship with pre-vaccination titer on a log-log scale. Models also predict that higher vaccine doses should have a higher intercept, but parallel slopes. Using vaccine cohort data, we found that the first conclusion was true, but the latter was not always true. Now we are working to understand in which cases the model deviates from expected predictions.</p>
+<a href="./presentations/2021-CIVR-HRP/index.html" class="no-external">Previous mechanistic models predict that fold change in influenza antibody level should have a negative linear relationship with pre-vaccination titer on a log-log scale. Models also predict that higher vaccine doses should have a higher intercept, but parallel slopes. Using vaccine cohort data, we found that the first conclusion was true, but the latter was not always true. Now we are working to understand in which cases the model deviates from expected predictions. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./presentations/2021-CIVR-HRP/index.html">
+<a href="./presentations/2021-CIVR-HRP/index.html" class="no-external">
 <div class="listing-date">
 Apr 6, 2021
 </div>
@@ -700,6 +688,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -768,13 +783,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -853,10 +870,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -866,8 +882,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -880,6 +905,135 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -923,6 +1077,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -948,6 +1103,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1010,11 +1191,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><i class="fa-regular fa-copyright" aria-hidden="true"></i> Zane Billings, 2023<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-sa" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/wzbillings/quarto-website">Source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+    <div class="nav-footer-left">
+<p><i class="fa-regular fa-copyright" aria-hidden="true"></i> Zane Billings, 2023<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-sa" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/wzbillings/quarto-website">Source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></p>
+</div>
   </div>
 </footer>
+
 
 
 
