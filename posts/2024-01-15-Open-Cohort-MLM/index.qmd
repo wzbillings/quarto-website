@@ -1,0 +1,85 @@
+---
+title: "Multilevel models for a complex open cohort"
+author: "Zane Billings"
+date: last-modified
+date-format: iso
+description: |
+  One of the data sources that I'm using for my cohort has a complicated
+  multilevel structure. Since I had to figure out what to do with it, I
+  thought I'd write about it in case my thoughts are useful for anyone dealing
+  with similar data.
+license: "CC BY-SA"
+draft: true
+---
+
+```{r setup}
+library(ggplot2)
+ggplot2::theme_set(hgp::theme_ms())
+```
+I started this post by trying to write a StackExchange question. I thought it
+would be fairly simple, but it kept getting longer and eventually I got stuck so
+I thought I'd go back to the drawing board. Eventually I wrote down something
+like this.
+
+> If individuals didn't repeat, I think this would be a fairly simple structure
+because it amounts to a normal 3-level nested model. The model should look
+something like
+
+And at that point I realized I didn't actually know how to write out that
+model, so it was time to do some thinking and writing and actually figure out
+what I was talking about. I've used multilevel models multiple times before,
+and even took a class on longitudinal data analysis, but the complex structure
+of this problem got me. So I'll start by writing out a (simplfied, generalized)
+version of the model problem and exactly specifying my notation. Then we
+can talk about how to write this model in both math-language and
+`lme4`-language, and what I ultimately decided was the best model structure.
+
+## Data description
+> I am working with data from a study that has repeated measures at two scales,
+and I'm not certain how to correctly specify the structure of this model. I have
+a decent amount of experience with MLN/hierarchical models, but this one has
+stumped me.
+>
+> The data were collected over multiple waves, and each wave has multiple
+individuals. The design is a prospective open cohort, which means individuals
+can repeat for any arbitrary pattern of waves. So, individual 1 might repeat
+from wave 1 all the way to wave $J$ (the final year). Individual 27 might only
+be present in wave 3. Individual 93 might be present in waves 1, 2, 3, 7, and 9,
+etc. Any arbitrary combination is allowed. So this is one level of the repeated
+measures structure of the data -- individuals are repeated over waves.
+>
+> Each individual also shows up twice during each season--there are multiple
+time points in each year. So, each individual, for each year, is measured
+between 2 and 5 times over the course of the year. The effect of repeated
+measures over time, nested within each individual, needs to be treated
+separately from the wave because there are qualitative differences between the
+waves. (We know the dates when each wave was happening, and we have the dates
+for each measurement, but we can't just combine things into one time variable.)
+>
+> Finally, at each time point, each individual also has multiple assays -- each
+time point represents a serological sample, and multiple different (correlated,
+comparable) assays are performed on the sample. So we have a cluster of
+measurements nested within intra-wave time points, which are nested within
+individuals.
+
+# Simplifying models
+
+One of the more useful things I learned in my math undergrad was
+*Pólya's principle*:
+> If you cannot solve the proposed problem, try to solve first some related problem. Could you imagine a more accessible related problem? --
+> [George Pólya](https://en.wikipedia.org/wiki/How_to_Solve_It).
+
+So instead of immediately tackling the large and complex model all at once,
+we should first attempt to solve some smaller, related problems. Solving
+these smaller problems will help us to understand how all the pieces can
+fit together.
+
+## Details {.appendix}
+
+Last updated at `r Sys.time()`.
+
+[source code](https://github.com/wzbillings/zlog/tree/master/_posts/posts/2024-01-15-Open-Cohort-MLM/index.Rmd)
+
+```{r}
+sessionInfo()
+```
