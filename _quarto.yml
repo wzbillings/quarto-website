@@ -61,5 +61,8 @@ format:
       dark: vapor
     css: styles.css
 
+metadata-files: 
+  - drafts.yml
+
 
 

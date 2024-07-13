@@ -3,11 +3,6 @@ title: "Multilevel models for a complex open cohort"
 author: "Zane Billings"
 date: last-modified
 date-format: iso
-description: |
-  One of the data sources that I'm using for my cohort has a complicated
-  multilevel structure. Since I had to figure out what to do with it, I
-  thought I'd write about it in case my thoughts are useful for anyone dealing
-  with similar data.
 license: "CC BY-SA"
 draft: true
 ---
@@ -16,6 +11,7 @@ draft: true
 library(ggplot2)
 ggplot2::theme_set(hgp::theme_ms())
 ```
+
 I started this post by trying to write a StackExchange question. I thought it
 would be fairly simple, but it kept getting longer and eventually I got stuck so
 I thought I'd go back to the drawing board. Eventually I wrote down something

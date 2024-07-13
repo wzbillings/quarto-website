@@ -6,7 +6,7 @@ description: |
   Just a list of instructions for building a quarto website with netlify, no
   GitHub, no CSS, nothing too technical.
 license: "CC BY-NC-SA"
-image: "thumbnail.jpg"
+image: thumbnail.png
 ---
 
 This checklist is 100% adapted from a [much better blog post by Jadey Ryan](https://jadeyryan.com/blog/2024-02-19_beginner-quarto-netlify/).

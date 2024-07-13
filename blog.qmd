@@ -7,6 +7,8 @@ listing:
   categories: true
   sort-ui: false
   filter-ui: false
+  exclude:
+    draft: true
 page-layout: full
 ---
 

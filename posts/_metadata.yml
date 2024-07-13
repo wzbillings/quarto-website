@@ -11,15 +11,9 @@ toc-title: contents
 toc-location: left
 toc-depth: 2
 
-page-layout: article
-
 execute: 
   echo: true
   warning: true
   message: true
 
 citation: true
-
-comments:
-  utterances:
-    repo: wzbillings/quarto-website
