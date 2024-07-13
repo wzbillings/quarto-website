@@ -2,6 +2,21 @@
 format: gfm
 ---
 
+```{r}
+#| label: setup
+#| eval: true
+#| include: false
+
+# Specify project renv reqs
+box::use(
+	rmarkdown,
+	markdown,
+	mime,
+	yaml
+)
+```
+
+
 <!-- README.md is generated from README.qmd. Please edit that file. -->
 
 # Zane's Website

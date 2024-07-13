@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-03-01">
+<meta name="author" content="Zane Billings">
+<meta name="dcterms.date" content="2024-07-13">
 <meta name="description" content="Personal homepage for Zane Billings">
 
-<title>Intro to Open Science, v2 – W. Zane Billings</title>
+<title>Instructions for an Easy Quarto Website – W. Zane Billings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,39 +144,46 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Intro to Open Science, v2</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">talk</div>
-                <div class="quarto-category">other</div>
-              </div>
-                  </div>
+      <h1 class="title">Instructions for an Easy Quarto Website</h1>
+                  <div>
+        <div class="description">
+          <p>Just a list of instructions for building a quarto website with netlify, no GitHub, no CSS, nothing too technical.</p>
+        </div>
+      </div>
+                </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Zane Billings </p>
+            </div>
+    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 1, 2023</p>
+        <p class="date">July 13, 2024</p>
       </div>
     </div>
     
       
     </div>
     
-  <div>
-    <div class="abstract">
-      <div class="block-title">Abstract</div>
-      Open science is a pretty broad term that broadly includes data sharing, open access publication, inclusive research, preregistration, and more! In this talk, I gave an intro to the concept of open science at a seminar for the Center for the Ecology of Infectious Disease (CEID) at UGA.
-    </div>
-  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#steps-for-making-a-quarto-website-with-netlify." id="toc-steps-for-making-a-quarto-website-with-netlify." class="nav-link active" data-scroll-target="#steps-for-making-a-quarto-website-with-netlify.">Steps for making a Quarto website with Netlify.</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -188,16 +196,44 @@ cookieconsent.run({
 
 
 
-<p><img src="featured.jpg" class="img-fluid"></p>
-<p>You can see the information for this talk <a href="https://mailchi.mp/acc96bfdcebd/ceid-workshop-with-zane-billings?e=18ee2321bf">here</a>.</p>
-<p>In January 2023, I was awarded a fellowship by the <a href="https://cos.io">Center for Open Science</a>, funded by <a href="https://theflulab.org">FluLab</a>. I got some excellent open science training, and one stipulation of my fellowship was that I had to share my training knowledge with my colleagues. So I talked about what open science is, why bother with open science, how to start doing open science, and briefly about the <a href="https://osf.io">Open Science Foundation</a>, an online platform developed by OSF to empower open science workflows. The slides are embedded below or you can get them <a href="pres.pdf">here</a> if you’re interested.</p>
-<object data="pres.pdf" width="100%" height="800" title="presentation slides" class="objectSet" type="application/pdf">
-</object>
-<p><strong>Note that, as an</strong> <strong><em>exception</em></strong> <strong>to the rest of my website, this slide set is released under the CC BY 4.0 license, rather than the CC BY-NC-SA 4.0 license.</strong></p>
+<p>This checklist is 100% adapted from a <a href="https://jadeyryan.com/blog/2024-02-19_beginner-quarto-netlify/">much better blog post by Jadey Ryan</a>. This is a condensed version that is designed to print on ~1 (maybe front/back) letter sized page.</p>
+<section id="steps-for-making-a-quarto-website-with-netlify." class="level1">
+<h1>Steps for making a Quarto website with Netlify.</h1>
+<ol type="1">
+<li>Install R and RStudio, update Quarto.
+<ol type="1">
+<li>R download link: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a>.</li>
+<li>RStudio download link: <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop/</a>.</li>
+<li>Quarto download link: <a href="https://quarto.org/docs/get-started/">https://quarto.org/docs/get-started/</a>.</li>
+</ol></li>
+<li>Open RStudio, and use the dialog menu to create a new project in a new directory. Choose the “Quarto Website” project type. Optionally, check the “use visual editor” option.</li>
+<li>(Optional) render the website for the first time.</li>
+<li>Edit the home page (<code>index.qmd</code>). Specify the title and homepage contents.</li>
+<li>Edit the about page (<code>about.qmd</code>), using <a href="https://quarto.org/docs/websites/website-about.html#templates">a template</a> from the quarto docs. Add an image if you have one.</li>
+<li>Add a new page called “Projects” along with a directory, and set it up as a <a href="https://quarto.org/docs/websites/website-listings.html">listing page</a>.</li>
+<li>Add a new test project to the listing.</li>
+<li>Edit the listing <code>_metadata.yml</code> so that code pages get frozen.</li>
+<li>Update <code>_quarto.yml</code> to show the listing page, also talk about updating the website theme. See themes <a href="https://bootswatch.com/">here</a>.</li>
+<li>Make sure everything renders.</li>
+<li>Create an account on <a href="https://netlify.com/">netlify</a> if you don’t have one, then create a new netlify site. Upload the entire <code>_site</code> folder to Netlify.</li>
+<li>In site configuration, set up the site name. You can also add a custom domain name here if you want to pay for one.</li>
+<li>Whenever you want to update your website, simply render it again, and upload the <code>_site</code> folder to your website.</li>
+</ol>
 
 
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{billings2024,
+  author = {Billings, Zane},
+  title = {Instructions for an {Easy} {Quarto} {Website}},
+  date = {2024-07-13},
+  url = {https://wzbillings.com/posts/2024-07-13-Quarto-Website-Checklist/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-billings2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Billings, Zane. 2024. <span>“Instructions for an Easy Quarto
+Website.”</span> July 13, 2024. <a href="https://wzbillings.com/posts/2024-07-13-Quarto-Website-Checklist/">https://wzbillings.com/posts/2024-07-13-Quarto-Website-Checklist/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -762,7 +798,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://utteranc.es/client.js" repo="wzbillings/website" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+<script src="https://utteranc.es/client.js" repo="wzbillings/quarto-website" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

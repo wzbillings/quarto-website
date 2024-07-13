@@ -1,9 +1,15 @@
 
+
 <!-- README.md is generated from README.qmd. Please edit that file. -->
 
 # Zane’s Website
 
 This repository contains the source code for https://wzbillings.com/.
+
+## “Acknowledgements”
+
+- I stole a lot of code from [Andrew Heiss](https://andrewheiss.com) and
+  [Andreas Handel](https://andreashandel.com). Thanks to both of them!
 
 ## Licensing
 
@@ -22,10 +28,12 @@ This repository contains the source code for https://wzbillings.com/.
 
 ## TODO
 
-- [ ] convert presentations to qmd
+- [x] convert presentations to qmd
 - [ ] finish CIs blog post
 - [ ] convert projects to qmd
 - [ ] update projects
-- [ ] add CV
-- [ ] Add CIVICs 2022 presentation (trajectories)
-- [ ] Fix presentation dates
+- [x] add CV
+- [x] Add CIVICs 2022 presentation (trajectories)
+- [x] convert iframes to object tags for presentations
+- [x] Fix presentation dates
+- [ ] move papers blog to be hidden

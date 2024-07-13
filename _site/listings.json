@@ -2,11 +2,18 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2024-01-15-Open-Cohort-MLM/index.html",
+      "/posts/2024-07-13-Quarto-Website-Checklist/index.html",
+      "/posts/2023-10-30-Censored-Data-Diagrams/index.html",
       "/posts/2023-10-28_TI-vs-Post-Regression/index.html",
       "/posts/2023-10-09_BootstrapIntro/index.html",
       "/posts/2023-08-10_Titer-w-Distance/index.html",
       "/posts/2023-07-25_Simulating-Titer-Data/index.html",
+      "/posts/2023-11-01-Linearized-Decay-Fits/index.html",
+      "/posts/2023-03-04_Statistical-Nihilist-Manifesto/index.html",
       "/posts/2022-12-17_histogram-bins/index.html",
+      "/posts/2022-10-24_Flu-Seroprotection/index.html",
+      "/posts/2022-08-22_brms-CIs/index.html",
       "/posts/2022-06-24_Bayes-Diagnostics/index.html"
     ]
   },

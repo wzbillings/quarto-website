@@ -29,12 +29,12 @@ website:
       #   href: projects.qmd
       - text: "presentations"
         href: presentations.qmd
-      - text: "uses"
-        href: uses.qmd
-      - text: "now"
-        href: now.qmd
-      - text: "misc"
-        href: misc.qmd
+      # - text: "uses"
+      #   href: uses.qmd
+      # - text: "now"
+      #   href: now.qmd
+      # - text: "misc"
+      #   href: misc.qmd
       - text: "{{< iconify bi github size=1.1em title='GitHub' >}}"
         href: https://github.com/wzbillings/quarto-website/
         rel: me
@@ -42,6 +42,7 @@ website:
   search: true
   site-url: "https://wzbillings.com"
   repo-url: "https://github.com/wzbillings/quarto-website"
+  draft-mode: gone
   
   page-footer:
     left: |

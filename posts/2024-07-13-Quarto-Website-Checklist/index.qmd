@@ -1,0 +1,40 @@
+---
+title: "Instructions for an Easy Quarto Website"
+author: "Zane Billings"
+date: "2024-07-13"
+description: |
+  Just a list of instructions for building a quarto website with netlify, no
+  GitHub, no CSS, nothing too technical.
+license: "CC BY-NC-SA"
+image: "thumbnail.jpg"
+---
+
+This checklist is 100% adapted from a [much better blog post by Jadey Ryan](https://jadeyryan.com/blog/2024-02-19_beginner-quarto-netlify/).
+This is a condensed version that is designed to print on ~1 (maybe front/back)
+letter sized page.
+
+# Steps for making a Quarto website with Netlify.
+
+1. Install R and RStudio, update Quarto.
+    1. R download link: [https://cran.r-project.org/](https://cran.r-project.org/).
+    1. RStudio download link: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/).
+    1. Quarto download link: [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/).
+1. Open RStudio, and use the dialog menu to create a new project in a new
+directory. Choose the "Quarto Website" project type. Optionally, check the
+"use visual editor" option.
+1. (Optional) render the website for the first time.
+1. Edit the home page (`index.qmd`). Specify the title and homepage contents.
+1. Edit the about page (`about.qmd`), using [a template](https://quarto.org/docs/websites/website-about.html#templates) from
+the quarto docs. Add an image if you have one.
+1. Add a new page called "Projects" along with a directory, and set it up as a [listing page](https://quarto.org/docs/websites/website-listings.html).
+1. Add a new test project to the listing.
+1. Edit the listing `_metadata.yml` so that code pages get frozen.
+1. Update `_quarto.yml` to show the listing page, also talk about updating
+the website theme. See themes [here](https://bootswatch.com/).
+1. Make sure everything renders.
+1. Create an account on [netlify](https://netlify.com/) if you don't have one,
+then create a new netlify site. Upload the entire `_site` folder to Netlify.
+1. In site configuration, set up the site name. You can also add a custom
+domain name here if you want to pay for one.
+1. Whenever you want to update your website, simply render it again, and upload
+the `_site` folder to your website.
