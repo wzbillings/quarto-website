@@ -1,0 +1,26 @@
+---
+title: Modeling Censored Immunological Data
+abstract: |
+  Publicity for the censored data tutorials we're writing!
+event: "CEIRR Annual Meeting, 2024, CMC tools showcase"
+location: New York City, NY
+
+image: featured.png
+date: "2024-07-23"
+categories:
+  - talk
+  - other
+---
+
+![](featured.PNG)
+
+I presented these slides at the CEIRR Annual Meeting 2024, specifically at the
+Computational Modeling Core tools showcase. They introduce and provide some
+motivation for a set of tutorials on censored data that we are currently developing
+(at time of writing). The slides are embedded below or you can get them [here](pres.pdf)
+if you're interested.
+
+You can access our censored data tutorials at this link: [https://tinyurl.com/hg-cens](https://tinyurl.com/hg-cens).
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>

@@ -1,0 +1,29 @@
+---
+title: |
+  Quantifying the effect of HD vs SD FluZone vaccination on heterologous
+  immunity
+abstract: |
+  Research talk given at the 2024 DIVERsity (drivers of individual variation
+  in influenza vaccine response and protection from infection) grant annual
+  meeting. We use data from a human influenza vaccine cohort study with HAIs
+  collected to a panel of historical strains to analyze the causal effect of
+  high dose vaccination on the heterologous antibody response.
+event: "DIVERsity annual meeting"
+location: New York City, NY
+
+image: featured.png
+date: "2024-07-24"
+categories:
+  - talk
+  - research
+---
+
+![](featured.png)
+
+I presented these slides at the DIVERsity Annual Meeting 2024. The slides are embedded below or you can get them [here](pres.pdf)
+if you're interested.
+
+You can find a draft of our code and manuscript here: [https://github.com/ahgroup/Billings-2024-HD-Heterologous](https://github.com/ahgroup/Billings-2024-HD-Heterologous).
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>

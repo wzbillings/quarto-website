@@ -9,6 +9,7 @@ about:
       href: https://linkedin.com/in/wzbillings
     - icon: mastodon
       text: Mastodon
+      rel: "me"
       href: https://fediscience.org/@wzbillings
     - icon: github
       text: GitHub
@@ -17,8 +18,8 @@ about:
       text: Email
       href: mailto:wesley.billings@uga.edu
     - icon: file-pdf-fill
-      text: "CV"
-      href: "/static/CV.pdf"
+      text: "Resume"
+      href: "/static/resume.pdf"
     - text: "Google scholar"
       href: "https://scholar.google.com/citations?user=JgDUMIcAAAAJ"
     - text: "ORCid"
@@ -30,7 +31,7 @@ I sound my barbaric yawp over the roofs of the world.
 >
 > -- Walt Whitman, *Leaves of Grass*
 
-I am currently a PhD student working with [Andreas Handel](http://handelgroup.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. I like using data science and statistical methods to inform cool questions about viruses, mainly flu. Find me on <a rel="me" href="https://fediscience.org/@wzbillings">Fediscience</a>!
+I am currently a PhD student working with [Andreas Handel](http://handelgroup.uga.edu/) at the University of Georgia (Department of Epidemiology & Biostatistics). My main skills are R programming, scientific computing, and data analysis. I like using data science and statistical methods to inform cool questions about viruses, mainly flu.
 
 ### Education
 
@@ -40,10 +41,9 @@ I am currently a PhD student working with [Andreas Handel](http://handelgroup.ug
 
 ### Interests
 
-* Data analytics and modeling for epidemiological data
-* Seasonal influenza vaccines
+* (Bayesian) hierarchical/multilevel models for epidemiological problems
+* Effects of antigenic drift on immunity and vaccination
 * Epidemiology and immunology of influenza
-* The `R` programming language
 
 <!--
 
