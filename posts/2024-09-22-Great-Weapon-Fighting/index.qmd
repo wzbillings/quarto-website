@@ -1,0 +1,508 @@
+---
+title: "2014 vs. 2024 Great Weapon Fighting"
+author: "Zane Billings"
+date: "2024-09-22"
+description: |
+  The new D&D Player's Handbook (5th edition 2024) came out recently, and the
+  Great Weapon Fighting fighting style is a bit different. But is it better,
+  or is the old one better?
+license: "CC BY-NC-SA"
+categories:
+  - dnd
+  - dice problems
+# image: thumbnail.png
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    code-tools: true
+    code-links:
+      - text: 'Enumeration code'
+        icon: file-code
+        href: enumeration.R
+      - text: 'Simulation example'
+        icon: file-code
+        href: simulation.R
+---
+
+```{r setup}
+library(ggplot2)
+base_pth <- here::here("posts/2024-09-22-Great-Weapon-Fighting")
+source(here::here(base_pth, "enumeration.R"), echo = FALSE)
+```
+
+The new version of the Dungeons and Dragons 5th Edition rules came out this
+month, featuring some changes to features from the 2014 version of the rules.
+I'm getting ready to start a new campaign (as a player! which is still very
+fun and unusual for me) and I decided that I'm going to go out on a limb
+and play a fighter this time. And of course, if I'm going to be a fighter,
+I'm going to have a Cloud Strife, Zabuza, Guts Berserk type of sword.
+
+An interesting statistical exercise arises from the fact that **Great Weapon
+Fighting**, an ability that makes your fighter character better at using
+large weapons, is one of the abilities that has been updated in the 2024
+edition of the Player's Handbook. While the change in wording might seem
+small from just reading the text, the damage distributions of affected weapons
+is changed a lot. For reference, here's the text from the 2014 version.
+
+> **Great Weapon Fighting.** When you roll a 1 or 2 on a damage die for an
+attack you make with a melee weapon that you are wielding with two hands, you
+can reroll the die and must use the new roll, even if the new roll is a 1 or a
+2. The weapon must have the two-handed or versatile property for you to gain
+this benefit. --- Player's Handbook, 2014.
+
+And here's the text from the 2024 version.
+
+> **Great Weapon Fighting.** When you roll damage for an attack you make with a
+Melee weapon that you are holding with two hands, you can treat any 1 or 2 on a
+damage die as a 3. The weapon must have the Two-Handed or Versatile property to
+gain this benefit. --- Player's Handbook, 2024.
+
+In the 2014 version, you can still roll a 1 or 2, although the chance is
+greatly diminished. In the 2024 version, the lowest number you can roll is a 3.
+Now, when I first read this, my thought was "oh, clearly the 2024 version
+is better" which I think is an easy misinterpretation to make. While the
+threshold for the lowest value you can roll is raised, *you are actually less
+likely to get high rolls* with the 2024 version than with the 2014 version.
+That's because those rerolls are powerful -- instead of just increasing the
+probability of a 3, they increase the probability of rolling values that are
+higher than three.
+
+Of course, as a statistical something-or-other, my inclination was to quantify
+how influential this effect as. And as a D&D player since 2016-ish (hard to
+believe it's been 8 years…), I thought this would be a pretty fun problem
+to solve. It's also not too difficult, fortunately. So let's walk through
+the solution.
+
+One major caveat is that *which of the versions is better* depends on the die
+we're rolling. For example, if we're rolling four-sided dice (d4's in D&D
+nomenclature), bumping our lower values up to three will have a larger impact
+on the expected value of our rolls than if we're rolling a d12. So I'll
+work this problem out for the two most common types of damage rolls for a
+GWF-affected heavy weapon in 5th edition D&D: a weapon that does 1d12 damage,
+and a weapon that does 2d6 damage. I have, for some time, been a 2d6 fan
+(because rolling more dice is more fun) and it turns out the resulting
+distributions in the 2d6 case are more interesting, so that's yet another
+reason to make a character using a greatsword, which is one of those 2d6
+weapons.
+
+# How to calculate those probabilities
+
+We'll compare both of the GWF cases, and we'll also include the base case of
+rolling without GWF at all, so we can see how the two versions compare to
+each other, and also to the baseline.
+
+## No GWF
+
+The case for no GWF is simple. For the 1d12 weapon, assuming the die is fair,
+the distribution is just $1/12$ for each of the values. The distribution for
+2d6 is not much more complicated, and is a common problem in introductory
+probability courses and textbooks. I'll use a set of helper functions that
+will be useful for more complex problems that I included in the
+enumeration code file.
+
+Here's the table of probabilities for a 2d6 weapon with no GWF.
+
+```{r 2d6 no correction table}
+get_distribution(6, 2, "none", FALSE) |>
+  knitr::kable()
+```
+
+Using the normal rules for calculating the mean and standard deviation from
+this kind of distribution table, we can get that **in summary**:
+
+- the 1d12 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(12, 1, "none", FALSE))`$; and
+- the 2d6 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(6, 2, "none", FALSE))`$.
+
+Of course these summary metrics are not the only useful information for us,
+but they are a concise way to represent the amount of damage we can expect to
+do with one attack.
+
+## 2024 GWF
+
+> **Great Weapon Fighting.** When you roll damage for an attack you make with a
+Melee weapon that you are holding with two hands, you can treat any 1 or 2 on a
+damage die as a 3. The weapon must have the Two-Handed or Versatile property to
+gain this benefit. --- Player's Handbook, 2024.
+
+I'm doing the 2024 version first because it's actually less interesting than the
+2014 version. To compute the probabilities for one die, we can calculate all the
+same probabilities from the no GWF case, and then compute the probability of
+rolling a three as the probability of rolling a three or less. That is,
+$$
+P(3 \mid \text{2024 GWF}) = P(1 \mid \text{no GWF}) +
+P(2 \mid \text{no GWF}) +
+P(3 \mid \text{no GWF}).
+$$
+
+So for a 1d12 weapon, the probability of rolling a 3 would be $3/12 = 1/4$,
+the probability of rolling a 1 or 2 is $0$, and the probability of rolling any
+other number $4, 5, \ldots, 12$ is $1/12$ as before.
+
+```{r 1d12 2024 table}
+get_distribution(12, 1, "new", FALSE) |>
+  knitr::kable()
+```
+
+For a 2d6 weapon, we have the additional issue of having to add two dice
+together. So while the same formula works for one dice, like so:
+
+```{r 1d6 2024 table}
+get_distribution(6, 1, "new", FALSE) |>
+  knitr::kable()
+```
+
+we need to calculate the distribution of the sum. The function that I'm
+using does this by enumerating all of the possible combinations of the two
+die rolls, calculating the sum of each combination, and normalizing to get
+the percentages. For the 2024 version of GWF, we can get the combinations in
+the correct proportions by finding the combinations of $k$ dice with the faces
+$3, 3, 3, 4, 5, \ldots, n$ instead of $1, 2, \ldots, n$. This tactic of
+using one die with modified faces will be crucial for the 2014 GWF probabilities
+so it's nice to think about this problem that way.
+
+Anyways, calculating the probabilities in that way gives the following table
+for a 2d6 weapon.
+
+```{r 2d6 2024 table}
+get_distribution(6, 2, "new", FALSE) |>
+  knitr::kable()
+```
+
+It makes sense that 6 is the lowest value we can roll -- each of the two dice
+has to be a 3 or greater. The dip in probability for 7 is interesting though,
+because 7 is famously the most common number to roll for 2d6 without any
+special rules. This distribution also forms an interesting asymmetrical shape
+with a weird dip in it.
+
+**In summary:** for the 2024 GWF version, we get
+
+- the 1d12 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(12, 1, "new", FALSE))`$; and
+- the 2d6 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(6, 2, "new", FALSE))`$.
+
+Interestingtly, the expected improvement is much higher for the 2d6 weapon
+than for the 1d12 weapon. That's a combination of the effect of improving two
+die rolls instead of just one, and the fact that the new correction is better
+for weapons with smaller damage dice. So maybe a weapon that uses a sum of d4s
+(or d3s? lol) would be best with this correction. Like a greatwhip or something
+else that doesn't exist.
+
+## 2014 GWF
+
+> **Great Weapon Fighting.** When you roll a 1 or 2 on a damage die for an
+attack you make with a melee weapon that you are wielding with two hands, you
+can reroll the die and must use the new roll, even if the new roll is a 1 or a
+2. The weapon must have the two-handed or versatile property for you to gain
+this benefit. --- Player's Handbook, 2014.
+
+The 2014 GWF case is the hardest one to calculate analytically. The trick to
+this one is to stop thinking about the problem as "one die roll, and sometimes
+a second one". Thinking about it that way will give you results, but it is
+conceptually more difficult. Instead we should try and reframe the problem as
+"if I were only rolling one die, what faces would that die have to have?"
+The die for this problem will certainly not exist in real life, so first let's
+take the 1d12 case as an example.
+
+- We can get a 1 by rolling either a 1 or 2, which will cause us to reroll, and
+then rolling a 1 on the second die. These are the ONLY ways we can roll a 1 for
+the result. So there are two ways we can get a 1.
+- We can get a 2 by rolling either a 1 or 2, triggering a reroll, then then
+rolling a 2. So similarly there are two ways we can get a 2 as our result.
+- We can get a 3 by rolling a 3 on the first die, or by rolling either a 1 or 2
+on the first die, and then a 3 on the second die. *The tricky part is changing
+how we think about this roll*.
+- We can get a 4, 5, whatever, up to 12, in the exact same way as a 3, those
+numbers are all equally likely.
+
+To think about the probability of rolling a 3, imaging that you always roll the
+second die. However, if the result of the first die is not a 1 or a 2, we just
+ignore the second die. Since we're rolling 2d12, that means there are **144
+possible outcomes**, and if we were going to roll one hypothetical die, it
+would have to be 144 faces. (Or in general, $n^2$ faces for an $n$-sided die.)
+From what we established above, there have to be two faces with a 1 on them,
+and then two faces with a 2 on them. Then we have 140 faces left to fill with
+10 equally likely outcomes, so each remaining die has to get $14$ faces.
+
+We can also think about choosing the number of faces that show, e.g., a 3, like
+this. If we roll a three on the first d12, there are twelve ways we can roll
+the second d12 and the outcome will still be 3. However, if we roll a 1 or 2
+on the first d12, and then a 3 on the second d12, that gives us 2 more ways
+to get a 3 overall. So we see we can get $12 + 2 = 14$ (or in the general
+case, $n+2$) faces with a 3 on them. And the math works out the same for
+faces numbered $4, \ldots, 12$.
+
+That means the probability of rolling a given number is given by the number of
+faces showing that number divided by the total number of faces. So that's
+$$P(1) = P(2) = 2 / 144; \quad P(3) = \ldots = P(12) = 14 / 144.$$
+
+The table is shown below.
+```{r 1d12 2014 table}
+get_distribution(12, 1, "old", FALSE) |>
+  knitr::kable()
+```
+
+Now, that's for just one die. If we want to roll multiple dice, say 2d6, under
+the 2014 GWF rules, we are actually rolling two of those special $n^2$ faced
+dies we just discovered. Then we can get all of the combinations of two of
+those special dice and find the distribution of their sum. That's exactly
+what the `get_distribution()` function is doing to get the following table.
+
+```{r 2d6 2014 table}
+get_distribution(6, 2, "old", FALSE) |>
+  knitr::kable()
+```
+
+We can see that now, 9 is the mostly likely outcome instead of 7, and the
+low rolls of 2 and 3 are much less likely as well.
+
+**In summary:** for the 2014 GWF version, we get
+
+- the 1d12 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(12, 1, "old", FALSE))`$; and
+- the 2d6 weapon will have an expected value of $`r mean_sd_from_dist(get_distribution(6, 2, "old", FALSE))`$.
+
+So again, it seems that the improvement favors the 2d6 weapon instead of the
+1d12 weapon. The effect of benefitting two dice instead of just one die seems
+to be quite strong.
+
+# Visualization and comparison
+
+Now, these tables are not the best way to visualize the comparisons we want
+to make, a figure will be much more useful. So let's make some. First we need
+to do some calculations and data cleaning to compute the probability for all
+6 cases we're interested in, and store them in a nice data frame. You can
+expand the code to see how I did that with my helper functions.
+
+```{r calculating all results}
+# Make a list that includes the function we want to call along with vectors
+# specifying the arguments to map over
+combos_to_run <- list(
+	f = get_distribution,
+	n = c(12, 12, 12, 6, 6, 6),
+	k = c(1, 1, 1, 2, 2, 2),
+	which_gwf = c("none", "old", "new", "none", "old", "new")
+)
+# use the Map function to call get_distribution() with each set of args
+results <- do.call(Map, combos_to_run)
+
+# data cleaning to get a nice data frame for ggplot
+results_df <- do.call(rbind, results)
+results_processed <- results_df
+results_processed$weapon <- paste0(
+	results_processed$k, "d", results_processed$n
+)
+results_processed$n <- NULL
+results_processed$k <- NULL
+results_processed$which_gwf <- factor(
+  results_processed$which_gwf,
+  levels = c("none", "old", "new"),
+  labels = c("No GWF", "2014 GWF", "2024 GWF")
+)
+```
+
+
+## Probability of each outcome
+
+First, we'll look at distribution curves for both weapons under each of the
+conditions we just walked through. These curves will show the damage value
+rolled on the x-axis and the probability of rolling **exactly** that value on
+the $y$-axis.
+
+```{r exact probability plot}
+results_processed |>
+  ggplot() +
+  aes(x = value, y = rel_freq, color = which_gwf, shape = which_gwf) +
+  geom_point(alpha = 0.75, stroke = 1, size = 3) +
+  geom_line(alpha = 0.75, linewidth = 1) +
+  scale_x_continuous(
+    name = "Damage result",
+    breaks = seq(1, 12, 1),
+    minor_breaks = NULL,
+    limits = c(0.5, 12.5)
+  ) +
+  scale_y_continuous(
+    name = "P(X = x)",
+    breaks = scales::breaks_pretty(),
+    labels = scales::label_percent()
+  ) +
+  scale_color_brewer(
+    name = "Rule",
+    palette = "Dark2"
+  ) +
+  scale_shape_manual(
+    name = "Rule",
+    values = 15:17
+  ) +
+  facet_wrap(vars(weapon)) +
+  theme_minimal(base_size = 18) +
+  theme(legend.position = "bottom")
+```
+
+By looking at the plot, we can see some interesting observations. Of course,
+the distributions for the 2d6 weapon damage are in general more interesting
+than for 1d12. For 1d12, we can see that the 2024 outcome really boosts the
+probability of rolling a 3 but is otherwise exactly the same as having no
+GWF, while the 2014 outcome slightly boosts the probability of each number 3 or
+larger but drastically lowers the chance of getting a 1 or 2.
+
+For the 2d6 outcome, we can see that both corrections have an obvious impact
+that increases the average amount of damage, but in weird ways that are (at
+least to me) not incredibly intuitive. For the 2014 GWF distribution, 9 is the
+most common outcome, but for 2024, 9 is the second most common outcome after 6.
+
+So, it seems that using either ability is obviously better than using neither.
+But it's hard to tell whether the 2014 or the 2024 ability is better. It
+probably depends on our personal loss aversion bias -- **if you really don't
+like rolling low numbers and want to more consistently reach a minimum value,
+then the 2024 version is better for you.** However on the other hand,
+we can see that the 2014 version, we are more likely to roll high values.
+**So if getting a few 1's and 2's is worth it for the times you get 10's, 11's,
+and 12's, the 2014 version is for you.**
+
+We can see this more clearly if we look at the results a bit differently.
+
+## Probability of 'at least' some outcome
+
+So far we've considered the probability that we roll exactly a specific outcome.
+But when we're trying to decide which of the two options we prefer, it can
+be more helpful to look at the **cumulative probabilities**. The cumulative
+probability $P(X \leq x)$ can be interpreted as "the probability that we roll
+*at most* some value $x$".
+
+For many people, and certainly for me, it is typically easier to understand
+$P(X \geq x)$, "the probability that we roll *at least* some value $x$". So
+that lets us answer the question "is the probability that I roll a 10 or more
+higher for the 2014 or 2024 GWF ability?" and other similar questions.
+
+First I'll calculate those *at least* probabilities.
+
+```{r calculating at least probabilities}
+results_cumulative <-
+	results_processed |>
+	dplyr::group_by(which_gwf, weapon) |>
+	dplyr::mutate(
+		at_most = cumsum(rel_freq),
+		at_least = 1 - at_most + rel_freq
+	) |>
+	dplyr::ungroup()
+```
+
+Now we can make a plot with the probability we roll a value of $x$ or higher on
+the y-axis.
+
+```{r at least probability plot}
+results_cumulative |>
+  ggplot() +
+  aes(x = value, y = at_least, color = which_gwf, shape = which_gwf) +
+  geom_point(alpha = 0.75, stroke = 1, size = 3) +
+  geom_line(alpha = 0.75, linewidth = 1) +
+  scale_x_continuous(
+    name = "Damage result",
+    breaks = seq(1, 12, 1),
+    minor_breaks = NULL,
+    limits = c(0.5, 12.5)
+  ) +
+  scale_y_continuous(
+    name = "P(X ≥ x)",
+    breaks = scales::breaks_pretty(),
+    labels = scales::label_percent()
+  ) +
+  scale_color_brewer(
+    name = "Rule",
+    palette = "Dark2"
+  ) +
+  scale_shape_manual(
+    name = "Rule",
+    values = 15:17
+  ) +
+  facet_wrap(vars(weapon)) +
+  theme_minimal(base_size = 18) +
+  theme(legend.position = "bottom")
+```
+
+Yes, I think this nicely shows my conclusion, although you might disagree with
+me, and that's ok! For both weapons, we can see that the 2024 rules have a
+higher probability of getting at least some minimum value (3 for 1d12, 6 for
+2d6), but we have a lower probability of rolling at least ANY VALUE above that
+threshold!
+
+# Conclusions
+
+Let's look at all the summary statistics together in one place.
+
+```{r summary table}
+stat_df <- data.frame(
+  "Weapon" = paste0(combos_to_run$k, "d", combos_to_run$n),
+  "Rule" = factor(
+    combos_to_run$which_gwf,
+    levels = c("none", "old", "new"),
+    labels = c("No GWF", "2014 GWF", "2024 GWF")
+  ),
+  "Expected" = sapply(results, mean_sd_from_dist)
+)
+knitr::kable(stat_df)
+```
+
+Interestingly, we can see that the 2014 GWF ability gives us the highest
+expected damage value for both 1d12 and 2d6 weapons. For 2d6 weapons, the 2024
+GWF ability has a tighter SD, indicating that values will also tend to be
+more consistent in the long run -- more of our rolls will be close to the mean.
+However, for 1d12 weapons, the 2024 GWF damage is actually a bit less
+consistent than the 2014 version! That's probably good, since the mean is
+substantially lower than if we look at the contrast for 2d6.
+
+For me, any guarantees of rolling above a baseline isn't worth losing some
+expected high rolls, given that the means
+are higher for the 2014 GWF rule than for the 2024 rule. I don't want to
+lose out on that extra damage just for a guarantee that I won't get low
+numbers!
+
+Notably though, the results are strongly affected by which dice we are rolling.
+Like I said, if your weapon requires you to roll a lot of small dice, like
+potentially a lot of d4's, maybe the 2024 version would come out on top.
+However, I expected that as you increase the number of dice, the benefit from
+the 2014 version will also become more powerful, so maybe the 2024 version
+would be best for a weapon that does 2d4 or 3d4 damage. I didn't do any
+further simulations so I'm not 100% sure right now.
+
+All of the functions I wrote accept arbitrary integers $n$ and $k$ as arguments
+so in the future I think it would be nice to build a Shiny app or something
+that allows easy experimentation with that kind of thing, but we'll see if
+that happens. Anyways, it was nice to think about this problem and convince
+myself that (by a certain metric made up by me), the 2014 GWF ability is better
+than the 2024 ability, even if that seems counterintuitive on a first reading
+of both abilities.
+
+If you got all the way here, thank you for reading this! And please feel free
+to get in touch with me if you have questions about D&D dice problems.
+
+## Details {.appendix}
+
+* Another common tactic I use for this types of problems, which I call the
+lazy way, is just to write a simulation that replicates the behavior of
+interest a million times and look at the empirical probabilities. This is often
+a great strategy, but for this example the analytical computation is simple
+enough that it's not worth doing a simulation. However, the more dice you
+start rolling, the more RAM it takes to enumerate combinations and the more
+worthwhile it becomes to just do a simulation. You can see my example simulation
+code in the code links.
+* A much simpler way to do this is to use the specialized web app
+[AnyDice](https://anydice.com/) by [Jasper Flick]().
+Implementing [an AnyDice program](https://anydice.com/program/38e70) for this
+comparison takes only 3 lines of code, although I've modified this so that
+$n$, the number of faces on the dice, and $k$, the number of dice to roll,
+are variables that you can easily change all at once.
+* Information from the Player's Handbook is not owned by me, and is included here
+under fair use for educational purposes (although it seems prudent to mention
+that all of the information included here is also licensed under the
+[Open Game License Version 1.0a](https://opengamingfoundation.org/ogl.html)
+and is included in the Basic Rules). The CC-BY-NC-SA licensed under which my
+content is not distributed does not extend to information which is owned by
+Wizards of the Coast or Hasbro.
+* This document was last updated at `r Sys.time()`. The complete `R` session
+information is reproduced below.
+
+```{r session info}
+sessioninfo::session_info()
+```
+
+<!-- END OF FILE -->
