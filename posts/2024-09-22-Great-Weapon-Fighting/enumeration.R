@@ -80,25 +80,3 @@ mean_sd_from_dist <- function(dist_res, format = TRUE, pct_input = FALSE) {
 	return(out)
 }
 
-
-# 
-# results_cdf |> 
-# 	dplyr::filter(weapon == "2d6") |>
-# 	ggplot() +
-# 	aes(x = value, y = ccdf, color = which_gwf, fill = which_gwf) +
-# 	ggplot2::geom_line() +
-# 	ggplot2::geom_point() +
-# 	ggplot2::scale_x_continuous(
-# 		name = "Damage result",
-# 		breaks = seq(1, 12, 1),
-# 		minor_breaks = NULL,
-# 		limits = c(0.5, 12.5)
-# 	) +
-# 	scale_y_continuous(
-# 		name = "Probability of dealing at least this much damage",
-# 		breaks = scales::breaks_pretty(),
-# 		labels = scales::label_percent(),
-# 		#limits = c(0, 0.27)
-# 	) +
-# 	ggplot2::theme_minimal()
-

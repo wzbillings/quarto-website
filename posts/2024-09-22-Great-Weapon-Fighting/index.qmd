@@ -16,13 +16,13 @@ format:
     code-fold: true
     code-summary: "Show the code"
     code-tools: true
-    code-links:
-      - text: 'Enumeration code'
-        icon: file-code
-        href: enumeration.R
-      - text: 'Simulation example'
-        icon: file-code
-        href: simulation.R
+    # code-links:
+    #   - text: 'Enumeration code'
+    #     icon: file-code
+    #     href: enumeration.R
+    #   - text: 'Simulation example'
+    #     icon: file-code
+    #     href: simulation.R
 ---
 
 ```{r setup}
@@ -474,6 +474,181 @@ of both abilities.
 
 If you got all the way here, thank you for reading this! And please feel free
 to get in touch with me if you have questions about D&D dice problems.
+
+## Code {.appendix}
+
+```{r}
+#| label: "include enumeration.R"
+#| code-summary: "Enumeration.R"
+#| eval: false
+
+###
+# Probabilities of GWF damage by enumeration
+# Zane
+# 2024-09-22
+###
+
+# Probabilities for old GWF
+create_die_matrix <- function(values, k) {
+	perms <-
+		rep(values, times = k) |>
+		matrix(nrow = length(values), ncol = k) |>
+		as.data.frame() |>
+		expand.grid()
+	
+	colnames(perms) <- paste0("X", 1:ncol(perms))
+	
+	return(perms)
+}
+
+die_from_method <- function(which_gwf, n) {
+	if (which_gwf == "none") {
+		die <- seq(1, n, 1)
+	} else if (which_gwf == "old") {
+		die <- c(
+			rep(c(1, 2), each = 2),
+			rep(seq(3, n), each = n + 2)
+		)
+	} else if (which_gwf == "new") {
+		die <- c(3, 3, seq(3, n, 1))
+	} else {
+		stop("'which_gwf' should be one of: 'none', 'old', or 'new'.")
+	}
+	
+	return(die)
+}
+
+get_distribution <- function(
+		n, k, which_gwf, return_args = TRUE, digits = 4, pct = FALSE
+	) {
+	die <- die_from_method(which_gwf, n)
+	die_matrix <- create_die_matrix(die, k)
+	damage_values <- rowSums(die_matrix)
+	damage_distribution <- table(damage_values, dnn = NULL)
+	damage_distribution_rel <- prop.table(damage_distribution)
+	
+	tidy_output <- data.frame(
+		value = as.integer(names(damage_distribution)),
+		freq = as.integer(damage_distribution)
+	)
+	
+	mult <- ifelse(isTRUE(pct), 100, 1)
+	tidy_output$rel_freq <- round(
+		as.numeric(damage_distribution_rel) * mult,
+		digits = ifelse(isTRUE(pct), digits - 2, digits)
+	)
+	
+	if (isTRUE(return_args)) {
+		tidy_output$n <- n
+		tidy_output$k <- k
+		tidy_output$which_gwf <- which_gwf
+	}
+	
+	return(tidy_output)
+}
+
+mean_sd_from_dist <- function(dist_res, format = TRUE, pct_input = FALSE) {
+	mult <- ifelse(isTRUE(pct_input), 0.01, 1)
+	x <- dist_res$value
+	wt <- dist_res$rel_freq * mult
+	wm <- sum(x * wt)
+	wv <- sum(wt * (x - wm)^2)
+	wsd <- sqrt(wv)
+	
+	if (isTRUE(format)) {
+		out <- sprintf("%.2f ± %.2f", wm, wsd)
+	} else {
+		out <- c("mean" = wm, "sd" = wsd)
+	}
+	
+	return(out)
+}
+```
+
+```{r}
+#| label: "include simulation.R"
+#| code-summary: "Simulation.R"
+#| eval: false
+
+###
+# Simulating GWF damage
+# Zane
+# 2024-09-22
+###
+
+N_sims <- 1e6
+
+validate_args_as_integer <- function(...) {
+	mc <- match.call(expand.dots = FALSE)
+	dots <- list(...)
+	names(dots) <- mc$...
+	
+	for (i in seq_along(dots)) {
+		it <- dots[[i]]
+		it_name <- names(dots)[[i]]
+		if (!is.numeric(it) || (it < 1) || (it %% 1 != 0)) {
+			stop(it_name, " should be an integer ≥ 1")
+		}
+	}
+	
+	invisible(TRUE)
+}
+
+# Old method
+simulation_old_gwf <- function(n, k, n_sims) {
+	
+	validate_args_as_integer(n, k, n_sims)
+	
+	one_die <- function() {
+		result <- sample.int(n, size = n_sims, replace = TRUE)
+		rerolls <- (result %in% c(1, 2))
+		result[rerolls] <- sample.int(n, size = sum(rerolls), replace = TRUE)
+		return(result)
+	}
+	
+	sim_dice <-
+		lapply(1:k, \(x) one_die()) |> 
+		simplify2array(except = NULL)
+	
+	damage <- rowSums(sim_dice)
+	
+	return(damage)
+}
+
+set.seed(375)
+old_sim <- simulation_old_gwf(6, 2, 1e6)
+old_sim_counts <- old_sim |> table()
+old_sim_props <- old_sim_counts |> prop.table()
+barplot(old_sim_props)
+
+# New method
+
+simulation_new_gwf <- function(n, k, n_sims) {
+	
+	validate_args_as_integer(n, k, n_sims)
+	
+	one_die <- function() {
+		result <- sample.int(n, size = n_sims, replace = TRUE)
+		result[result < 3] <- 3
+		return(result)
+	}
+	
+	sim_dice <-
+		lapply(1:k, \(x) one_die()) |> 
+		simplify2array(except = NULL)
+	
+	damage <- rowSums(sim_dice)
+	
+	return(damage)
+}
+
+set.seed(375)
+new_sim <- simulation_new_gwf(6, 2, 1e6)
+new_sim_counts <- new_sim |> table()
+new_sim_props <- new_sim_counts |> prop.table()
+barplot(new_sim_props)
+```
+
 
 ## Details {.appendix}
 

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wzbillings.com/posts/2022-12-17_histogram-bins/index.html</loc>
-    <lastmod>2023-03-04T15:48:40.557Z</lastmod>
-  </url>
-  <url>
     <loc>https://wzbillings.com/posts/2024-09-22-Great-Weapon-Fighting/index.html</loc>
-    <lastmod>2024-09-23T04:02:26.048Z</lastmod>
+    <lastmod>2024-09-23T04:16:44.394Z</lastmod>
   </url>
   <url>
     <loc>https://wzbillings.com/posts/2023-08-10_Titer-w-Distance/index.html</loc>
@@ -111,5 +107,9 @@
   <url>
     <loc>https://wzbillings.com/posts/2023-10-09_BootstrapIntro/index.html</loc>
     <lastmod>2023-10-29T02:07:17.542Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wzbillings.com/posts/2022-12-17_histogram-bins/index.html</loc>
+    <lastmod>2023-03-04T15:48:40.557Z</lastmod>
   </url>
 </urlset>
