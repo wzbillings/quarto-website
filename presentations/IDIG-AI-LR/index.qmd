@@ -1,0 +1,30 @@
+---
+title: "😱 SUPERCHARGE 🌩 YOUR LIT REVIEW 📖 WORKFLOW WITH 🤖 ~AI TOOLS~ 🤯"
+abstract: |
+  While I might be a dyed-in-the-wool AI hater, that doesn't mean that there
+  isn't a very limited subset of useful AI tools. Usually those are the ones
+  that aren't plagiarism machines.
+event: "UGA Infectious Disease Interest Group"
+location: Athens, GA
+license: "CC BY"
+image: featured.png
+date: "2024-10-03"
+categories:
+  - talk
+  - other
+---
+
+![](featured.png)
+
+This talk about AI tools that can actually help you do literature review is
+from our weekly seminar meeting (the Infectious Disease Interest Group at UGA).
+While I'm well known as an AI hater, and my feelings about AI are pretty
+well summed up in [this blog post](https://ludic.mataroa.blog/blog/i-will-fucking-piledrive-you-if-you-mention-ai-again/)
+(CW: language), there are a few rare AI tools that aren't plagiarism machines or
+torment nexuses. Yeah, that surprised me also. It surprised me so much that
+I had to give a presentation about them. The slides are embedded below or you can get them [here](pres.pdf) if you're interested.
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>
+
+
