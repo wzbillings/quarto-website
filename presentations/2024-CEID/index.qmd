@@ -1,0 +1,19 @@
+---
+title: Antigenic distance has a nonlinear negative impact on the humoral response to seasonal influenza vaccination in elderly individuals even after controlling for preexisting antibody titers
+abstract: Antigenic drift occurs when influenza strains accumulate enough mutations to escape immune memory. While antigenic drift is known to be a major problem in the development of influenza vaccines, quantifying the effect of antigenic drift on the immune response after vaccination is more difficult. We use data from an influenza vaccine cohort where a panel of heterologous HAI assays was conducted on each individual's serum samples, and we computed the antigenic distance between each of the assay strains and the strain used for vaccination to estimate the effect of antigenic distance on vaccine immunogenicity. We found nonlinear negative patterns for both H3N2 and H1N1 influenza strains.
+event: Symposium on the Ecology and Evolution of Influenza Viruses
+location: Center for the Ecology of Infectious Diseases, Athens, GA, USA.
+
+image: featured.png
+date: last-modified
+categories:
+  - poster
+  - flu
+  - vaccines
+  - research
+---
+
+The poster can be found [here](pres.pdf), and is also embedded below.
+
+<object data="pres.pdf" width="100%" height="800" title = "poster" class="objectSet" type="application/pdf">
+</object>
