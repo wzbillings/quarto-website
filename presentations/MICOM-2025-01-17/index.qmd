@@ -1,0 +1,27 @@
+---
+title: Antigenic distance and breadth of vaccine response
+abstract: |
+  Working group presentation about our current thoughts on quantifying what
+  it means to have a broadly reactive vaccine, and how antigenic distance could
+  be useful for selecting them
+event: "MICOM Antibody dynamics working group"
+location: Virtual
+image: featured.png
+date: "2025-01-17"
+categories:
+  - talk
+  - influenza
+  - vaccines
+  - antigenic distance
+  - other
+---
+
+![](featured.PNG)
+
+These are the slides I presented on antigenic distance and vaccine breadth at the MICOM antibody working group meeting on January 17, 2025. They contain some progress updates from our group on how we think about broadly reactive vaccines, how to use antigenic distance to improve vaccine candidate selection, and some other related problems we've been thinking about.
+
+The slides are embedded below or you can get them [here](pres.pptx)
+if you're interested.
+
+<object data="pres.pdf" width="100%" height="800" title = "presentation slides" class="objectSet" type="application/pdf">
+</object>
